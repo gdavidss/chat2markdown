@@ -76,7 +76,7 @@ Project Voyage is an app based on Automated Speech Recognition (ASR). It transcr
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
-
+ 
 **Flow Navigation** (Screen to Screen)
 
 * Login/Signup screen
@@ -86,8 +86,6 @@ Project Voyage is an app based on Automated Speech Recognition (ASR). It transcr
     * Chat
 * Edit message
    * Chat (after done editing the message)
-
-
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
