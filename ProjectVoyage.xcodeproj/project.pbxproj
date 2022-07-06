@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6AC2C8AB2876269D00436B8D /* SignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AA2876269D00436B8D /* SignUpVC.m */; };
 		6AD5983828760C140058386E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5983728760C140058386E /* AppDelegate.m */; };
 		6AD5983B28760C140058386E /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5983A28760C140058386E /* SceneDelegate.m */; };
-		6AD5983E28760C140058386E /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5983D28760C140058386E /* ViewController.m */; };
 		6AD5984128760C140058386E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD5983F28760C140058386E /* Main.storyboard */; };
 		6AD5984328760C160058386E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AD5984228760C160058386E /* Assets.xcassets */; };
 		6AD5984628760C160058386E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD5984428760C160058386E /* LaunchScreen.storyboard */; };
@@ -17,6 +17,7 @@
 		6AD5985328760C170058386E /* ProjectVoyageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5985228760C170058386E /* ProjectVoyageTests.m */; };
 		6AD5985D28760C170058386E /* ProjectVoyageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5985C28760C170058386E /* ProjectVoyageUITests.m */; };
 		6AD5985F28760C170058386E /* ProjectVoyageUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5985E28760C170058386E /* ProjectVoyageUITestsLaunchTests.m */; };
+		6AD598712876245C0058386E /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD598702876245C0058386E /* LoginVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,13 +38,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6AC2C8A92876269D00436B8D /* SignUpVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpVC.h; sourceTree = "<group>"; };
+		6AC2C8AA2876269D00436B8D /* SignUpVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpVC.m; sourceTree = "<group>"; };
 		6AD5983328760C140058386E /* ProjectVoyage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectVoyage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD5983628760C140058386E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AD5983728760C140058386E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6AD5983928760C140058386E /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		6AD5983A28760C140058386E /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		6AD5983C28760C140058386E /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		6AD5983D28760C140058386E /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		6AD5984028760C140058386E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6AD5984228760C160058386E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AD5984528760C160058386E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,6 +55,8 @@
 		6AD5985828760C170058386E /* ProjectVoyageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectVoyageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD5985C28760C170058386E /* ProjectVoyageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectVoyageUITests.m; sourceTree = "<group>"; };
 		6AD5985E28760C170058386E /* ProjectVoyageUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectVoyageUITestsLaunchTests.m; sourceTree = "<group>"; };
+		6AD5986F2876245C0058386E /* LoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		6AD598702876245C0058386E /* LoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,13 +111,12 @@
 				6AD5983728760C140058386E /* AppDelegate.m */,
 				6AD5983928760C140058386E /* SceneDelegate.h */,
 				6AD5983A28760C140058386E /* SceneDelegate.m */,
-				6AD5983C28760C140058386E /* ViewController.h */,
-				6AD5983D28760C140058386E /* ViewController.m */,
 				6AD5983F28760C140058386E /* Main.storyboard */,
 				6AD5984228760C160058386E /* Assets.xcassets */,
 				6AD5984428760C160058386E /* LaunchScreen.storyboard */,
 				6AD5984728760C160058386E /* Info.plist */,
 				6AD5984828760C160058386E /* main.m */,
+				6AD5986E287623D60058386E /* View Controllers */,
 			);
 			path = ProjectVoyage;
 			sourceTree = "<group>";
@@ -134,6 +136,17 @@
 				6AD5985E28760C170058386E /* ProjectVoyageUITestsLaunchTests.m */,
 			);
 			path = ProjectVoyageUITests;
+			sourceTree = "<group>";
+		};
+		6AD5986E287623D60058386E /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				6AD5986F2876245C0058386E /* LoginVC.h */,
+				6AD598702876245C0058386E /* LoginVC.m */,
+				6AC2C8A92876269D00436B8D /* SignUpVC.h */,
+				6AC2C8AA2876269D00436B8D /* SignUpVC.m */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,8 +279,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AD5983E28760C140058386E /* ViewController.m in Sources */,
 				6AD5983828760C140058386E /* AppDelegate.m in Sources */,
+				6AD598712876245C0058386E /* LoginVC.m in Sources */,
+				6AC2C8AB2876269D00436B8D /* SignUpVC.m in Sources */,
 				6AD5984928760C160058386E /* main.m in Sources */,
 				6AD5983B28760C140058386E /* SceneDelegate.m in Sources */,
 			);

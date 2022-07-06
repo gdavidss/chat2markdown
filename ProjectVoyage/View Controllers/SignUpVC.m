@@ -1,21 +1,22 @@
 //
-//  LoginVC.m
+//  SignUpVC.m
 //  ProjectVoyage
 //
 //  Created by Gui David on 7/6/22.
 //
 
-#import "LoginVC.h"
+#import "SignUpVC.h"
 
-@interface LoginVC ()
+@interface SignUpVC ()
+@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
-@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
-@property (weak, nonatomic) IBOutlet UIButton *signupBtn;
+@property (weak, nonatomic) IBOutlet UITextField *repeatPasswordField;
 
 @end
 
-@implementation LoginVC
+@implementation SignUpVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
