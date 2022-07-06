@@ -37,6 +37,9 @@
                                 <rect key="frame" x="246.5" y="355" width="64" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Log in"/>
+                                <connections>
+                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="26j-CD-mwd"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JrD-0S-tkv">
                                 <rect key="frame" x="103.5" y="355" width="73" height="31"/>
@@ -131,6 +134,9 @@
                                 <rect key="frame" x="240.5" y="440" width="70" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Submit"/>
+                                <connections>
+                                    <action selector="submitSignUp:" destination="jSp-fZ-0W2" eventType="touchUpInside" id="bA5-BD-ZN0"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="VPH-My-ukF"/>
@@ -172,7 +178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pAL-qh-el5" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1906" y="102"/>
+            <point key="canvasLocation" x="1905.7971014492755" y="101.78571428571428"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wMa-Bt-rzv">

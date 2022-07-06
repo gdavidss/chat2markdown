@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33BCB6EC4E095D5DF148E5A9 /* Pods_ProjectVoyage_ProjectVoyageUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 488061CE958977073E1AA26C /* Pods_ProjectVoyage_ProjectVoyageUITests.framework */; };
+		4E1A13A42A53BB29FA7F1897 /* Pods_ProjectVoyage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7FEFD683F07E31C748D340 /* Pods_ProjectVoyage.framework */; };
 		6AC2C8AB2876269D00436B8D /* SignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AA2876269D00436B8D /* SignUpVC.m */; };
+		6AC2C8AE2876347500436B8D /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AD2876347500436B8D /* Keys.plist */; };
 		6AD5983828760C140058386E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5983728760C140058386E /* AppDelegate.m */; };
 		6AD5983B28760C140058386E /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5983A28760C140058386E /* SceneDelegate.m */; };
 		6AD5984128760C140058386E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD5983F28760C140058386E /* Main.storyboard */; };
@@ -18,6 +21,7 @@
 		6AD5985D28760C170058386E /* ProjectVoyageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5985C28760C170058386E /* ProjectVoyageUITests.m */; };
 		6AD5985F28760C170058386E /* ProjectVoyageUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5985E28760C170058386E /* ProjectVoyageUITestsLaunchTests.m */; };
 		6AD598712876245C0058386E /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD598702876245C0058386E /* LoginVC.m */; };
+		B5BA60BAC5D1A304853B4754 /* Pods_ProjectVoyageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F51A004A7968E444CAD93A /* Pods_ProjectVoyageTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +42,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		269F2F3F83A5FB5494793E36 /* Pods-ProjectVoyageTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectVoyageTests.release.xcconfig"; path = "Target Support Files/Pods-ProjectVoyageTests/Pods-ProjectVoyageTests.release.xcconfig"; sourceTree = "<group>"; };
+		488061CE958977073E1AA26C /* Pods_ProjectVoyage_ProjectVoyageUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectVoyage_ProjectVoyageUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AC2C8A92876269D00436B8D /* SignUpVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpVC.h; sourceTree = "<group>"; };
 		6AC2C8AA2876269D00436B8D /* SignUpVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpVC.m; sourceTree = "<group>"; };
+		6AC2C8AD2876347500436B8D /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		6AD5983328760C140058386E /* ProjectVoyage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectVoyage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD5983628760C140058386E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AD5983728760C140058386E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -57,6 +64,13 @@
 		6AD5985E28760C170058386E /* ProjectVoyageUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectVoyageUITestsLaunchTests.m; sourceTree = "<group>"; };
 		6AD5986F2876245C0058386E /* LoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		6AD598702876245C0058386E /* LoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		6B7791EBA84C0E82298B12F3 /* Pods-ProjectVoyage-ProjectVoyageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectVoyage-ProjectVoyageUITests.release.xcconfig"; path = "Target Support Files/Pods-ProjectVoyage-ProjectVoyageUITests/Pods-ProjectVoyage-ProjectVoyageUITests.release.xcconfig"; sourceTree = "<group>"; };
+		84F51A004A7968E444CAD93A /* Pods_ProjectVoyageTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectVoyageTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9BB45CBBD996C76DDA2B7404 /* Pods-ProjectVoyageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectVoyageTests.debug.xcconfig"; path = "Target Support Files/Pods-ProjectVoyageTests/Pods-ProjectVoyageTests.debug.xcconfig"; sourceTree = "<group>"; };
+		A4C4029A7C39400C73522875 /* Pods-ProjectVoyage.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectVoyage.release.xcconfig"; path = "Target Support Files/Pods-ProjectVoyage/Pods-ProjectVoyage.release.xcconfig"; sourceTree = "<group>"; };
+		A9958BC8A3A106659C0D2114 /* Pods-ProjectVoyage-ProjectVoyageUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectVoyage-ProjectVoyageUITests.debug.xcconfig"; path = "Target Support Files/Pods-ProjectVoyage-ProjectVoyageUITests/Pods-ProjectVoyage-ProjectVoyageUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CA6D71C8773D13EB1CFCFE22 /* Pods-ProjectVoyage.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectVoyage.debug.xcconfig"; path = "Target Support Files/Pods-ProjectVoyage/Pods-ProjectVoyage.debug.xcconfig"; sourceTree = "<group>"; };
+		CD7FEFD683F07E31C748D340 /* Pods_ProjectVoyage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectVoyage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E1A13A42A53BB29FA7F1897 /* Pods_ProjectVoyage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5BA60BAC5D1A304853B4754 /* Pods_ProjectVoyageTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,12 +94,34 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33BCB6EC4E095D5DF148E5A9 /* Pods_ProjectVoyage_ProjectVoyageUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		354D6AD2C95AFFCE91C58F1B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD7FEFD683F07E31C748D340 /* Pods_ProjectVoyage.framework */,
+				488061CE958977073E1AA26C /* Pods_ProjectVoyage_ProjectVoyageUITests.framework */,
+				84F51A004A7968E444CAD93A /* Pods_ProjectVoyageTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6AC2C8AC287633B600436B8D /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				6AD5983A28760C140058386E /* SceneDelegate.m */,
+				6AD5983628760C140058386E /* AppDelegate.h */,
+				6AD5983728760C140058386E /* AppDelegate.m */,
+				6AD5983928760C140058386E /* SceneDelegate.h */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		6AD5982A28760C140058386E = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +129,8 @@
 				6AD5985128760C170058386E /* ProjectVoyageTests */,
 				6AD5985B28760C170058386E /* ProjectVoyageUITests */,
 				6AD5983428760C140058386E /* Products */,
+				BE7EFF3296B8261FCBA144D3 /* Pods */,
+				354D6AD2C95AFFCE91C58F1B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -107,16 +147,14 @@
 		6AD5983528760C140058386E /* ProjectVoyage */ = {
 			isa = PBXGroup;
 			children = (
-				6AD5983628760C140058386E /* AppDelegate.h */,
-				6AD5983728760C140058386E /* AppDelegate.m */,
-				6AD5983928760C140058386E /* SceneDelegate.h */,
-				6AD5983A28760C140058386E /* SceneDelegate.m */,
+				6AD5986E287623D60058386E /* View Controllers */,
+				6AC2C8AC287633B600436B8D /* Delegates */,
 				6AD5983F28760C140058386E /* Main.storyboard */,
 				6AD5984228760C160058386E /* Assets.xcassets */,
 				6AD5984428760C160058386E /* LaunchScreen.storyboard */,
 				6AD5984728760C160058386E /* Info.plist */,
+				6AC2C8AD2876347500436B8D /* Keys.plist */,
 				6AD5984828760C160058386E /* main.m */,
-				6AD5986E287623D60058386E /* View Controllers */,
 			);
 			path = ProjectVoyage;
 			sourceTree = "<group>";
@@ -149,6 +187,19 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		BE7EFF3296B8261FCBA144D3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				CA6D71C8773D13EB1CFCFE22 /* Pods-ProjectVoyage.debug.xcconfig */,
+				A4C4029A7C39400C73522875 /* Pods-ProjectVoyage.release.xcconfig */,
+				A9958BC8A3A106659C0D2114 /* Pods-ProjectVoyage-ProjectVoyageUITests.debug.xcconfig */,
+				6B7791EBA84C0E82298B12F3 /* Pods-ProjectVoyage-ProjectVoyageUITests.release.xcconfig */,
+				9BB45CBBD996C76DDA2B7404 /* Pods-ProjectVoyageTests.debug.xcconfig */,
+				269F2F3F83A5FB5494793E36 /* Pods-ProjectVoyageTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -156,9 +207,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6AD5986228760C170058386E /* Build configuration list for PBXNativeTarget "ProjectVoyage" */;
 			buildPhases = (
+				BD09657C46AB8E0D86FB5567 /* [CP] Check Pods Manifest.lock */,
 				6AD5982F28760C140058386E /* Sources */,
 				6AD5983028760C140058386E /* Frameworks */,
 				6AD5983128760C140058386E /* Resources */,
+				41FDE5CA049936E7C61188B7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -173,6 +226,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6AD5986528760C170058386E /* Build configuration list for PBXNativeTarget "ProjectVoyageTests" */;
 			buildPhases = (
+				B0883F2E13FE9764E9F4D485 /* [CP] Check Pods Manifest.lock */,
 				6AD5984A28760C170058386E /* Sources */,
 				6AD5984B28760C170058386E /* Frameworks */,
 				6AD5984C28760C170058386E /* Resources */,
@@ -191,9 +245,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6AD5986828760C170058386E /* Build configuration list for PBXNativeTarget "ProjectVoyageUITests" */;
 			buildPhases = (
+				1803446F0763189754CDC823 /* [CP] Check Pods Manifest.lock */,
 				6AD5985428760C170058386E /* Sources */,
 				6AD5985528760C170058386E /* Frameworks */,
 				6AD5985628760C170058386E /* Resources */,
+				6667EAC54B7B30F990C9062B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -212,6 +268,9 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				KnownAssetTags = (
+					942WWucHyddS23J3FZ8nsFoGyZS92REnLg4qzKhW,
+				);
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					6AD5983228760C140058386E = {
@@ -252,6 +311,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AC2C8AE2876347500436B8D /* Keys.plist in Resources */,
 				6AD5984628760C160058386E /* LaunchScreen.storyboard in Resources */,
 				6AD5984328760C160058386E /* Assets.xcassets in Resources */,
 				6AD5984128760C140058386E /* Main.storyboard in Resources */,
@@ -273,6 +333,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1803446F0763189754CDC823 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ProjectVoyage-ProjectVoyageUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		41FDE5CA049936E7C61188B7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProjectVoyage/Pods-ProjectVoyage-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProjectVoyage/Pods-ProjectVoyage-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ProjectVoyage/Pods-ProjectVoyage-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6667EAC54B7B30F990C9062B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProjectVoyage-ProjectVoyageUITests/Pods-ProjectVoyage-ProjectVoyageUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ProjectVoyage-ProjectVoyageUITests/Pods-ProjectVoyage-ProjectVoyageUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ProjectVoyage-ProjectVoyageUITests/Pods-ProjectVoyage-ProjectVoyageUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B0883F2E13FE9764E9F4D485 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ProjectVoyageTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD09657C46AB8E0D86FB5567 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ProjectVoyage-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6AD5982F28760C140058386E /* Sources */ = {
@@ -451,6 +614,7 @@
 		};
 		6AD5986328760C170058386E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA6D71C8773D13EB1CFCFE22 /* Pods-ProjectVoyage.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -477,6 +641,7 @@
 		};
 		6AD5986428760C170058386E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A4C4029A7C39400C73522875 /* Pods-ProjectVoyage.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -503,6 +668,7 @@
 		};
 		6AD5986628760C170058386E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9BB45CBBD996C76DDA2B7404 /* Pods-ProjectVoyageTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -520,6 +686,7 @@
 		};
 		6AD5986728760C170058386E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 269F2F3F83A5FB5494793E36 /* Pods-ProjectVoyageTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -537,6 +704,7 @@
 		};
 		6AD5986928760C170058386E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9958BC8A3A106659C0D2114 /* Pods-ProjectVoyage-ProjectVoyageUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -552,6 +720,7 @@
 		};
 		6AD5986A28760C170058386E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B7791EBA84C0E82298B12F3 /* Pods-ProjectVoyage-ProjectVoyageUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
