@@ -26,17 +26,29 @@
 
 - (IBAction)login:(id)sender {
     NSString *username = self.usernameField.text;
-        NSString *password = self.passwordField.text;
+    NSString *password = self.passwordField.text;
         
-        [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
-            if (error != nil) {
-                NSLog(@"User log in failed: %@", error.localizedDescription);
-            } else {
-                NSLog(@"User logged in successfully");
-                // segue to home feed
-                [self performSegueWithIdentifier:@"loginSegue" sender:nil];
-            }
-        }];
+    [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
+        if (error != nil) {
+            [self alertFailedLogin];
+            NSLog(@"User log in failed: %@", error.localizedDescription);
+        } else {
+            NSLog(@"User logged in successfully");
+            // segue to home feed
+            [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+        }
+    }];
+}
+
+
+- (void) alertFailedLogin {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Login failed" message:@"Please username and/or password." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:acknowledge];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 /*
