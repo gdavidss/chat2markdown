@@ -45,7 +45,7 @@
                   NSLog(@"User registered successfully");
                   
                   // segue to home feed
-                  [self performSegueWithIdentifier:@"loginSegue" sender:nil];
+                  [self performSegueWithIdentifier:@"submitSegue" sender:nil];
               }
           }];
     }

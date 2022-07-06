@@ -11,6 +11,7 @@
 		4E1A13A42A53BB29FA7F1897 /* Pods_ProjectVoyage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7FEFD683F07E31C748D340 /* Pods_ProjectVoyage.framework */; };
 		6AC2C8AB2876269D00436B8D /* SignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AA2876269D00436B8D /* SignUpVC.m */; };
 		6AC2C8AE2876347500436B8D /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AD2876347500436B8D /* Keys.plist */; };
+		6AC2C8B12876411B00436B8D /* ChatListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B02876411B00436B8D /* ChatListVC.m */; };
 		6AD5983828760C140058386E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5983728760C140058386E /* AppDelegate.m */; };
 		6AD5983B28760C140058386E /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5983A28760C140058386E /* SceneDelegate.m */; };
 		6AD5984128760C140058386E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD5983F28760C140058386E /* Main.storyboard */; };
@@ -47,6 +48,8 @@
 		6AC2C8A92876269D00436B8D /* SignUpVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpVC.h; sourceTree = "<group>"; };
 		6AC2C8AA2876269D00436B8D /* SignUpVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpVC.m; sourceTree = "<group>"; };
 		6AC2C8AD2876347500436B8D /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		6AC2C8AF2876411B00436B8D /* ChatListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatListVC.h; sourceTree = "<group>"; };
+		6AC2C8B02876411B00436B8D /* ChatListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatListVC.m; sourceTree = "<group>"; };
 		6AD5983328760C140058386E /* ProjectVoyage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectVoyage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD5983628760C140058386E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AD5983728760C140058386E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -122,6 +125,13 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
+		6AC2C8B2287648B700436B8D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		6AD5982A28760C140058386E = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +157,7 @@
 		6AD5983528760C140058386E /* ProjectVoyage */ = {
 			isa = PBXGroup;
 			children = (
+				6AC2C8B2287648B700436B8D /* Models */,
 				6AD5986E287623D60058386E /* View Controllers */,
 				6AC2C8AC287633B600436B8D /* Delegates */,
 				6AD5983F28760C140058386E /* Main.storyboard */,
@@ -183,6 +194,8 @@
 				6AD598702876245C0058386E /* LoginVC.m */,
 				6AC2C8A92876269D00436B8D /* SignUpVC.h */,
 				6AC2C8AA2876269D00436B8D /* SignUpVC.m */,
+				6AC2C8AF2876411B00436B8D /* ChatListVC.h */,
+				6AC2C8B02876411B00436B8D /* ChatListVC.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -446,6 +459,7 @@
 				6AD598712876245C0058386E /* LoginVC.m in Sources */,
 				6AC2C8AB2876269D00436B8D /* SignUpVC.m in Sources */,
 				6AD5984928760C160058386E /* main.m in Sources */,
+				6AC2C8B12876411B00436B8D /* ChatListVC.m in Sources */,
 				6AD5983B28760C140058386E /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
