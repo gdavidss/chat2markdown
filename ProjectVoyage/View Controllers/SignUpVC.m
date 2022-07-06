@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
 @property (weak, nonatomic) IBOutlet UITextField *repeatPasswordField;
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
 
 @end
 
@@ -26,13 +27,14 @@
 
 
 - (IBAction)submitSignUp:(id)sender {
-    if ([self areThereEmptyFields] || [self arePasswordsDifferent] || [self isEmailInvalid]) {
-        return;
-    } else {
+    //if ([self areThereEmptyFields] || [self arePasswordsDifferent] || [self isEmailInvalid]) {
+        //return;
+    //} else {
         // initialize a user object
           PFUser *newUser = [PFUser user];
           
           // set user properties
+          newUser[@"name"] = self.nameField.text;
           newUser.username = self.usernameField.text;
           newUser.email = self.emailField.text;
           newUser.password = self.passwordField.text;
@@ -48,7 +50,7 @@
                   [self performSegueWithIdentifier:@"submitSegue" sender:nil];
               }
           }];
-    }
+    //}
 }
 
 
@@ -69,7 +71,7 @@
 
 - (BOOL) areThereEmptyFields {
     if ([_passwordField.text  isEqual: @""] || [_repeatPasswordField.text isEqual: @""]
-        || [_emailField.text  isEqual: @""] || [_usernameField.text isEqual: @""]) {
+        || [_emailField.text  isEqual: @""] || [_usernameField.text isEqual: @""] || [_nameField.text isEqual: @""]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Empty fields are not allowed" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
