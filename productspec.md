@@ -20,10 +20,10 @@ Project Voyage is an app based on Automated Speech Recognition (ASR). It transcr
 
 ### App Evaluation
 - **Category:** Self-cognition
-- **Mobile:** Mobile is fundamental here because it is the most direct from of sending voice messages. PCs have the disadvantage of having to download the voice message. Plus, most transcription apps on app store are too purpose broad.
+- **Mobile:** Yes, sir. Mobile is fundamental here because it is the most direct from of sending voice messages. PCs have the disadvantage of having to download the voice message. Plus, most transcription apps on app store are too purpose broad.
 - **Story:** Users will be able to transcribe their conversations that contains voice messages and export them forever.
 - **Market:** Self-improvement
-- **Habit:** The app might integrate the personal habit of sending voice messages to people to verbalize meaningful thoughts, and be able to retrieve information from them.
+- **Habit:** The app might assist and integrate the personal habit of sending meaningful voice messages to people, while being able to regularly retrieve information from these messages. 
 - **Scope:** On the most basic level, the user should be able to upload a voice message directly from WhatsApp and have it displayed in screen as a message bubble to copy and paste in raw text. Users can also import written messages from WhatsApp if it helps complementing a dialogue. They can also edit any of the text of all parties in the dialogue as they wish. In cybernetic terms, they have requisite variety over all existing symbols in the dialogue.
 
 
@@ -71,10 +71,13 @@ Project Voyage is an app based on Automated Speech Recognition (ASR). It transcr
     * User can delete account
     * User can change password
 
+
+
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
- 
+
+
 **Flow Navigation** (Screen to Screen)
 
 * Login/Signup screen
@@ -85,13 +88,13 @@ Project Voyage is an app based on Automated Speech Recognition (ASR). It transcr
 * Edit message
    * Chat (after done editing the message)
 
+
+
 ## Wireframes
-[Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+[Figma template](https://www.figma.com/file/mvjrm3VC09pIPwdkurNP2c/Untitled?node-id=4%3A152)
 
-### [BONUS] Digital Wireframes & Mockups
-
-### [BONUS] Interactive Prototype
+![](https://i.imgur.com/ExRtL06.png)
+![](https://i.imgur.com/zRpov42.png)
 
 ## Schema 
 [This section will be completed in Unit 9]
