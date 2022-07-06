@@ -84,11 +84,12 @@
                         <outlet property="passwordField" destination="DDJ-pT-yVr" id="yPT-aa-0ld"/>
                         <outlet property="signupBtn" destination="JrD-0S-tkv" id="Sel-ta-c5I"/>
                         <outlet property="usernameField" destination="onl-7k-6lI" id="bkp-rG-s2L"/>
+                        <segue destination="GC7-ET-A92" kind="show" identifier="loginSegue" id="2Xx-pF-QOp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.0289855072465" y="101.78571428571428"/>
+            <point key="canvasLocation" x="1141" y="102"/>
         </scene>
         <!--Sign up-->
         <scene sceneID="SNq-eV-pZC">
@@ -174,11 +175,37 @@
                         <outlet property="repeatPasswordField" destination="Kf9-0h-q4d" id="iN0-pM-B59"/>
                         <outlet property="submitBtn" destination="ks0-OH-FUg" id="xLJ-HQ-W26"/>
                         <outlet property="usernameField" destination="dJT-pR-t5c" id="Hra-uX-ryX"/>
+                        <segue destination="GC7-ET-A92" kind="show" identifier="loginSegue" id="Bma-jP-Kd4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pAL-qh-el5" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1905.7971014492755" y="101.78571428571428"/>
+            <point key="canvasLocation" x="1909" y="-668"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="VgX-3Y-ac7">
+            <objects>
+                <viewController id="ILi-Qs-sig" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ATD-Mm-nki">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="You logged in!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXp-tj-Js0">
+                                <rect key="frame" x="156" y="229" width="108" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pUl-z7-Eq1"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="2JZ-rV-zo8"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1J3-VR-h3z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2746" y="117"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wMa-Bt-rzv">
@@ -196,9 +223,31 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vHV-c6-VrV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="131.8840579710145" y="101.78571428571428"/>
+            <point key="canvasLocation" x="196" y="102"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eK0-a6-dlS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GC7-ET-A92" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="dNJ-fi-jAM"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fDN-Lp-Kfh">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ILi-Qs-sig" kind="relationship" relationship="rootViewController" id="jzW-gF-73g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o58-sw-WTK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1909" y="117"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Bma-jP-Kd4"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
