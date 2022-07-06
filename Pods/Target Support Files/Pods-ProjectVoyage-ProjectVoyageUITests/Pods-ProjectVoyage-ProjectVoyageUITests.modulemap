@@ -1,0 +1,6 @@
+framework module Pods_ProjectVoyage_ProjectVoyageUITests {
+  umbrella header "Pods-ProjectVoyage-ProjectVoyageUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -6,6 +6,7 @@ target 'ProjectVoyage' do
   use_frameworks!
 
   # Pods for ProjectVoyage
+  pod 'Parse'
 
   target 'ProjectVoyageTests' do
     inherit! :search_paths
