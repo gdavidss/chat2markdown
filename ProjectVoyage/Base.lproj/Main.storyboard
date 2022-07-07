@@ -203,7 +203,16 @@
                         <viewLayoutGuide key="safeArea" id="1KM-8Y-ep5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="1l8-Lr-GW3"/>
+                    <navigationItem key="navigationItem" id="1l8-Lr-GW3">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="FoO-fo-qMd">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Z5t-AG-oKA">
+                                <rect key="frame" x="20" y="5" width="92" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Log out"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="emailLabel" destination="Lev-Gr-a53" id="7mt-hx-65N"/>
                         <outlet property="nameLabel" destination="ZyD-D4-IVH" id="3In-9H-6Se"/>
@@ -291,7 +300,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="yoW-G9-Wzw">
             <objects>
-                <tabBarController modalPresentationStyle="fullScreen" id="lZq-Np-Ahf" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarViewController" modalPresentationStyle="fullScreen" id="lZq-Np-Ahf" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="L4h-zE-vEa"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hLm-77-lBU">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -471,7 +480,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="yZy-Uu-wZC"/>
+        <segue reference="H5A-Xm-0jJ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
