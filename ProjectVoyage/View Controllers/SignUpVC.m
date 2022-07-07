@@ -27,9 +27,9 @@
 
 
 - (IBAction)submitSignUp:(id)sender {
-    //if ([self areThereEmptyFields] || [self arePasswordsDifferent] || [self isEmailInvalid]) {
+    if ([self areThereEmptyFields] || [self arePasswordsDifferent] || [self isEmailInvalid]) {
         //return;
-    //} else {
+    } else {
         // initialize a user object
           PFUser *newUser = [PFUser user];
           
@@ -50,7 +50,7 @@
                   [self performSegueWithIdentifier:@"submitSegue" sender:nil];
               }
           }];
-    //}
+    }
 }
 
 
