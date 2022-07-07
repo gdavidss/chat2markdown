@@ -128,14 +128,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Guilherme David" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZyD-D4-IVH">
-                                <rect key="frame" x="119" y="137" width="145" height="24"/>
+                                <rect key="frame" x="119" y="137" width="264" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="gdavid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uuk-Iv-X7m">
-                                <rect key="frame" x="119" y="165" width="60" height="24"/>
+                                <rect key="frame" x="119" y="165" width="264" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -156,48 +156,48 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Repeat new password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B9u-Q1-dTL">
-                                <rect key="frame" x="90" y="464" width="207" height="34"/>
+                                <rect key="frame" x="108" y="468" width="207" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xvZ-fQ-fK2">
-                                <rect key="frame" x="90" y="420" width="207" height="34"/>
+                                <rect key="frame" x="108" y="426" width="207" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GnB-KU-ItM">
-                                <rect key="frame" x="90" y="376" width="207" height="34"/>
+                                <rect key="frame" x="108" y="380" width="207" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NdP-0d-bga">
-                                <rect key="frame" x="90" y="334" width="207" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAw-da-pIQ">
-                                <rect key="frame" x="231" y="506" width="72" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Update"/>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LOQ-yI-Onr">
-                                <rect key="frame" x="90" y="292" width="207" height="34"/>
+                                <rect key="frame" x="108" y="338" width="207" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TLG-xr-hY1">
-                                <rect key="frame" x="132" y="619" width="122" height="31"/>
+                                <rect key="frame" x="150" y="623" width="122" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Delete account">
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LOQ-yI-Onr">
+                                <rect key="frame" x="108" y="296" width="207" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAw-da-pIQ">
+                                <rect key="frame" x="249" y="510" width="72" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Update"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1KM-8Y-ep5"/>
@@ -224,7 +224,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E8a-Ns-etD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3784" y="524"/>
+            <point key="canvasLocation" x="3782.608695652174" y="522.99107142857144"/>
         </scene>
         <!--Chat list-->
         <scene sceneID="RZv-af-OSW">
@@ -429,7 +429,7 @@
         <scene sceneID="YxE-ff-oai">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V5E-TC-cFe" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Chat list" id="Vch-LD-bdG"/>
+                    <tabBarItem key="tabBarItem" title="Chat list" image="bubble.left.and.bubble.right.fill" catalog="system" id="Vch-LD-bdG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="p5U-2I-5tD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -448,7 +448,7 @@
         <scene sceneID="D8Z-X3-2Kb">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="FBZ-P9-hlz" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Settings" id="CRR-s7-z5U"/>
+                    <tabBarItem key="tabBarItem" title="Settings" image="gearshape.fill" catalog="system" id="CRR-s7-z5U"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iMR-ua-xUA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
@@ -468,6 +468,8 @@
         <segue reference="H5A-Xm-0jJ"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="bubble.left.and.bubble.right.fill" catalog="system" width="128" height="97"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
