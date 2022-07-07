@@ -32,11 +32,42 @@
 - (IBAction)logout:(id)sender {
     // PFUser.current() will now be nil
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"LoginVC"];
-        SceneDelegate *mySceneDelegate = (SceneDelegate * ) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
-        mySceneDelegate.window.rootViewController = loginVC;
+        [self returnToLoginVC];
     }];
+}
+
+
+- (IBAction)didPressDeleteAccount:(id)sender {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure?" message:@"This action cannot be undone." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* abort = [UIAlertAction actionWithTitle:@"Abort" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {}];
+    UIAlertAction* proceed = [UIAlertAction actionWithTitle:@"Proceed" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {[self deleteAccount];}];
+    
+    [alert addAction:abort];
+    [alert addAction:proceed];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void) deleteAccount {
+    [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Something went wrong when trying to delete your account.");
+        } else {
+            // Cleans current session and return to login view controller
+            [PFUser logOut];
+            [self returnToLoginVC];
+        }
+    }];
+}
+
+
+- (void) returnToLoginVC {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"LoginVC"];
+    SceneDelegate *mySceneDelegate = (SceneDelegate * ) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
+    mySceneDelegate.window.rootViewController = loginVC;
 }
 
 /*

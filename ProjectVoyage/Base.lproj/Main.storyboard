@@ -89,7 +89,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1157" y="102"/>
+            <point key="canvasLocation" x="1214" y="110"/>
         </scene>
         <!--SettingsVC-->
         <scene sceneID="dfY-CB-1T2">
@@ -186,6 +186,9 @@
                                 <state key="normal" title="Delete account">
                                     <color key="titleColor" systemColor="systemRedColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="didPressDeleteAccount:" destination="vfo-F3-JPP" eventType="touchUpInside" id="TXp-U5-8ii"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="New name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LOQ-yI-Onr">
                                 <rect key="frame" x="108" y="296" width="207" height="34"/>
@@ -224,7 +227,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E8a-Ns-etD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3782.608695652174" y="522.99107142857144"/>
+            <point key="canvasLocation" x="3533" y="451"/>
         </scene>
         <!--Chat list-->
         <scene sceneID="RZv-af-OSW">
@@ -298,7 +301,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ala-CN-Vxo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3783" y="-194"/>
+            <point key="canvasLocation" x="3532" y="-214"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yoW-G9-Wzw">
@@ -317,7 +320,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JUP-is-Sey" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1983" y="109"/>
+            <point key="canvasLocation" x="1983" y="126"/>
         </scene>
         <!--Sign up-->
         <scene sceneID="SNq-eV-pZC">
@@ -442,7 +445,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uoh-51-8ZL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2873.913043478261" y="-193.52678571428569"/>
+            <point key="canvasLocation" x="2746" y="-213"/>
         </scene>
         <!--Settings-->
         <scene sceneID="D8Z-X3-2Kb">
@@ -461,7 +464,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nmE-el-ISX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2874" y="523"/>
+            <point key="canvasLocation" x="2745" y="451"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
