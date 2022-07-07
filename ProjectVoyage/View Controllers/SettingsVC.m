@@ -6,6 +6,8 @@
 //
 
 #import "SettingsVC.h"
+#import "LoginVC.h"
+#import "SceneDelegate.h"
 @import Parse;
 
 @interface SettingsVC ()
@@ -24,6 +26,17 @@
     _nameLabel.text = currentUser[@"name"];
     _usernameLabel.text = currentUser[@"username"];
     _emailLabel.text = currentUser[@"email"];
+}
+
+
+- (IBAction)logout:(id)sender {
+    // PFUser.current() will now be nil
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"LoginVC"];
+        SceneDelegate *mySceneDelegate = (SceneDelegate * ) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
+        mySceneDelegate.window.rootViewController = loginVC;
+    }];
 }
 
 /*
