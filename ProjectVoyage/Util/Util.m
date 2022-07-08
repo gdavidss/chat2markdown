@@ -9,6 +9,18 @@
 
 @implementation Util
 
++ (NSString *) formatDateString:(NSDate *)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    //[dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+
+    NSString *convertedString = [dateFormatter stringFromDate:date]; //here convert date in NSString
+    NSLog(@"Converted String : %@", convertedString);
+    
+    return convertedString;
+}
+
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
     // check if image is not nil
     if (!image) {
