@@ -6,7 +6,7 @@
 //
 
 #import "ChatListVC.h"
-
+#import "Chat.h"
 @interface ChatListVC ()
 
 @end
@@ -16,6 +16,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [Chat postChat:@"teste description" withRecipientName:@"rodolfo" withRecipientImage:[UIImage imageNamed:@"profile_tab.png"] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error != nil) {
+    NSLog(@"Error: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Post made successfully");
+        }
+        // Hides progress HUD on completion
+    }];
 }
 
 /*

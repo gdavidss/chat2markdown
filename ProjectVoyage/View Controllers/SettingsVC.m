@@ -50,6 +50,7 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
+
 - (void) deleteAccount {
     [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
@@ -60,6 +61,11 @@
             [self returnToLoginVC];
         }
     }];
+}
+
+
+- (IBAction)didPressUpdate:(id)sender {
+    
 }
 
 
