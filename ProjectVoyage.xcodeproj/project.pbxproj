@@ -14,6 +14,7 @@
 		6AC2C8B12876411B00436B8D /* ChatListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B02876411B00436B8D /* ChatListVC.m */; };
 		6AC2C8B5287648F000436B8D /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B4287648F000436B8D /* Chat.m */; };
 		6AC2C8B8287659B900436B8D /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B7287659B900436B8D /* SettingsVC.m */; };
+		6AC2C8BB2877B2DD00436B8D /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8BA2877B2DD00436B8D /* Util.m */; };
 		6AD5983828760C140058386E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5983728760C140058386E /* AppDelegate.m */; };
 		6AD5983B28760C140058386E /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5983A28760C140058386E /* SceneDelegate.m */; };
 		6AD5984128760C140058386E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AD5983F28760C140058386E /* Main.storyboard */; };
@@ -56,6 +57,8 @@
 		6AC2C8B4287648F000436B8D /* Chat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
 		6AC2C8B6287659B900436B8D /* SettingsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
 		6AC2C8B7287659B900436B8D /* SettingsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsVC.m; sourceTree = "<group>"; };
+		6AC2C8B92877B2DD00436B8D /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		6AC2C8BA2877B2DD00436B8D /* Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		6AD5983328760C140058386E /* ProjectVoyage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectVoyage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD5983628760C140058386E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AD5983728760C140058386E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -140,6 +143,15 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		6AC2C8BC2877B2E900436B8D /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				6AC2C8B92877B2DD00436B8D /* Util.h */,
+				6AC2C8BA2877B2DD00436B8D /* Util.m */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		6AD5982A28760C140058386E = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +177,7 @@
 		6AD5983528760C140058386E /* ProjectVoyage */ = {
 			isa = PBXGroup;
 			children = (
+				6AC2C8BC2877B2E900436B8D /* Util */,
 				6AC2C8B2287648B700436B8D /* Models */,
 				6AD5986E287623D60058386E /* View Controllers */,
 				6AC2C8AC287633B600436B8D /* Delegates */,
@@ -473,6 +486,7 @@
 				6AC2C8B12876411B00436B8D /* ChatListVC.m in Sources */,
 				6AD5983B28760C140058386E /* SceneDelegate.m in Sources */,
 				6AC2C8B5287648F000436B8D /* Chat.m in Sources */,
+				6AC2C8BB2877B2DD00436B8D /* Util.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,11 +6,19 @@
 //
 
 #import <Foundation/Foundation.h>
+@import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Chat : NSObject
+@interface Chat : PFObject<PFSubclassing>
 
+@property (nonatomic, strong) NSString *chatID;
+@property (nonatomic, strong) NSString *chatDescription;
+@property (nonatomic, strong) NSString *recipientName;
+@property (nonatomic, strong) PFFileObject *recipientImg;
+
+
++ (void) postChat: (NSString * _Nullable)recipientDescription withRecipientName:(NSString *)recipientName withRecipientImage:(UIImage * _Nullable)recipientImg withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 @end
 
 NS_ASSUME_NONNULL_END
