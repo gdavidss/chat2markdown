@@ -11,9 +11,11 @@
 @import Parse;
 
 @interface SettingsVC ()
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UITextField *repeatPasswordField;
 
 @end
 
@@ -23,9 +25,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     PFUser *currentUser = [PFUser currentUser];
-    _nameLabel.text = currentUser[@"name"];
-    _usernameLabel.text = currentUser[@"username"];
-    _emailLabel.text = currentUser[@"email"];
+    _nameField.text = currentUser[@"name"];
+    _usernameField.text = currentUser[@"username"];
+    _emailField.text = currentUser[@"email"];
 }
 
 
@@ -63,17 +65,85 @@
     }];
 }
 
-
 - (IBAction)didPressUpdate:(id)sender {
-    
+    if (![self arePasswordsDifferent] && ![self areThereEmptyFields]) {
+        PFUser *currentUser = [PFUser currentUser];
+        currentUser[@"name"] = _nameField.text;
+        currentUser[@"email"] = _emailField.text;
+        currentUser[@"username"] = _usernameField.text;
+        if (![_passwordField.text isEqual:@""]) {
+            currentUser.password = _passwordField.text;
+        }
+        [currentUser saveInBackgroundWithBlock: ^(BOOL succeeded, NSError * _Nullable error) {
+            if (error) {
+                [self throwUpdateErrorAlert];
+            } else {
+                [self throwSucessAlert];
+            }
+        }];
+    }
 }
 
+
+- (void) throwUpdateErrorAlert {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wront when trying to update your account. Try it later." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:acknowledge];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
+- (void) throwSucessAlert {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sucess" message:@"Your account was updated sucessfully" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * action) {
+        // Return to chat list
+        [self.tabBarController setSelectedIndex:0];
+    }];
+    
+    [alert addAction:acknowledge];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 - (void) returnToLoginVC {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     LoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"LoginVC"];
     SceneDelegate *mySceneDelegate = (SceneDelegate * ) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
     mySceneDelegate.window.rootViewController = loginVC;
+}
+
+
+- (BOOL) arePasswordsDifferent {
+    if (_passwordField.text != _repeatPasswordField.text) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Passwords do not match" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:acknowledge];
+        [self presentViewController:alert animated:YES completion:nil];
+        return true;
+    }
+    return false;
+}
+
+
+- (BOOL) areThereEmptyFields {
+    if ([_emailField.text  isEqual: @""] || [_usernameField.text isEqual: @""] || [_nameField.text isEqual: @""]) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Empty fields are not allowed" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * action) {}];
+        
+        [alert addAction:acknowledge];
+        [self presentViewController:alert animated:YES completion:nil];
+        return true;
+    }
+    return false;
 }
 
 /*
