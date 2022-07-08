@@ -14,16 +14,18 @@
 @dynamic chatID;
 @dynamic chatDescription;
 @dynamic recipientName;
-@dynamic recipientImg;
+@dynamic recipientImage;
 @dynamic author;
 
+
 + (nonnull NSString *)parseClassName {
-    return @"Post";
+    return @"Chat";
 }
+
 
 + (void) postChat: (NSString * _Nullable)chatDescription withRecipientName:(NSString *)recipientName withRecipientImage:(UIImage * _Nullable)recipientImg withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     Chat *newChat = [Chat new];
-    newChat.recipientImg = [Util getPFFileFromImage:recipientImg];
+    newChat.recipientImage = [Util getPFFileFromImage:recipientImg];
     newChat.recipientName = recipientName;
     newChat.chatDescription = chatDescription;
     

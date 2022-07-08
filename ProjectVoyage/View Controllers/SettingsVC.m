@@ -101,7 +101,7 @@
     
     UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
                                                         handler:^(UIAlertAction * action) {
-        // Return to chat list
+        // Return  to chat list
         [self.tabBarController setSelectedIndex:0];
     }];
     
