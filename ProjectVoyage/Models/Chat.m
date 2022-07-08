@@ -7,7 +7,7 @@
 
 #import "Chat.h"
 #import "Util.h"
-
+@import Parse;
 
 @implementation Chat
 
@@ -15,6 +15,7 @@
 @dynamic chatDescription;
 @dynamic recipientName;
 @dynamic recipientImg;
+@dynamic author;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
@@ -25,6 +26,9 @@
     newChat.recipientImg = [Util getPFFileFromImage:recipientImg];
     newChat.recipientName = recipientName;
     newChat.chatDescription = chatDescription;
+    
+    PFUser *currentUser = [PFUser currentUser];
+    newChat.author = currentUser;
     
     [newChat saveInBackgroundWithBlock: completion];
 }

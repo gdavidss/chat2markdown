@@ -32,9 +32,9 @@
     } else {
         // initialize a user object
           PFUser *newUser = [PFUser user];
-          
-          // set user properties
+                   
           newUser[@"name"] = self.nameField.text;
+        
           newUser.username = self.usernameField.text;
           newUser.email = self.emailField.text;
           newUser.password = self.passwordField.text;
