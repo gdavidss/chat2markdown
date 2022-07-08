@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Util : NSObject
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
++ (NSString *) formatDateString:(NSDate *)stringDate;
 
 @end
 
