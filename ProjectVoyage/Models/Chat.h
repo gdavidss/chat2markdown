@@ -15,9 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *chatID;
 @property (nonatomic, strong) NSString *chatDescription;
 @property (nonatomic, strong) NSString *recipientName;
-@property (nonatomic, strong) PFFileObject *recipientImg;
+@property (nonatomic, strong) PFFileObject *recipientImage;
 @property (nonatomic, strong) PFUser *author;
-
 
 + (void) postChat: (NSString * _Nullable)recipientDescription withRecipientName:(NSString *)recipientName withRecipientImage:(UIImage * _Nullable)recipientImg withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
