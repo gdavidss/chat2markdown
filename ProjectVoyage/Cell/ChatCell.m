@@ -6,6 +6,7 @@
 //
 
 #import "ChatCell.h"
+#import "Util.h"
 
 @implementation ChatCell
 
@@ -14,10 +15,21 @@
     // Initialization code
 }
 
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 
+
+- (void) setChat:(Chat *)chat {
+    _chat = chat;
+    self.recipientImage.image = [UIImage imageWithData:[chat.recipientImage getData]];
+    self.recipientLabel.text = chat.recipientName;
+    self.descriptionLabel.text = chat.chatDescription;
+    
+    self.dateChat.text = [Util formatDateString:chat.createdAt];
+}
+
 @end
+
