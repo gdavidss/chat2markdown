@@ -6,10 +6,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Chat.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ChatCell : UITableViewCell
+
+@property (strong, nonatomic) IBOutlet UILabel *recipientLabel;
+@property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *recipientImage;
+@property (weak, nonatomic) IBOutlet UILabel *dateChat;
+
+@property (strong, nonatomic) Chat *chat;
 
 @end
 
