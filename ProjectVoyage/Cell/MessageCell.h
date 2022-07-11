@@ -6,11 +6,19 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Message.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface MessageCell : UIViewController
+/*
+This class build bubble message cells
+for incoming or outgoing messages
+ */
+@interface MessageCell : UITableViewCell
+
+@property (strong, nonatomic) Message *message;
+
+- (CGFloat) bubbleCellHeight;
 
 @end
-
 NS_ASSUME_NONNULL_END

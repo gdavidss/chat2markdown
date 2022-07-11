@@ -1,16 +1,23 @@
 //
 //  LocalStorage.h
-//  ProjectVoyage
+//  Whatsapp
 //
-//  Created by Gui David on 7/8/22.
+//  Created by Rafael Castro on 7/24/15.
+//  Copyright (c) 2015 HummingBird. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import "Message.h"
+#import "Chat.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
+// This class is responsable to store messages
+// For now, it stores in memory only
+//
 @interface LocalStorage : NSObject
-
++(id)sharedInstance;
++(void)storeChat:(Chat *)chat;
++(void)storeChats:(NSArray *)chats;
++(void)storeMessage:(Message *)message;
++(void)storeMessages:(NSArray *)messages;
+-(NSArray *)queryMessagesForChatID:(NSString *)chat_id;
 @end
-
-NS_ASSUME_NONNULL_END

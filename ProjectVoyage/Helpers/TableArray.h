@@ -1,16 +1,33 @@
 //
-//  TableArray.h
-//  ProjectVoyage
+//  MessageArray.h
+//  Whatsapp
 //
-//  Created by Gui David on 7/8/22.
+//  Created by Rafael Castro on 6/18/15.
+//  Copyright (c) 2015 HummingBird. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import "Message.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
+//
+// This class teaches tableView how to interact with
+// dictionaty. Basically it's mimics the array use in
+// a tableView.
+//
 @interface TableArray : NSObject
 
-@end
+-(void)addObject:(Message *)message;
+-(void)addObjectsFromArray:(NSArray *)messages;
+-(void)removeObject:(Message *)message;
+-(void)removeObjectsInArray:(NSArray *)messages;
+-(void)removeAllObjects;
+-(NSInteger)numberOfMessages;
+-(NSInteger)numberOfSections;
+-(NSInteger)numberOfMessagesInSection:(NSInteger)section;
+-(NSString *)titleForSection:(NSInteger)section;
+-(Message *)objectAtIndexPath:(NSIndexPath *)indexPath;
+-(Message *)lastObject;
+-(NSIndexPath *)indexPathForLastMessage;
+-(NSIndexPath *)indexPathForMessage:(Message *)message;
 
-NS_ASSUME_NONNULL_END
+@end
