@@ -1,17 +1,17 @@
 //
-//  ChatMessagesVC.m
+//  MessageCell.m
 //  ProjectVoyage
 //
 //  Created by Gui David on 7/8/22.
 //
 
-#import "ChatMessagesVC.h"
+#import "MessageCell.h"
 
-@interface ChatMessagesVC ()
+@interface MessageCell ()
 
 @end
 
-@implementation ChatMessagesVC
+@implementation MessageCell
 
 - (void)viewDidLoad {
     [super viewDidLoad];
