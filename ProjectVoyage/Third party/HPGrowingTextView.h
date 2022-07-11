@@ -1,15 +1,15 @@
 //
-//  ChatMessagesVC.h
+//  HPGrowingTextView.h
 //  ProjectVoyage
 //
 //  Created by Gui David on 7/8/22.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ChatMessagesVC : UIViewController
+@interface HPGrowingTextView : NSObject
 
 @end
 
