@@ -1,16 +1,18 @@
 //
-//  MessagesVC.h
-//  ProjectVoyage
+//  ChatController.h
+//  Whatsapp
 //
-//  Created by Gui David on 7/8/22.
+//  Created by Rafael Castro on 6/16/15.
+//  Copyright (c) 2015 HummingBird. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "Chat.h"
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface MessagesVC : NSObject
-
+//
+// This class control chat exchange message itself
+// It creates the bubble UI
+//
+@interface MessagesVC : UIViewController
+@property (strong, nonatomic) Chat *chat;
 @end
-
-NS_ASSUME_NONNULL_END
