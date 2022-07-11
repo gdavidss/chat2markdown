@@ -41,8 +41,8 @@
 {
     if (messages.count == 0) return;
     Message *message = messages[0];
-    NSString *chat_id = message.chat_id;
-    NSMutableArray *array = (NSMutableArray *)[self queryMessagesForChatID:chat_id];
+    NSString *chatId = message.chatId;
+    NSMutableArray *array = (NSMutableArray *)[self queryMessagesForChatID:chatId];
     if (array)
     {
         [array addObjectsFromArray:messages];
@@ -51,8 +51,9 @@
     {
         array = [[NSMutableArray alloc] initWithArray:messages];
     }
-    [self.mapChatToMessages setValue:array forKey:chat_id];
+    [self.mapChatToMessages setValue:array forKey:chatId];
 }
+
 -(NSArray *)queryMessagesForChatID:(NSString *)chat_id
 {
     return [self.mapChatToMessages valueForKey:chat_id];

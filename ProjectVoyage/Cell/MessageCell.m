@@ -13,6 +13,8 @@
 @property (strong, nonatomic) UITextView *textView;
 @property (strong, nonatomic) UIImageView *bubbleImage;
 @property (strong, nonatomic) UIImageView *statusIcon;
+
+@property (strong, nonatomic) UILabel *messageType;
 @end
 
 
@@ -48,9 +50,11 @@
     
     _textView = [[UITextView alloc] init];
     _bubbleImage = [[UIImageView alloc] init];
+    _messageType = [[UILabel alloc] init];
     
     [self.contentView addSubview:_bubbleImage];
     [self.contentView addSubview:_textView];
+    [self.contentView addSubview:_messageType];
 }
 
 - (void) prepareForReuse {
@@ -71,13 +75,47 @@
 - (void) buildCell {
     [self setTextView];
     [self setBubble];
+    [self setMessageType];
     [self setNeedsLayout];
 }
+
+#pragma mark - Container
+
+- (void) setMessageType {
+    UIFont * customFont = [UIFont fontWithName:@"Helvetica" size:15.0]; //custom font
+    NSString *text = @"Written message";
+
+    _messageType.font = customFont;
+    _messageType.numberOfLines = 1;
+    _messageType.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
+    _messageType.adjustsFontSizeToFitWidth = YES;
+    _messageType.adjustsLetterSpacingToFitWidth = YES;
+    _messageType.minimumScaleFactor = 10.0f/12.0f;
+    _messageType.clipsToBounds = YES;
+    _messageType.backgroundColor = [UIColor clearColor];
+    _messageType.textColor = [UIColor grayColor];
+    _messageType.textAlignment = NSTextAlignmentLeft;
+    _messageType.text = text;
+    
+    // Margins
+    CGFloat marginRight = 2;
+    
+    // Position
+    CGFloat messageType_x = 10;
+    CGFloat messageType_y = 0;
+    CGFloat messageType_width;
+    CGFloat messageType_height = 40;
+    
+    messageType_width = self.contentView.frame.size.width - messageType_x - marginRight;
+   
+    _messageType.frame = CGRectMake(messageType_x, messageType_y, messageType_width, messageType_height);
+}
+
 
 #pragma mark - TextView
 
 - (void) setTextView {
-    CGFloat max_width = 0.7 * self.contentView.frame.size.width;
+    CGFloat max_width = 0.5 * self.contentView.frame.size.width;
     _textView.frame = CGRectMake(0, 0, max_width, MAXFLOAT);
     _textView.font = [UIFont fontWithName:@"Helvetica" size:17.0];
     _textView.backgroundColor = [UIColor clearColor];
@@ -125,6 +163,7 @@
     _bubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height);
     _bubbleImage.autoresizingMask = _textView.autoresizingMask;
 }
+
 
 #pragma mark - UIImage Helper
 
