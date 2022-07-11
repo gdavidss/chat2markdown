@@ -195,7 +195,7 @@
     Message *message = [[Message alloc] init];
     message.text = inputbar.text;
     message.date = [NSDate date];
-    message.chat_id = _chat.objectId;
+    message.chatId = _chat.objectId;
     
     //Store Message in memory
     [self.tableArray addObject:message];
@@ -231,7 +231,7 @@
 -(void)gatewayDidUpdateStatusForMessage:(Message *)message {
     NSIndexPath *indexPath = [self.tableArray indexPathForMessage:message];
     MessageCell *cell = (MessageCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    [cell updateMessageStatus];
+    //[cell updateMessageStatus];
 }
 
 -(void)gatewayDidReceiveMessages:(NSArray *)array {

@@ -7,11 +7,11 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "Chat.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, MessageStatus)
-{
+typedef NS_ENUM(NSInteger, MessageStatus) {
     MessageStatusSending,
     MessageStatusSent,
     MessageStatusReceived,
@@ -19,8 +19,7 @@ typedef NS_ENUM(NSInteger, MessageStatus)
     MessageStatusFailed
 };
 
-typedef NS_ENUM(NSInteger, MessageSender)
-{
+typedef NS_ENUM(NSInteger, MessageSender) {
     MessageSenderMyself,
     MessageSenderSomeone
 };
@@ -30,7 +29,9 @@ typedef NS_ENUM(NSInteger, MessageSender)
 @property (assign, nonatomic) MessageSender sender;
 @property (assign, nonatomic) MessageStatus status;
 @property (strong, nonatomic) NSString *identifier;
-@property (strong, nonatomic) NSString *chat_id;
+
+// GD change chatID to Chat object? You'll have to change the functions that store and retrieve messages then in the Local Storage file
+@property (strong, nonatomic) NSString *chatId;
 @property (strong, nonatomic) NSString *text;
 @property (strong, nonatomic) NSDate *date;
 @property (assign, nonatomic) CGFloat height;
