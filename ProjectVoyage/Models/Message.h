@@ -34,7 +34,11 @@ typedef NS_ENUM(NSInteger, MessageSender) {
 // GD change chatID to Chat object? You'll have to change the functions that store and retrieve messages then in the Local Storage file
 @property (strong, nonatomic) NSString *chatId;
 @property (strong, nonatomic) NSString *text;
+
+// GD isn't this redundant? I think order is more important than date for displaying it correctly.
 @property (strong, nonatomic) NSDate *date;
+
+// GD why do I need height here? Reconsider this being handled automatically by message cell
 @property (assign, nonatomic) CGFloat height;
 
 +(Message *)messageFromDictionary:(NSDictionary *)dictionary;

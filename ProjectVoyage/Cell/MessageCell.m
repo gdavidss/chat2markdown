@@ -7,7 +7,6 @@
 //
 
 #import "MessageCell.h"
-#import "EditMessageVC.h"
 #import "Message.h"
 
 @interface MessageCell ()
@@ -89,12 +88,12 @@
 - (void) buildCell {
     [self setTextView];
     [self setBubble];
-    //[self setMessageType];
+    [self setMessageType];
     
-   // [self setContainerButton:_editButton withTitle:@"Edit" withOrder:1 withMethod:@selector(aMethod:)];
-    //[self setContainerButton:_changeSenderButton withTitle:@"Change sender" withOrder:2 withMethod:@selector(aMethod:)];
-    //[self setContainerButton:_moveButton withTitle:@"Move" withOrder:3 withMethod:@selector(aMethod:)];
-    //[self setContainerButton:_deleteButton withTitle:@"Delete" withOrder:4 withMethod:@selector(aMethod:)];
+    [self setContainerButton:_editButton withTitle:@"Edit" withOrder:1 withMethod:@selector(didTapEdit)];
+    [self setContainerButton:_changeSenderButton withTitle:@"Change sender" withOrder:2 withMethod:@selector(aMethod:)];
+    [self setContainerButton:_moveButton withTitle:@"Move" withOrder:3 withMethod:@selector(aMethod:)];
+    [self setContainerButton:_deleteButton withTitle:@"Delete" withOrder:4 withMethod:@selector(aMethod:)];
 
     [self setNeedsLayout];
 }
@@ -131,7 +130,7 @@
                             withOrder:(int)order
                             withMethod:(nonnull SEL)method {
     
-    [button addTarget:self action:@selector(aMethod:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
     
     button.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [button setTitle:title forState:UIControlStateNormal];
@@ -223,24 +222,9 @@
 
 #pragma mark - Container methods
 
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"editMessageSegue"]) {
-        Message *messageToPass = self.message;
-        EditMessageVC *editMessageVC = [segue destinationViewController];
-        editMessageVC.message = messageToPass;
-    }
-}
-
-
-- (void)didTapLogout {
+- (void)didTapEdit {
+    [self.delegate editMessage:self.message];
     return;
 }
-
-- (void) didTapDelete {
-    
-}
-
-
 
 @end

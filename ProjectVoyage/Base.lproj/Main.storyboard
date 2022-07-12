@@ -331,6 +331,7 @@
                     <connections>
                         <outlet property="inputbar" destination="MzZ-qy-fks" id="cPB-gf-5qa"/>
                         <outlet property="tableView" destination="SXK-mt-RRH" id="1so-m2-s7x"/>
+                        <segue destination="Tuo-3w-fe7" kind="show" identifier="EditMessageSegue" destinationCreationSelector="EditMessageSegue" id="JoW-tv-Y9Z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzd-1p-PfQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -342,7 +343,7 @@
             <objects>
                 <viewController storyboardIdentifier="EditMessageVC" title="EditMessageVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Tuo-3w-fe7" customClass="EditMessageVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="acv-yQ-56e">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="i4m-cg-PCR">
@@ -370,6 +371,7 @@
                         <viewLayoutGuide key="safeArea" id="De7-kS-1Nd"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="vah-yN-9Qt"/>
                     <connections>
                         <outlet property="editButton" destination="JKD-FH-a5g" id="C1i-3a-t6w"/>
                         <outlet property="editView" destination="i4m-cg-PCR" id="laP-le-Rk3"/>
@@ -378,7 +380,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z2X-bh-oEE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5244.9275362318849" y="-214.28571428571428"/>
+            <point key="canvasLocation" x="5223" y="-214"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yoW-G9-Wzw">

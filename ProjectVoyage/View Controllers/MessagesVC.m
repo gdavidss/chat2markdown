@@ -9,12 +9,13 @@
 #import "MessagesVC.h"
 #import "MessageCell.h"
 #import "TableArray.h"
+#import "EditMessageVC.h"
 
 #import "Inputbar.h"
 #import "DAKeyboardControl.h"
 
 @interface MessagesVC() <InputbarDelegate,
-                                    UITableViewDataSource,UITableViewDelegate>
+                                    UITableViewDataSource,UITableViewDelegate, EditProtocol>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet Inputbar *inputbar;
@@ -32,8 +33,7 @@
     //[self setGateway];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
+-(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
     __weak Inputbar *inputbar = _inputbar;
@@ -137,6 +137,7 @@
         cell = [[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     cell.message = [self.tableArray objectAtIndexPath:indexPath];
+    cell.delegate = self;
     return cell;
 }
 
@@ -224,6 +225,19 @@
 -(void)inputbarDidChangeHeight:(CGFloat)new_height {
     //Update DAKeyboardControl
     self.view.keyboardTriggerOffset = new_height;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+   if ([segue.identifier isEqualToString:@"EditMessageSegue"]) {
+        EditMessageVC *editMessageVC = [segue destinationViewController];
+        Message *messageToPass = sender;
+        editMessageVC.message = messageToPass;
+    }
+}
+
+- (void)editMessage:(Message *)message{
+    [self performSegueWithIdentifier:@"EditMessageSegue" sender:message];
+    return;
 }
 
 @end

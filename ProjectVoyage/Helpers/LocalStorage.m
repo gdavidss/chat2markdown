@@ -15,8 +15,7 @@
 
 @implementation LocalStorage
 
-+(id)sharedInstance
-{
++ (id)sharedInstance {
     static LocalStorage *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -24,38 +23,34 @@
     });
     return sharedInstance;
 }
--(id)init
-{
+
+- (id)init {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         self.mapChatToMessages = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
--(void)storeMessage:(Message *)message
-{
+
+- (void)storeMessage:(Message *)message {
     [self storeMessages:@[message]];
 }
--(void)storeMessages:(NSArray *)messages
-{
+
+- (void)storeMessages:(NSArray *)messages {
     if (messages.count == 0) return;
     Message *message = messages[0];
     NSString *chatId = message.chatId;
     NSMutableArray *array = (NSMutableArray *)[self queryMessagesForChatID:chatId];
-    if (array)
-    {
+    if (array) {
         [array addObjectsFromArray:messages];
     }
-    else
-    {
+    else {
         array = [[NSMutableArray alloc] initWithArray:messages];
     }
     [self.mapChatToMessages setValue:array forKey:chatId];
 }
 
--(NSArray *)queryMessagesForChatID:(NSString *)chat_id
-{
+-(NSArray *)queryMessagesForChatID:(NSString *)chat_id {
     return [self.mapChatToMessages valueForKey:chat_id];
 }
 

@@ -14,10 +14,12 @@
 // For now, it stores in memory only
 //
 @interface LocalStorage : NSObject
+
 +(id)sharedInstance;
 +(void)storeChat:(Chat *)chat;
 +(void)storeChats:(NSArray *)chats;
 +(void)storeMessage:(Message *)message;
 +(void)storeMessages:(NSArray *)messages;
 -(NSArray *)queryMessagesForChatID:(NSString *)chat_id;
+
 @end
