@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, MessageStatus) {
     MessageStatusFailed
 };
 
+
 typedef NS_ENUM(NSInteger, MessageSender) {
     MessageSenderMyself,
     MessageSenderSomeone

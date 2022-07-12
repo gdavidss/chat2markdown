@@ -14,9 +14,18 @@ NS_ASSUME_NONNULL_BEGIN
 This class build bubble message cells
 for incoming or outgoing messages
  */
+
 @interface MessageCell : UITableViewCell
 
 @property (strong, nonatomic) Message *message;
+
+
+// Container
+@property (strong, nonatomic) UILabel *messageType;
+@property (strong, nonatomic) UIButton *deleteButton;
+@property (strong, nonatomic) UIButton *editButton;
+@property (strong, nonatomic) UIButton *changeSenderButton;
+@property (strong, nonatomic) UIButton *moveButton;
 
 - (CGFloat) bubbleCellHeight;
 
