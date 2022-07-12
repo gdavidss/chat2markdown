@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Message.h"
+#import "MessagesVC.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,6 +20,7 @@ for incoming or outgoing messages
 
 @property (strong, nonatomic) Message *message;
 
+@property (weak, nonatomic) id <EditProtocol> delegate;
 
 // Container
 @property (strong, nonatomic) UILabel *messageType;
