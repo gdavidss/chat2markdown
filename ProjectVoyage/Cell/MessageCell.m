@@ -9,19 +9,28 @@
 #import "MessageCell.h"
 
 @interface MessageCell ()
+// Message
 @property (strong, nonatomic) UILabel *timeLabel;
 @property (strong, nonatomic) UITextView *textView;
 @property (strong, nonatomic) UIImageView *bubbleImage;
-@property (strong, nonatomic) UIImageView *statusIcon;
 
+// Container
 @property (strong, nonatomic) UILabel *messageType;
+@property (strong, nonatomic) UIButton *deleteButton;
+@property (strong, nonatomic) UIButton *editButton;
+@property (strong, nonatomic) UIButton *changeSenderButton;
+@property (strong, nonatomic) UIButton *moveButton;
+
+
 @end
 
+#define LAYER_HEIGHT 25
+#define NUM_LAYERS 6
 
 @implementation MessageCell
 
 -(CGFloat) bubbleCellHeight {
-    return _bubbleImage.frame.size.height;
+    return LAYER_HEIGHT * NUM_LAYERS;
 }
 
 #pragma mark - Initialization
@@ -48,13 +57,24 @@
     self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.accessoryType = UITableViewCellAccessoryNone;
     
-    _textView = [[UITextView alloc] init];
-    _bubbleImage = [[UIImageView alloc] init];
-    _messageType = [[UILabel alloc] init];
-    
+    _textView = [UITextView new];
+    _bubbleImage = [UIImageView new];
+    _messageType = [UILabel new];
+    _editButton = [UIButton new];
+    _moveButton = [UIButton new];
+    _changeSenderButton = [UIButton new];
+    _deleteButton = [UIButton new];
+
+    // subviews for message bubble
     [self.contentView addSubview:_bubbleImage];
     [self.contentView addSubview:_textView];
+    
+    // Subviews for message container
     [self.contentView addSubview:_messageType];
+    [self.contentView addSubview:_editButton];
+    [self.contentView addSubview:_deleteButton];
+    [self.contentView addSubview:_moveButton];
+    [self.contentView addSubview:_changeSenderButton];
 }
 
 - (void) prepareForReuse {
@@ -76,6 +96,12 @@
     [self setTextView];
     [self setBubble];
     [self setMessageType];
+    
+    [self setContainerButton:_editButton withTitle:@"Edit" withOrder:1 withMethod:@selector(aMethod:)];
+    [self setContainerButton:_changeSenderButton withTitle:@"Change sender" withOrder:2 withMethod:@selector(aMethod:)];
+    [self setContainerButton:_moveButton withTitle:@"Move" withOrder:3 withMethod:@selector(aMethod:)];
+    [self setContainerButton:_deleteButton withTitle:@"Delete" withOrder:4 withMethod:@selector(aMethod:)];
+
     [self setNeedsLayout];
 }
 
@@ -89,7 +115,6 @@
     _messageType.numberOfLines = 1;
     _messageType.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
     _messageType.adjustsFontSizeToFitWidth = YES;
-    _messageType.adjustsLetterSpacingToFitWidth = YES;
     _messageType.minimumScaleFactor = 10.0f/12.0f;
     _messageType.clipsToBounds = YES;
     _messageType.backgroundColor = [UIColor clearColor];
@@ -97,20 +122,39 @@
     _messageType.textAlignment = NSTextAlignmentLeft;
     _messageType.text = text;
     
-    // Margins
-    CGFloat marginRight = 2;
-    
     // Position
     CGFloat messageType_x = 10;
     CGFloat messageType_y = 0;
-    CGFloat messageType_width;
-    CGFloat messageType_height = 40;
     
-    messageType_width = self.contentView.frame.size.width - messageType_x - marginRight;
+    // Get height and width of the UILabel based on the size of its text
+    CGSize messageType_size = [text sizeWithAttributes:@{NSFontAttributeName:_textView.font}];
    
-    _messageType.frame = CGRectMake(messageType_x, messageType_y, messageType_width, messageType_height);
+   
+    _messageType.frame = CGRectMake(messageType_x, messageType_y, messageType_size.width, messageType_size.height);
 }
 
+- (void) setContainerButton:(UIButton *)button
+                            withTitle:(NSString *)title
+                            withOrder:(int)order
+                            withMethod:(nonnull SEL)method {
+    
+    [button addTarget:self action:@selector(aMethod:) forControlEvents:UIControlEventTouchUpInside];
+        
+    button.titleLabel.font = [UIFont systemFontOfSize:15.0];
+    [button setTitle:title forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor linkColor] forState:UIControlStateNormal];
+
+    // Margin from the UI label above
+    CGFloat margin_y = 25 * order;
+
+    CGFloat button_y = _messageType.frame.origin.y + margin_y;
+    CGFloat button_x = _messageType.frame.origin.x;
+
+    // GD Make the width dynamic
+    button.frame = CGRectMake(button_x, button_y, 120, 18);
+    NSLog(@"%f", button.titleLabel.frame.size.width);
+    NSLog(@"%f", button.titleLabel.frame.size.height);
+}
 
 #pragma mark - TextView
 
