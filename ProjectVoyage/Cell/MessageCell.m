@@ -7,19 +7,14 @@
 //
 
 #import "MessageCell.h"
+#import "EditMessageVC.h"
+#import "Message.h"
 
 @interface MessageCell ()
 // Message
-@property (strong, nonatomic) UILabel *timeLabel;
+// @property (strong, nonatomic) UILabel *timeLabel;
 @property (strong, nonatomic) UITextView *textView;
 @property (strong, nonatomic) UIImageView *bubbleImage;
-
-// Container
-@property (strong, nonatomic) UILabel *messageType;
-@property (strong, nonatomic) UIButton *deleteButton;
-@property (strong, nonatomic) UIButton *editButton;
-@property (strong, nonatomic) UIButton *changeSenderButton;
-@property (strong, nonatomic) UIButton *moveButton;
 
 
 @end
@@ -81,7 +76,6 @@
     [super prepareForReuse];
     
     _textView.text = @"";
-    _timeLabel.text = @"";
     _bubbleImage.image = nil;
 }
 
@@ -95,12 +89,12 @@
 - (void) buildCell {
     [self setTextView];
     [self setBubble];
-    [self setMessageType];
+    //[self setMessageType];
     
-    [self setContainerButton:_editButton withTitle:@"Edit" withOrder:1 withMethod:@selector(aMethod:)];
-    [self setContainerButton:_changeSenderButton withTitle:@"Change sender" withOrder:2 withMethod:@selector(aMethod:)];
-    [self setContainerButton:_moveButton withTitle:@"Move" withOrder:3 withMethod:@selector(aMethod:)];
-    [self setContainerButton:_deleteButton withTitle:@"Delete" withOrder:4 withMethod:@selector(aMethod:)];
+   // [self setContainerButton:_editButton withTitle:@"Edit" withOrder:1 withMethod:@selector(aMethod:)];
+    //[self setContainerButton:_changeSenderButton withTitle:@"Change sender" withOrder:2 withMethod:@selector(aMethod:)];
+    //[self setContainerButton:_moveButton withTitle:@"Move" withOrder:3 withMethod:@selector(aMethod:)];
+    //[self setContainerButton:_deleteButton withTitle:@"Delete" withOrder:4 withMethod:@selector(aMethod:)];
 
     [self setNeedsLayout];
 }
@@ -108,7 +102,7 @@
 #pragma mark - Container
 
 - (void) setMessageType {
-    UIFont * customFont = [UIFont fontWithName:@"Helvetica" size:15.0]; //custom font
+    UIFont *customFont = [UIFont fontWithName:@"Helvetica" size:15.0];
     NSString *text = @"Written message";
 
     _messageType.font = customFont;
@@ -127,10 +121,9 @@
     CGFloat messageType_y = 0;
     
     // Get height and width of the UILabel based on the size of its text
-    CGSize messageType_size = [text sizeWithAttributes:@{NSFontAttributeName:_textView.font}];
+    CGSize textSize = [text sizeWithAttributes:@{NSFontAttributeName:_textView.font}];
    
-   
-    _messageType.frame = CGRectMake(messageType_x, messageType_y, messageType_size.width, messageType_size.height);
+    _messageType.frame = CGRectMake(messageType_x, messageType_y, textSize.width, textSize.height);
 }
 
 - (void) setContainerButton:(UIButton *)button
@@ -139,21 +132,19 @@
                             withMethod:(nonnull SEL)method {
     
     [button addTarget:self action:@selector(aMethod:) forControlEvents:UIControlEventTouchUpInside];
-        
+    
     button.titleLabel.font = [UIFont systemFontOfSize:15.0];
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitleColor:[UIColor linkColor] forState:UIControlStateNormal];
-
+    
     // Margin from the UI label above
     CGFloat margin_y = 25 * order;
-
+    
     CGFloat button_y = _messageType.frame.origin.y + margin_y;
     CGFloat button_x = _messageType.frame.origin.x;
-
-    // GD Make the width dynamic
+    
+    // GD Make the width dynamic depending on the label width of each button
     button.frame = CGRectMake(button_x, button_y, 120, 18);
-    NSLog(@"%f", button.titleLabel.frame.size.width);
-    NSLog(@"%f", button.titleLabel.frame.size.height);
 }
 
 #pragma mark - TextView
@@ -177,7 +168,13 @@
     textView_x = self.contentView.frame.size.width - textView_w - 20;
     textView_y = -3;
     autoresizing = UIViewAutoresizingFlexibleLeftMargin;
-        
+    
+    /* if sender is someone else {
+        textView_x = 20;
+        textView_y = -1;
+        autoresizing = UIViewAutoresizingFlexibleRightMargin;
+    */
+    
     _textView.autoresizingMask = autoresizing;
     _textView.frame = CGRectMake(textView_x, textView_y, textView_w, textView_h);
 }
@@ -200,9 +197,16 @@
     CGFloat bubble_height = _textView.frame.size.height + 8;
     
     bubble_x = _textView.frame.origin.x - marginLeft;
-    
     bubble_width = self.contentView.frame.size.width - bubble_x - marginRight;
     
+    /* if sender is someone else
+        bubble_x = marginRight;
+        
+        _bubbleImage.image = [[self imageNamed:@"bubbleRecipient"]
+                              stretchableImageWithLeftCapWidth:21 topCapHeight:14];
+        
+        bubble_width = _textView.frame.origin.x + _textView.frame.size.width + marginLeft;
+    */
    
     _bubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height);
     _bubbleImage.autoresizingMask = _textView.autoresizingMask;
@@ -216,5 +220,27 @@
                     inBundle:[NSBundle bundleForClass:[self class]]
                     compatibleWithTraitCollection:nil];
 }
+
+#pragma mark - Container methods
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"editMessageSegue"]) {
+        Message *messageToPass = self.message;
+        EditMessageVC *editMessageVC = [segue destinationViewController];
+        editMessageVC.message = messageToPass;
+    }
+}
+
+
+- (void)didTapLogout {
+    return;
+}
+
+- (void) didTapDelete {
+    
+}
+
+
 
 @end

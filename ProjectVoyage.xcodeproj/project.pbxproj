@@ -18,6 +18,7 @@
 		6A9CDC6D2878E46E0003EFA1 /* DAKeyboardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC6C2878E46E0003EFA1 /* DAKeyboardControl.m */; };
 		6A9CDC702878E6ED0003EFA1 /* MessagesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC6F2878E6ED0003EFA1 /* MessagesVC.m */; };
 		6A9CDC732878E93C0003EFA1 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC722878E93C0003EFA1 /* HPTextViewInternal.m */; };
+		6A9CDC7B287DDC420003EFA1 /* EditMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC7A287DDC420003EFA1 /* EditMessageVC.m */; };
 		6AC2C8AB2876269D00436B8D /* SignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AA2876269D00436B8D /* SignUpVC.m */; };
 		6AC2C8AE2876347500436B8D /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AD2876347500436B8D /* Keys.plist */; };
 		6AC2C8B12876411B00436B8D /* ChatListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B02876411B00436B8D /* ChatListVC.m */; };
@@ -76,6 +77,8 @@
 		6A9CDC6F2878E6ED0003EFA1 /* MessagesVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagesVC.m; sourceTree = "<group>"; };
 		6A9CDC712878E93C0003EFA1 /* HPTextViewInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
 		6A9CDC722878E93C0003EFA1 /* HPTextViewInternal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
+		6A9CDC79287DDC420003EFA1 /* EditMessageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditMessageVC.h; sourceTree = "<group>"; };
+		6A9CDC7A287DDC420003EFA1 /* EditMessageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditMessageVC.m; sourceTree = "<group>"; };
 		6AC2C8A92876269D00436B8D /* SignUpVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpVC.h; sourceTree = "<group>"; };
 		6AC2C8AA2876269D00436B8D /* SignUpVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpVC.m; sourceTree = "<group>"; };
 		6AC2C8AD2876347500436B8D /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -177,6 +180,26 @@
 				6A9CDC722878E93C0003EFA1 /* HPTextViewInternal.m */,
 			);
 			path = "Third party";
+			sourceTree = "<group>";
+		};
+		6A9CDC77287DDBCA0003EFA1 /* Login and Signup */ = {
+			isa = PBXGroup;
+			children = (
+				6AD5986F2876245C0058386E /* LoginVC.h */,
+				6AD598702876245C0058386E /* LoginVC.m */,
+				6AC2C8A92876269D00436B8D /* SignUpVC.h */,
+				6AC2C8AA2876269D00436B8D /* SignUpVC.m */,
+			);
+			path = "Login and Signup";
+			sourceTree = "<group>";
+		};
+		6A9CDC78287DDBE80003EFA1 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				6AC2C8B6287659B900436B8D /* SettingsVC.h */,
+				6AC2C8B7287659B900436B8D /* SettingsVC.m */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		6AC2C8AC287633B600436B8D /* Delegates */ = {
@@ -283,16 +306,14 @@
 		6AD5986E287623D60058386E /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				6AD5986F2876245C0058386E /* LoginVC.h */,
-				6AD598702876245C0058386E /* LoginVC.m */,
-				6AC2C8A92876269D00436B8D /* SignUpVC.h */,
-				6AC2C8AA2876269D00436B8D /* SignUpVC.m */,
+				6A9CDC77287DDBCA0003EFA1 /* Login and Signup */,
+				6A9CDC78287DDBE80003EFA1 /* Settings */,
 				6AC2C8AF2876411B00436B8D /* ChatListVC.h */,
 				6AC2C8B02876411B00436B8D /* ChatListVC.m */,
-				6AC2C8B6287659B900436B8D /* SettingsVC.h */,
-				6AC2C8B7287659B900436B8D /* SettingsVC.m */,
 				6A9CDC6E2878E6ED0003EFA1 /* MessagesVC.h */,
 				6A9CDC6F2878E6ED0003EFA1 /* MessagesVC.m */,
+				6A9CDC79287DDC420003EFA1 /* EditMessageVC.h */,
+				6A9CDC7A287DDC420003EFA1 /* EditMessageVC.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -558,6 +579,7 @@
 				6A9CDC5E2878E3020003EFA1 /* InputBar.m in Sources */,
 				6AD598712876245C0058386E /* LoginVC.m in Sources */,
 				6AC2C8BF2878A21B00436B8D /* ChatCell.m in Sources */,
+				6A9CDC7B287DDC420003EFA1 /* EditMessageVC.m in Sources */,
 				6AC2C8AB2876269D00436B8D /* SignUpVC.m in Sources */,
 				6AD5984928760C160058386E /* main.m in Sources */,
 				6A9CDC632878E3850003EFA1 /* LocalStorage.m in Sources */,

@@ -226,19 +226,4 @@
     self.view.keyboardTriggerOffset = new_height;
 }
 
-#pragma mark - MessageGatewayDelegate
-
--(void)gatewayDidUpdateStatusForMessage:(Message *)message {
-    NSIndexPath *indexPath = [self.tableArray indexPathForMessage:message];
-    MessageCell *cell = (MessageCell *)[self.tableView cellForRowAtIndexPath:indexPath];
-    //[cell updateMessageStatus];
-}
-
--(void)gatewayDidReceiveMessages:(NSArray *)array {
-    [self.tableArray addObjectsFromArray:array];
-    [self.tableView reloadData];
-}
-
-
-
 @end
