@@ -237,7 +237,6 @@
 
 - (void)editMessage:(Message *)message{
     [self performSegueWithIdentifier:@"EditMessageSegue" sender:message];
-    return;
 }
 
 @end

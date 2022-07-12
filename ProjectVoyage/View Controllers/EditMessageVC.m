@@ -31,4 +31,8 @@
 }
 */
 
+- (IBAction)didPressRestore:(id)sender {
+    _editView.text = _message.text;
+}
+
 @end
