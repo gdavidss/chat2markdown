@@ -141,12 +141,12 @@
 
 -(void)cacheTitles {
     NSArray *array = [self.mapTitleToMessages allKeys];
-    NSArray *orderedArray = [array sortedArrayUsingComparator:^NSComparisonResult(NSString *dateString1, NSString *dateString2)
-                             {
-                                 NSDate *d1 = [self.formatter dateFromString:dateString1];
-                                 NSDate *d2 = [self.formatter dateFromString:dateString2];
-                                 return [d1 compare: d2];;
-                             }];
+    NSArray *orderedArray = [array sortedArrayUsingComparator:^NSComparisonResult(NSString *dateString1, NSString *dateString2) {
+                         NSDate *d1 = [self.formatter dateFromString:dateString1];
+                         NSDate *d2 = [self.formatter dateFromString:dateString2];
+                         return [d1 compare: d2];;
+                     }];
+    
     self.orderedTitles  = [[NSArray alloc] initWithArray:orderedArray];
 }
 

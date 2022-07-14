@@ -31,6 +31,10 @@
 }
 */
 
+- (IBAction)didPressEdit:(id)sender {
+    [self dismissViewControllerAnimated:TRUE completion:^{}];
+}
+
 - (IBAction)didPressRestore:(id)sender {
     _editView.text = _message.text;
 }

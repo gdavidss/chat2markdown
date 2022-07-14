@@ -16,6 +16,7 @@
 @dynamic recipientName;
 @dynamic recipientImage;
 @dynamic author;
+@dynamic messages;
 
 
 + (nonnull NSString *)parseClassName {
@@ -28,6 +29,7 @@
     newChat.recipientImage = [Util getPFFileFromImage:recipientImg];
     newChat.recipientName = recipientName;
     newChat.chatDescription = chatDescription;
+    newChat.messages = [NSMutableArray new];
     
     PFUser *currentUser = [PFUser currentUser];
     newChat.author = currentUser;

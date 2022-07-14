@@ -14,6 +14,7 @@
 // dictionaty. Basically it's mimics the array use in
 // a tableView.
 //
+
 @interface TableArray : NSObject
 
 -(void)addObject:(Message *)message;
