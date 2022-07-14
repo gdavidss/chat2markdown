@@ -89,7 +89,6 @@
     messagesVC.chat = selectedChatCell.chat;
 }
 
-
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ChatCell *chatCell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell" forIndexPath:indexPath];
     chatCell.chat = self.chats[indexPath.row];

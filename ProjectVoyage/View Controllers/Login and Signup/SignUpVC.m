@@ -34,7 +34,7 @@
           PFUser *newUser = [PFUser user];
                    
           newUser[@"name"] = self.nameField.text;
-        
+
           newUser.username = self.usernameField.text;
           newUser.email = self.emailField.text;
           newUser.password = self.passwordField.text;

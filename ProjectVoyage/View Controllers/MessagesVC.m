@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 HummingBird. All rights reserved.
 //
 
+
 #import "MessagesVC.h"
 #import "MessageCell.h"
 #import "TableArray.h"
@@ -19,7 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet Inputbar *inputbar;
-@property (strong, nonatomic) TableArray *tableArray;
+//@property (strong, nonatomic) TableArray *tableArray;
 
 @end
 
@@ -82,13 +83,12 @@
 -(void)setInputbar {
     self.inputbar.placeholder = @"";
     self.inputbar.delegate = self;
-    self.inputbar.leftButtonImage = [UIImage imageNamed:@"share"];
     self.inputbar.rightButtonText = @"Send";
     self.inputbar.rightButtonTextColor = [UIColor colorWithRed:0 green:124/255.0 blue:1 alpha:1];
 }
 
 -(void) setTableView {
-    self.tableArray = [[TableArray alloc] init];
+    //self.tableArray = [[TableArray alloc] init];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f,self.view.frame.size.width, 10.0f)];
@@ -96,7 +96,6 @@
     self.tableView.backgroundColor = [UIColor clearColor];
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier: @"MessageCell"];
 }
-
 
 /*
 -(void)setGateway
@@ -106,10 +105,9 @@
     self.gateway.chat = self.chat;
     [self.gateway loadOldMessages];
 }
- */
+*/
 
-
--(void)setChat:(Chat *)chat {
+- (void) setChat:(Chat *)chat {
     _chat = chat;
     self.title = chat.recipientName;
 }
@@ -123,11 +121,11 @@
 #pragma mark - TableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.tableArray numberOfSections];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.tableArray numberOfMessagesInSection:section];
+    return self.chat.messages.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -136,7 +134,7 @@
     if (!cell) {
         cell = [[MessageCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    cell.message = [self.tableArray objectAtIndexPath:indexPath];
+    cell.message = self.chat.messages[indexPath.row];
     cell.delegate = self;
     return cell;
 }
@@ -144,7 +142,7 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    Message *message = [self.tableArray objectAtIndexPath:indexPath];
+    Message *message = self.chat.messages[indexPath.row];
     return message.height;
 }
 
@@ -153,7 +151,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return [self.tableArray titleForSection:section];
+    return @"teste";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -181,12 +179,15 @@
 
 
 - (void)tableViewScrollToBottomAnimated:(BOOL)animated {
-    NSInteger numberOfSections = [self.tableArray numberOfSections];
-    NSInteger numberOfRows = [self.tableArray numberOfMessagesInSection:numberOfSections-1];
-    if (numberOfRows)
-    {
-        [_tableView scrollToRowAtIndexPath:[self.tableArray indexPathForLastMessage]
-                                         atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+    NSInteger numberOfRows = self.chat.messages.count;
+    
+    // Open chat in the very last message
+    if (numberOfRows) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(self.chat.messages.count - 1) inSection:0];
+        
+        [_tableView scrollToRowAtIndexPath:indexPath
+                    atScrollPosition:UITableViewScrollPositionBottom
+                    animated:animated];
     }
 }
 
@@ -195,28 +196,23 @@
 -(void)inputbarDidPressRightButton:(Inputbar *)inputbar {
     Message *message = [[Message alloc] init];
     message.text = inputbar.text;
-    message.date = [NSDate date];
     message.chatId = _chat.objectId;
     
     //Store Message in memory
-    [self.tableArray addObject:message];
+    [self.chat.messages addObject:message];
     
     //Insert Message in UI
-    NSIndexPath *indexPath = [self.tableArray indexPathForMessage:message];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chat.messages.count - 1 inSection:0];
+    
     [self.tableView beginUpdates];
     
-    if ([self.tableArray numberOfMessagesInSection:indexPath.section] == 1) {
-        [self.tableView insertSections:[NSIndexSet indexSetWithIndex:indexPath.section]
-                      withRowAnimation:UITableViewRowAnimationNone];
-    }
-    
-    [self.tableView insertRowsAtIndexPaths:@[indexPath]
-                          withRowAnimation:UITableViewRowAnimationBottom];
+    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
     
     [self.tableView endUpdates];
     
-    [self.tableView scrollToRowAtIndexPath:[self.tableArray indexPathForLastMessage]
-                          atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.chat.messages.count-1 inSection:0]
+                    atScrollPosition:UITableViewScrollPositionBottom
+                    animated:YES];
     
     //Send message to server
     //[self.gateway sendMessage:message];
@@ -232,10 +228,11 @@
         EditMessageVC *editMessageVC = [segue destinationViewController];
         Message *messageToPass = sender;
         editMessageVC.message = messageToPass;
+        editMessageVC.delegate = self;
     }
 }
 
-- (void)editMessage:(Message *)message{
+- (void)editMessage:(Message *)message {
     [self performSegueWithIdentifier:@"EditMessageSegue" sender:message];
 }
 
