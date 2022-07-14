@@ -8,6 +8,7 @@
 #import "ChatListVC.h"
 #import "Chat.h"
 #import "ChatCell.h"
+#import "MessagesVC.h"
 
 @interface ChatListVC () <UITableViewDataSource, UITableViewDelegate>
 
@@ -24,7 +25,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self postChat];
+    // [self postChat];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -76,18 +77,21 @@
 }
 
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    UINavigationController *navController = [segue destinationViewController];
+    MessagesVC *messagesVC = navController.viewControllers[0];
+    ChatCell *selectedChatCell = sender;
+    messagesVC.chat = selectedChatCell.chat;
 }
-*/
+
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    ChatCell *chatCell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell"forIndexPath:indexPath];
+    ChatCell *chatCell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell" forIndexPath:indexPath];
     chatCell.chat = self.chats[indexPath.row];
     return chatCell;
 }
