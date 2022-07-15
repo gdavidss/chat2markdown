@@ -32,7 +32,17 @@
 */
 
 - (IBAction)didPressEdit:(id)sender {
-    [self dismissViewControllerAnimated:TRUE completion:^{}];
+    [self dismissViewControllerAnimated:TRUE completion:^{
+        if (self.message.text != self.editView.text) {
+            self.message.text = self.editView.text;
+            
+            // Reload that specific row as opposed to all rows in table
+            NSInteger rowToReload = [self.delegate.chat.messages indexOfObject:self.message];
+            NSArray *indexPaths = [[NSArray alloc]
+                                   initWithObjects:[NSIndexPath indexPathForRow:rowToReload inSection:0], nil];
+            
+            [self.delegate.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+        }}];
 }
 
 - (IBAction)didPressRestore:(id)sender {

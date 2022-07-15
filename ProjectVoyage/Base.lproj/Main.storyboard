@@ -336,7 +336,16 @@
                             <constraint firstAttribute="bottom" secondItem="MzZ-qy-fks" secondAttribute="bottom" constant="50" id="tpw-jw-tbE"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="vvt-Cl-vng"/>
+                    <navigationItem key="navigationItem" id="vvt-Cl-vng">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="WZF-JN-4ue">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="uYI-6l-Y6W">
+                                <rect key="frame" x="20" y="5" width="92" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Chats"/>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="inputbar" destination="MzZ-qy-fks" id="cPB-gf-5qa"/>
                         <outlet property="tableView" destination="SXK-mt-RRH" id="1so-m2-s7x"/>
@@ -525,7 +534,7 @@
         <!--Chat list-->
         <scene sceneID="YxE-ff-oai">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="V5E-TC-cFe" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="V5E-TC-cFe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Chat list" image="bubble.left.and.bubble.right.fill" catalog="system" id="Vch-LD-bdG"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="p5U-2I-5tD">
@@ -539,7 +548,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uoh-51-8ZL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2746" y="-213"/>
+            <point key="canvasLocation" x="2745" y="-230"/>
         </scene>
         <!--Settings-->
         <scene sceneID="D8Z-X3-2Kb">
@@ -563,7 +572,7 @@
         <!--Navigation Controller-->
         <scene sceneID="KgL-Vk-Du6">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BHE-s0-uoX" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="BHE-s0-uoX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="7L5-Qg-Is5"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eLk-uG-xaI">
@@ -577,7 +586,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uhd-Xf-MeO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4401" y="-230"/>
+            <point key="canvasLocation" x="4396" y="-230"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

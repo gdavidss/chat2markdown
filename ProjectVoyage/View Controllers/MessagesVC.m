@@ -18,7 +18,6 @@
 @interface MessagesVC() <InputbarDelegate,
                                     UITableViewDataSource,UITableViewDelegate, EditProtocol>
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet Inputbar *inputbar;
 //@property (strong, nonatomic) TableArray *tableArray;
 
@@ -70,13 +69,6 @@
     [self.view removeKeyboardControl];
     //[self.gateway dismiss];
 }
-
-/*
--(void)viewWillDisappear:(BOOL)animated
-{
-    self.chat.last_message = [self.tableArray lastObject];
-}
- */
 
 #pragma mark -
 

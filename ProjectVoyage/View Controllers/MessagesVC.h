@@ -21,4 +21,6 @@
 
 @interface MessagesVC: UIViewController
 @property (strong, nonatomic) Chat *chat;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end
