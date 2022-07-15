@@ -15,17 +15,16 @@
 // It creates the bubble UI
 //
 
-/*
-@protocol EditProtocol
-    -(void)editMessage:(Message *)message;
+
+@protocol ContainerProtocol
+    - (void)editMessage:(Message *)message;
+    - (void)deleteMessage:(Message *)message;
+    - (void)changeSender:(Message *)message;
 @end
-*/
+
 
 @interface MessagesVC: UIViewController
 @property (strong, nonatomic) Chat *chat;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
-- (void)editMessage:(Message *)message;
-- (void)deleteMessage:(Message *)message;
 
 @end

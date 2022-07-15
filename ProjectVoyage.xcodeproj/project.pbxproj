@@ -19,6 +19,7 @@
 		6A9CDC702878E6ED0003EFA1 /* MessagesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC6F2878E6ED0003EFA1 /* MessagesVC.m */; };
 		6A9CDC732878E93C0003EFA1 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC722878E93C0003EFA1 /* HPTextViewInternal.m */; };
 		6A9CDC7B287DDC420003EFA1 /* EditMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC7A287DDC420003EFA1 /* EditMessageVC.m */; };
+		6A9CDC7F2881E5970003EFA1 /* MarkdownExportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC7E2881E5970003EFA1 /* MarkdownExportVC.m */; };
 		6AC2C8AB2876269D00436B8D /* SignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AA2876269D00436B8D /* SignUpVC.m */; };
 		6AC2C8AE2876347500436B8D /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AD2876347500436B8D /* Keys.plist */; };
 		6AC2C8B12876411B00436B8D /* ChatListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B02876411B00436B8D /* ChatListVC.m */; };
@@ -79,6 +80,8 @@
 		6A9CDC722878E93C0003EFA1 /* HPTextViewInternal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
 		6A9CDC79287DDC420003EFA1 /* EditMessageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditMessageVC.h; sourceTree = "<group>"; };
 		6A9CDC7A287DDC420003EFA1 /* EditMessageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditMessageVC.m; sourceTree = "<group>"; };
+		6A9CDC7D2881E5970003EFA1 /* MarkdownExportVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkdownExportVC.h; sourceTree = "<group>"; };
+		6A9CDC7E2881E5970003EFA1 /* MarkdownExportVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarkdownExportVC.m; sourceTree = "<group>"; };
 		6AC2C8A92876269D00436B8D /* SignUpVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpVC.h; sourceTree = "<group>"; };
 		6AC2C8AA2876269D00436B8D /* SignUpVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpVC.m; sourceTree = "<group>"; };
 		6AC2C8AD2876347500436B8D /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -202,6 +205,15 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		6A9CDC7C2881E5810003EFA1 /* Markdown */ = {
+			isa = PBXGroup;
+			children = (
+				6A9CDC7D2881E5970003EFA1 /* MarkdownExportVC.h */,
+				6A9CDC7E2881E5970003EFA1 /* MarkdownExportVC.m */,
+			);
+			path = Markdown;
+			sourceTree = "<group>";
+		};
 		6AC2C8AC287633B600436B8D /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +318,7 @@
 		6AD5986E287623D60058386E /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6A9CDC7C2881E5810003EFA1 /* Markdown */,
 				6A9CDC77287DDBCA0003EFA1 /* Login and Signup */,
 				6A9CDC78287DDBE80003EFA1 /* Settings */,
 				6AC2C8AF2876411B00436B8D /* ChatListVC.h */,
@@ -585,6 +598,7 @@
 				6A9CDC632878E3850003EFA1 /* LocalStorage.m in Sources */,
 				6A9CDC692878E4120003EFA1 /* HPGrowingTextView.m in Sources */,
 				6A9CDC702878E6ED0003EFA1 /* MessagesVC.m in Sources */,
+				6A9CDC7F2881E5970003EFA1 /* MarkdownExportVC.m in Sources */,
 				6AC2C8B12876411B00436B8D /* ChatListVC.m in Sources */,
 				6AD5983B28760C140058386E /* SceneDelegate.m in Sources */,
 				6A9CDC732878E93C0003EFA1 /* HPTextViewInternal.m in Sources */,

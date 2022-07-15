@@ -345,9 +345,24 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Chats"/>
                             </button>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="BZN-D8-wvJ">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Jt3-XN-hFp">
+                                <rect key="frame" x="290.5" y="5" width="103.5" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Markdown"/>
+                                <connections>
+                                    <action selector="didPressMarkdown:" destination="1r5-GT-bD9" eventType="touchUpInside" id="bNz-US-oj8"/>
+                                </connections>
+                            </button>
+                            <connections>
+                                <segue destination="kcT-b7-kFK" kind="show" identifier="MarkdownSegue" id="m1t-y6-OPR"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="inputbar" destination="MzZ-qy-fks" id="cPB-gf-5qa"/>
+                        <outlet property="markdownButton" destination="BZN-D8-wvJ" id="QmM-Mu-XCo"/>
                         <outlet property="tableView" destination="SXK-mt-RRH" id="1so-m2-s7x"/>
                         <segue destination="Tuo-3w-fe7" kind="presentation" identifier="EditMessageSegue" destinationCreationSelector="EditMessageSegue" id="JoW-tv-Y9Z"/>
                     </connections>
@@ -355,6 +370,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rzd-1p-PfQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5278" y="-230"/>
+        </scene>
+        <!--Markdown ExportVC-->
+        <scene sceneID="Kvy-DY-kyV">
+            <objects>
+                <viewController id="kcT-b7-kFK" customClass="MarkdownExportVC" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="u0T-nq-fmv">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Vdr-wz-lH7">
+                                <rect key="frame" x="62" y="118" width="307" height="634"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="tintColor" systemColor="linkColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="oEH-5m-g8G"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="y2e-FS-TDH"/>
+                    <connections>
+                        <outlet property="textArea" destination="Vdr-wz-lH7" id="kGK-7D-Ki1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ztm-Ou-J2W" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6141" y="-656"/>
         </scene>
         <!--EditMessageVC-->
         <scene sceneID="rGN-gB-SRW">
@@ -404,7 +449,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z2X-bh-oEE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6077" y="-230"/>
+            <point key="canvasLocation" x="6142" y="2"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yoW-G9-Wzw">

@@ -11,15 +11,17 @@
 #import "MessageCell.h"
 #import "TableArray.h"
 #import "EditMessageVC.h"
+#import "MarkdownExportVC.h"
 
 #import "Inputbar.h"
 #import "DAKeyboardControl.h"
 
 @interface MessagesVC() <InputbarDelegate,
-                                    UITableViewDataSource,UITableViewDelegate>
+                                    UITableViewDataSource, UITableViewDelegate, ContainerProtocol>
 
 @property (weak, nonatomic) IBOutlet Inputbar *inputbar;
 //@property (strong, nonatomic) TableArray *tableArray;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *markdownButton;
 
 @end
 
@@ -31,6 +33,7 @@
     [self setInputbar];
     [self setTableView];
     //[self setGateway];
+    [self.tableView registerClass:MessageCell.class forCellReuseIdentifier:@"MessageCell"];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -143,7 +146,7 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"teste";
+    return @"test";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -215,6 +218,8 @@
     self.view.keyboardTriggerOffset = new_height;
 }
 
+#pragma mark - Segue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
    if ([segue.identifier isEqualToString:@"EditMessageSegue"]) {
         EditMessageVC *editMessageVC = [segue destinationViewController];
@@ -222,7 +227,14 @@
         editMessageVC.message = messageToPass;
         editMessageVC.delegate = self;
     }
+   else if ([segue.identifier isEqualToString:@"MarkdownSegue"]) {
+       MarkdownExportVC *markdownExportVC = [segue destinationViewController];
+       NSMutableArray<Message *> *messages = sender;
+       markdownExportVC.messages = messages;
+   }
 }
+
+#pragma mark - Container methods
 
 - (void)editMessage:(Message *)message {
     [self performSegueWithIdentifier:@"EditMessageSegue" sender:message];
@@ -238,6 +250,54 @@
                            initWithObjects:[NSIndexPath indexPathForRow:messageIndex inSection:0], nil];
     
     [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+    return;
+}
+
+- (void)changeSender:(Message *)message {
+    // Gets the message cell based on the index of the array
+    NSMutableArray<Message *> *chatMessages = self.chat.messages;
+    NSInteger messageIndex = [chatMessages indexOfObject:message];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:messageIndex inSection:0];
+    NSArray *indexPaths = [[NSArray alloc]
+                           initWithObjects:indexPath, nil];
+    
+    MessageCell *messageCell = [self.tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
+    
+    // Set bubble image
+    messageCell.bubbleImage.image = [[UIImage imageNamed:@"bubbleRecipient"
+                                                inBundle:[NSBundle bundleForClass:[self class]]
+                                                compatibleWithTraitCollection:nil]
+                          stretchableImageWithLeftCapWidth:15 topCapHeight:14];
+    
+    messageCell.textView.text = @"changed";
+    
+    Message *randomMsg = [[Message alloc] init];
+    randomMsg.text = @"Text";
+    [messageCell setMessage:randomMsg];
+    
+    // Margins
+    CGFloat marginLeft = 5;
+    CGFloat marginRight = 2;
+    
+    // Position
+    CGFloat bubble_x;
+    CGFloat bubble_y = 0;
+    CGFloat bubble_width;
+    CGFloat bubble_height = messageCell.textView.frame.size.height + 8;
+    
+    bubble_x = marginRight;
+    bubble_width = messageCell.textView.frame.origin.x + messageCell.textView.frame.size.width + marginLeft;
+   
+    messageCell.bubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height);
+    messageCell.bubbleImage.autoresizingMask = messageCell.textView.autoresizingMask;
+    
+    // Reload row
+    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+    return;
+}
+
+- (IBAction)didPressMarkdown:(id)sender {
+    [self performSegueWithIdentifier:@"MarkdownSegue" sender:self.chat.messages];
     return;
 }
 

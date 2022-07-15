@@ -12,8 +12,6 @@
 @interface MessageCell ()
 // Message
 // @property (strong, nonatomic) UILabel *timeLabel;
-@property (strong, nonatomic) UITextView *textView;
-@property (strong, nonatomic) UIImageView *bubbleImage;
 
 
 @end
@@ -55,7 +53,6 @@
     _bubbleImage = [UIImageView new];
     _messageType = [UILabel new];
     _editButton = [UIButton new];
-    _moveButton = [UIButton new];
     _changeSenderButton = [UIButton new];
     _deleteButton = [UIButton new];
 
@@ -67,7 +64,6 @@
     [self.contentView addSubview:_messageType];
     [self.contentView addSubview:_editButton];
     [self.contentView addSubview:_deleteButton];
-    [self.contentView addSubview:_moveButton];
     [self.contentView addSubview:_changeSenderButton];
 }
 
@@ -91,9 +87,8 @@
     [self setMessageType];
     
     [self setContainerButton:_editButton withTitle:@"Edit" withOrder:1 withMethod:@selector(didTapEdit)];
-    [self setContainerButton:_changeSenderButton withTitle:@"Change sender" withOrder:2 withMethod:@selector(aMethod:)];
-    [self setContainerButton:_moveButton withTitle:@"Move" withOrder:3 withMethod:@selector(aMethod:)];
-    [self setContainerButton:_deleteButton withTitle:@"Delete" withOrder:4 withMethod:@selector(didTapDelete)];
+    [self setContainerButton:_changeSenderButton withTitle:@"Change sender" withOrder:2 withMethod:@selector(didTapChangeSender)];
+    [self setContainerButton:_deleteButton withTitle:@"Delete" withOrder:3 withMethod:@selector(didTapDelete)];
 
     [self setNeedsLayout];
 }
@@ -230,6 +225,11 @@
 
 - (void)didTapDelete {
     [self.delegate deleteMessage:self.message];
+    return;
+}
+
+- (void)didTapChangeSender {
+    [self.delegate changeSender:self.message];
     return;
 }
 
