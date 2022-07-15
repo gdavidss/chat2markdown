@@ -36,10 +36,14 @@
         if (self.message.text != self.editView.text) {
             self.message.text = self.editView.text;
             
+            // Update array
+            NSMutableArray<Message *> *chatMessages = self.delegate.chat.messages;
+            NSInteger messageIndex = [chatMessages indexOfObject:self.message];
+            chatMessages[messageIndex].text = self.editView.text;
+            
             // Reload that specific row as opposed to all rows in table
-            NSInteger rowToReload = [self.delegate.chat.messages indexOfObject:self.message];
             NSArray *indexPaths = [[NSArray alloc]
-                                   initWithObjects:[NSIndexPath indexPathForRow:rowToReload inSection:0], nil];
+                                   initWithObjects:[NSIndexPath indexPathForRow:messageIndex inSection:0], nil];
             
             [self.delegate.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
         }}];
