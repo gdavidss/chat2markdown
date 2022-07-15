@@ -93,7 +93,7 @@
     [self setContainerButton:_editButton withTitle:@"Edit" withOrder:1 withMethod:@selector(didTapEdit)];
     [self setContainerButton:_changeSenderButton withTitle:@"Change sender" withOrder:2 withMethod:@selector(aMethod:)];
     [self setContainerButton:_moveButton withTitle:@"Move" withOrder:3 withMethod:@selector(aMethod:)];
-    [self setContainerButton:_deleteButton withTitle:@"Delete" withOrder:4 withMethod:@selector(aMethod:)];
+    [self setContainerButton:_deleteButton withTitle:@"Delete" withOrder:4 withMethod:@selector(didTapDelete)];
 
     [self setNeedsLayout];
 }
@@ -224,6 +224,12 @@
 
 - (void)didTapEdit {
     [self.delegate editMessage:self.message];
+    return;
+}
+
+
+- (void)didTapDelete {
+    [self.delegate deleteMessage:self.message];
     return;
 }
 

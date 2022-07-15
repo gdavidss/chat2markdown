@@ -12,7 +12,6 @@
 @property (strong, nonatomic) NSMutableDictionary *mapChatToMessages;
 @end
 
-
 @implementation LocalStorage
 
 + (id)sharedInstance {

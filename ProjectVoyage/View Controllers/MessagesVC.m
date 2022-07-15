@@ -16,7 +16,7 @@
 #import "DAKeyboardControl.h"
 
 @interface MessagesVC() <InputbarDelegate,
-                                    UITableViewDataSource,UITableViewDelegate, EditProtocol>
+                                    UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet Inputbar *inputbar;
 //@property (strong, nonatomic) TableArray *tableArray;
@@ -226,6 +226,19 @@
 
 - (void)editMessage:(Message *)message {
     [self performSegueWithIdentifier:@"EditMessageSegue" sender:message];
+}
+
+- (void)deleteMessage:(Message *)message {
+    // Update array
+    NSMutableArray<Message *> *chatMessages = self.chat.messages;
+    NSInteger messageIndex = [chatMessages indexOfObject:message];
+    [chatMessages removeObjectAtIndex:messageIndex];
+    
+    NSArray *indexPaths = [[NSArray alloc]
+                           initWithObjects:[NSIndexPath indexPathForRow:messageIndex inSection:0], nil];
+    
+    [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+    return;
 }
 
 @end

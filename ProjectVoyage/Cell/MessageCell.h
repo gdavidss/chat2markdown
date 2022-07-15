@@ -20,7 +20,7 @@ for incoming or outgoing messages
 
 @property (strong, nonatomic) Message *message;
 
-@property (weak, nonatomic) id <EditProtocol> delegate;
+@property (weak, nonatomic) MessagesVC *delegate;
 
 // Container
 @property (strong, nonatomic) UILabel *messageType;
