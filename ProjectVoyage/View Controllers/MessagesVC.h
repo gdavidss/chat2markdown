@@ -14,17 +14,14 @@
 // This class control chat exchange message itself
 // It creates the bubble UI
 //
-
-
 @protocol ContainerProtocol
-    - (void)editMessage:(Message *)message;
-    - (void)deleteMessage:(Message *)message;
-    - (void)changeSender:(Message *)message;
+- (void)editMessage:(Message *)message;
+- (void)deleteMessage:(Message *)message;
+- (void)changeSender:(Message *)message;
 @end
 
 
 @interface MessagesVC: UIViewController
-@property (strong, nonatomic) Chat *chat;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
+@property (nonatomic, strong) Chat *chat;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 @end

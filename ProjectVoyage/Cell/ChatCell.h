@@ -12,12 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ChatCell : UITableViewCell
 
-@property (strong, nonatomic) IBOutlet UILabel *recipientLabel;
-@property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property (strong, nonatomic) IBOutlet UIImageView *recipientImage;
-@property (weak, nonatomic) IBOutlet UILabel *dateChat;
-
-@property (strong, nonatomic) Chat *chat;
+@property (nonatomic, strong) Chat *chat;
 
 @end
 

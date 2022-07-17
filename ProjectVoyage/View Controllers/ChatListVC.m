@@ -12,11 +12,11 @@
 
 @interface ChatListVC () <UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *createChatBtn;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *createChatBtn;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (strong, nonatomic) NSArray *chats;
+@property (nonatomic, strong) NSArray *chats;
 
 @end
 
