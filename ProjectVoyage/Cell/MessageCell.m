@@ -20,11 +20,11 @@
 @end
 
 #define LAYER_HEIGHT 25
-#define NUM_LAYERS 6
+#define NUM_LAYERS 4
 
 @implementation MessageCell
 
--(CGFloat) bubbleCellHeight {
+-(CGFloat) minHeight {
     return LAYER_HEIGHT * NUM_LAYERS;
 }
 
@@ -87,13 +87,15 @@
     _message = message;
     [self buildCell];
     
-    message.height = self.bubbleCellHeight;
+    if (message.height < self.minHeight) {
+        message.height = self.minHeight;
+    }
 }
 
 - (void) buildCell {
     [self setupTextView];
-    [self setupBubbleView];
     [self setupMessage];
+    [self setupBubbleView];
     
     [self setContainerButton:_editButton withTitle:@"Edit" withOrder:1 withMethod:@selector(didTapEdit)];
     [self setContainerButton:_changeSenderButton withTitle:@"Change sender" withOrder:2 withMethod:@selector(didTapChangeSender)];
@@ -130,7 +132,6 @@
     } else {
         messageType_x = self.contentView.frame.size.width - textSize.width/2;
     }
-
     
     _messageType.frame = CGRectMake(messageType_x, messageType_y, textSize.width, textSize.height);
 }
@@ -219,6 +220,10 @@
     }
     _bubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height);
     _bubbleImage.autoresizingMask = _textView.autoresizingMask;
+    
+    if (bubble_height > _message.height) {
+        _message.height = bubble_height;
+    }
 }
 
 #pragma mark - UIImage Helper
