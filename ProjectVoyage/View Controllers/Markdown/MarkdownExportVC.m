@@ -9,6 +9,10 @@
 #import "Message.h"
 @import Parse;
 
+
+#define Myself ((BOOL)1)
+#define Someone  ((BOOL)0)
+
 /*
 typedef NS_ENUM(NSInteger, MessageSender) {
     MessageSenderMyself,
@@ -30,68 +34,83 @@ typedef NS_ENUM(NSInteger, MessageSender) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     _convertedMarkdown = [NSMutableString new];
-    [_convertedMarkdown appendString:@"**Metadata**\n"];
+    [_convertedMarkdown appendString:@"\n"];
+    _messages = _chat.messages;
     
     // GD test
-    bool TEST_MODE = YES;
+    bool TEST_MODE = NO;
     if (TEST_MODE) {
         Chat *chat = [Chat new];
         chat.chat_id = @"42";
         chat.recipientName = @"Varun";
-        chat.description = @"A conversation about debugging.";
+        chat.chatDescription = @"A conversation about debugging.";
         // chat.date = [NSDate date];
         _chat = chat;
     }
 
     [self appendMetadata];
-    //[self appendChat];
+    [self appendChat];
 
     NSLog(@"%@", _convertedMarkdown);
 }
 
 - (void) appendMetadata {
     // each index on the array corresponds to number of identations
-    [self generateBlock:_chat.chat_id withIdentation:1];
-    [self generateBlock:_chat.recipientName withIdentation:1];
-    [self generateBlock:_chat.description withIdentation:1];
+    [self generateBlock:@"Metadata" withIdentation:0 isItBold:YES];
+    [self generateBlock:_chat.chat_id withIdentation:1 isItBold:NO];
+    [self generateBlock:_chat.recipientName withIdentation:1 isItBold:NO];
+    [self generateBlock:_chat.chatDescription withIdentation:1 isItBold:NO];
     // GD bug here that is printing a whole chat object instead of description wtf
     //[_convertedMarkdown appendString:[self generateBlock:_chat.description withIdentation:1]];
     //NSLog(@"%@", _convertedMarkdown);
     return;
 }
 
-/*
 - (void) appendChat {
+    [self generateBlock:@"Messages" withIdentation:0 isItBold:YES];
+
     NSArray<Message *> *ordered_messages = [self orderMessages:_messages];
-    bool last_sender = ordered_messages[0].isSenderMyself;
+    bool last_sender = (ordered_messages[0].sender == MessageSenderMyself)? Myself: Someone;
     
-    NSMutableString *block = [NSMutableString new];
+    if (last_sender == Myself) {
+        [self generateBlock:[PFUser currentUser].username withIdentation:1 isItBold:YES];
+    } else {
+        [self generateBlock:_chat.recipientName withIdentation:1 isItBold:YES];
+    }
+    
     for (Message *message in ordered_messages) {
-        (MessageSender) current_sender message.sender;
+        bool current_sender = (message.sender == MessageSenderMyself)? Myself: Someone;
         
-        if (wasLastSenderMyself == isCurrentSenderMyself) {
-            [self generateBlock:message.text withIdentation:1];
-        } else {
-            if (current_sender == MessageSenderMyself) {
-                [self generateBlock:[PFUser currentUser].username withIdentation:0];
+        if (last_sender != current_sender) {
+            if (current_sender == Myself) {
+                [self generateBlock:[PFUser currentUser].username withIdentation:1 isItBold:YES];
             } else {
-                [self generateBlock:_chat.recipientName withIdentation:0];
+                [self generateBlock:_chat.recipientName withIdentation:1 isItBold:YES];
             }
         }
+        
+        [self generateBlock:message.text withIdentation:2 isItBold:NO];
+        
+        last_sender = current_sender;
     }
     return;
 }
- */
 
-- (void)generateBlock:(NSString *)text withIdentation:(NSInteger)num_identation {
+- (void)generateBlock:(NSString *)text withIdentation:(NSInteger)num_identation isItBold:(bool)bold {
     NSArray<NSString *> *identations =
         [[NSArray alloc] initWithObjects:@"", @"  ", @"   ", @"    ", nil];
     
+    NSString *format;
+    if (bold) {
+        format = @"%@ **%@** %@";
+    } else {
+        format = @"%@ %@ %@";
+    }
+    
     NSMutableString *block = [NSMutableString new];
-    [block appendFormat:@"%@ %@ %@", identations[num_identation], text, @"\n"];
+    [block appendFormat:format, identations[num_identation], text, @"\n"];
     [_convertedMarkdown appendString:(NSString *)block];
 }
-
 
 // Order messages from least recent to most recent
 - (NSArray<Message *> *) orderMessages:(NSArray<Message *> *)messages {
@@ -101,6 +120,7 @@ typedef NS_ENUM(NSInteger, MessageSender) {
     }
     return (NSArray *)ordered_messages;
 }
+
 /*
 - (void) didChangeSender:(MessageSender)current_sender withLastSender:(MessageSender)last_sender {
     

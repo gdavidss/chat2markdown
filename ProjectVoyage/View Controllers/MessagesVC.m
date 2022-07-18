@@ -262,7 +262,7 @@
                            initWithObjects:indexPath, nil];
     
     // Change the data model only. (reload will cause the cell to reload)
-    message.sender = MessageSenderSomeone;
+    message.sender = message.sender == MessageSenderMyself? MessageSenderSomeone: MessageSenderMyself;
     [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     return;
 }

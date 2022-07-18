@@ -29,7 +29,7 @@
     Chat *newChat = [Chat new];
     newChat.recipientImage = [Util getPFFileFromImage:recipientImg];
     newChat.recipientName = recipientName;
-    newChat.description = chatDescription;
+    newChat.chatDescription = chatDescription;
     newChat.messages = [NSMutableArray new];
     
     PFUser *currentUser = [PFUser currentUser];
