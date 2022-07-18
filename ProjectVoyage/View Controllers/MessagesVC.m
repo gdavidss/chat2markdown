@@ -259,8 +259,9 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:messageIndex inSection:0];
     NSArray *indexPaths = [[NSArray alloc]
                            initWithObjects:indexPath, nil];
+    
     // Change the data model only. (reload will cause the cell to reload)
-    message.text = @"NEW TEXT";
+    message.sender = MessageSenderSomeone;
     [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     return;
 }

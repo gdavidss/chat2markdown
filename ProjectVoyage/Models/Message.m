@@ -13,7 +13,7 @@
     self = [super init];
     if (self)
     {
-        //_sender = MessageSenderMyself;
+        _sender = MessageSenderMyself;
         _text = @"";
         _height = 44;
         _date = [NSDate date];

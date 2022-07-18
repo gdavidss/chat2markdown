@@ -44,7 +44,7 @@ typedef NS_ENUM(NSInteger, MessageSender) {
     }
 
     [self appendMetadata];
-    [self appendChat];
+    //[self appendChat];
 
     NSLog(@"%@", _convertedMarkdown);
 }
@@ -60,6 +60,7 @@ typedef NS_ENUM(NSInteger, MessageSender) {
     return;
 }
 
+/*
 - (void) appendChat {
     NSArray<Message *> *ordered_messages = [self orderMessages:_messages];
     bool last_sender = ordered_messages[0].isSenderMyself;
@@ -80,6 +81,7 @@ typedef NS_ENUM(NSInteger, MessageSender) {
     }
     return;
 }
+ */
 
 - (void)generateBlock:(NSString *)text withIdentation:(NSInteger)num_identation {
     NSArray<NSString *> *identations =

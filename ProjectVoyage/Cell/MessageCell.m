@@ -69,10 +69,11 @@
     [self.contentView addSubview:_deleteButton];
     [self.contentView addSubview:_changeSenderButton];
     
-    _bubbleImage.image = [[UIImage imageNamed:@"bubbleRecipient"
+    /*_bubbleImage.image = [[UIImage imageNamed:@"bubbleRecipient"
                                      inBundle:[NSBundle bundleForClass:[self class]]
                 compatibleWithTraitCollection:nil]
                           stretchableImageWithLeftCapWidth:15 topCapHeight:14];
+     */
 }
 
 - (void) prepareForReuse {
@@ -118,11 +119,18 @@
     _messageType.text = text;
     
     // Position
-    CGFloat messageType_x = 10;
+    CGFloat messageType_x;
     CGFloat messageType_y = 0;
     
     // Get height and width of the UILabel based on the size of its text
     CGSize textSize = [text sizeWithAttributes:@{NSFontAttributeName:_textView.font}];
+    
+    if (_message.sender == MessageSenderMyself) {
+        messageType_x = 10;
+    } else {
+        messageType_x = self.contentView.frame.size.width - textSize.width/2;
+    }
+
     
     _messageType.frame = CGRectMake(messageType_x, messageType_y, textSize.width, textSize.height);
 }
@@ -166,39 +174,23 @@
     CGFloat textView_h = _textView.frame.size.height;
     UIViewAutoresizing autoresizing;
     
-    textView_x = self.contentView.frame.size.width - textView_w - 20;
-    textView_y = -3;
-    autoresizing = UIViewAutoresizingFlexibleLeftMargin;
+    if (_message.sender == MessageSenderMyself) {
+        textView_x = self.contentView.frame.size.width - textView_w - 20;
+        textView_y = -3;
+        autoresizing = UIViewAutoresizingFlexibleLeftMargin;
+    } else {
+        textView_x = 20;
+        textView_y = -1;
+        autoresizing = UIViewAutoresizingFlexibleRightMargin;
+    }
     
     _textView.autoresizingMask = autoresizing;
     _textView.frame = CGRectMake(textView_x, textView_y, textView_w, textView_h);
-    
-    if (_message.sender == MessageSenderSomeone) {
-        // Margins
-        CGFloat marginLeft = 5;
-        CGFloat marginRight = 2;
-        
-        // Position
-        CGFloat bubble_x;
-        CGFloat bubble_y = 0;
-        CGFloat bubble_width;
-        CGFloat bubble_height = _textView.frame.size.height + 8;
-        
-        bubble_x = marginRight;
-        bubble_width = _textView.frame.origin.x + _textView.frame.size.width + marginLeft;
-        
-        _bubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height);
-        _bubbleImage.autoresizingMask = _textView.autoresizingMask;
-    }
 }
 
 #pragma mark - Bubble
 
 - (void) setupBubbleView {
-    // Set bubble image
-    _bubbleImage.image = [[self imageNamed:@"bubbleSender"]
-                          stretchableImageWithLeftCapWidth:15 topCapHeight:14];
-    
     // Margins
     CGFloat marginLeft = 5;
     CGFloat marginRight = 2;
@@ -209,22 +201,25 @@
     CGFloat bubble_width;
     CGFloat bubble_height = _textView.frame.size.height + 8;
     
-    bubble_x = _textView.frame.origin.x - marginLeft;
-    bubble_width = self.contentView.frame.size.width - bubble_x - marginRight;
-    
-    /* if sender is someone else
-     bubble_x = marginRight;
-     
-     _bubbleImage.image = [[self imageNamed:@"bubbleRecipient"]
-     stretchableImageWithLeftCapWidth:21 topCapHeight:14];
-     
-     bubble_width = _textView.frame.origin.x + _textView.frame.size.width + marginLeft;
-     */
-    
+    if (_message.sender == MessageSenderMyself) {
+        // Set bubble image
+        _bubbleImage.image = [[self imageNamed:@"bubbleSender"]
+                              stretchableImageWithLeftCapWidth:15 topCapHeight:14];
+        
+        bubble_x = _textView.frame.origin.x - marginLeft;
+        bubble_width = self.contentView.frame.size.width - bubble_x - marginRight;
+        
+    } else {
+        bubble_x = marginRight;
+        
+        _bubbleImage.image = [[self imageNamed:@"bubbleRecipient"]
+        stretchableImageWithLeftCapWidth:15 topCapHeight:14];
+        
+        bubble_width = _textView.frame.origin.x + _textView.frame.size.width + marginLeft;
+    }
     _bubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height);
     _bubbleImage.autoresizingMask = _textView.autoresizingMask;
 }
-
 
 #pragma mark - UIImage Helper
 
@@ -240,7 +235,6 @@
     [self.delegate editMessage:self.message];
     return;
 }
-
 
 - (void)didTapDelete {
     [self.delegate deleteMessage:self.message];

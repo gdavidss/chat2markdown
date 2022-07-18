@@ -11,18 +11,29 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef bool last_sender {
-    myself = TRUE,
-    someone = FALSE
+typedef NS_ENUM(NSInteger, MessageStatus) {
+    MessageStatusSending,
+    MessageStatusSent,
+    MessageStatusReceived,
+    MessageStatusRead,
+    MessageStatusFailed
+};
+
+
+typedef NS_ENUM(NSInteger, MessageSender) {
+    MessageSenderMyself,
+    MessageSenderSomeone
 };
 
 @interface Message : NSObject
 
-@property (assign, nonatomic) bool isSenderMyself;
-@property (strong, nonatomic) NSString *identifier;
+@property (nonatomic, assign) bool isSenderMyself;
+@property (nonatomic, strong) NSString *identifier;
 
-@property (strong, nonatomic) NSString *chatId;
-@property (strong, nonatomic) NSString *text;
+@property (nonatomic, strong) NSString *chatId;
+@property (nonatomic, strong) NSString *text;
+
+@property (nonatomic, assign) MessageSender sender;
 
 // GD isn't this redundant? I think order is more important than date for displaying it correctly.
 @property (strong, nonatomic) NSDate *date;
