@@ -8,27 +8,22 @@
 #import "ChatCell.h"
 #import "Util.h"
 
+@interface ChatCell()
+@property (nonatomic, strong) IBOutlet UILabel *recipientLabel;
+@property (nonatomic, strong) IBOutlet UILabel *descriptionLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *recipientImage;
+@property (nonatomic, strong) IBOutlet UILabel *dateChat;
+@end
+
 @implementation ChatCell
-
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
-}
-
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-    // Configure the view for the selected state
-}
-
 
 - (void) setChat:(Chat *)chat {
     _chat = chat;
-    self.recipientImage.image = [UIImage imageWithData:[chat.recipientImage getData]];
-    self.recipientLabel.text = chat.recipientName;
-    self.descriptionLabel.text = chat.description;
-    
-    self.dateChat.text = [Util formatDateString:chat.createdAt];
+
+    _recipientImage.image = [UIImage imageWithData:[chat.recipientImage getData]];
+    _recipientLabel.text = chat.recipientName;
+    _descriptionLabel.text = chat.description;
+    _dateChat.text = [Util formatDateString:chat.createdAt];
 }
 
 @end

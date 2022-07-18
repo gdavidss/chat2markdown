@@ -13,11 +13,11 @@
     self = [super init];
     if (self)
     {
-        self.isSenderMyself = YES;
-        self.text = @"";
-        self.height = 44;
-        self.date = [NSDate date];
-        self.identifier = @"";
+        //_sender = MessageSenderMyself;
+        _text = @"";
+        _height = 44;
+        _date = [NSDate date];
+        _identifier = @"";
     }
     return self;
 }

@@ -8,9 +8,9 @@
 #import "EditMessageVC.h"
 
 @interface EditMessageVC ()
-@property (weak, nonatomic) IBOutlet UITextView *editView;
-@property (weak, nonatomic) IBOutlet UIButton *editButton;
-@property (weak, nonatomic) IBOutlet UIButton *restoreButton;
+@property (nonatomic, strong) IBOutlet UITextView *editView;
+@property (nonatomic, strong) IBOutlet UIButton *editButton;
+@property (nonatomic, strong) IBOutlet UIButton *restoreButton;
 
 @end
 
@@ -20,16 +20,6 @@
     [super viewDidLoad];
     _editView.text = _message.text;
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (IBAction)didPressEdit:(id)sender {
     [self dismissViewControllerAnimated:TRUE completion:^{

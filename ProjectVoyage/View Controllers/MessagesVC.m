@@ -255,43 +255,12 @@
 
 - (void)changeSender:(Message *)message {
     // Gets the message cell based on the index of the array
-    NSMutableArray<Message *> *chatMessages = self.chat.messages;
-    NSInteger messageIndex = [chatMessages indexOfObject:message];
+    NSInteger messageIndex = [_chat.messages indexOfObject:message];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:messageIndex inSection:0];
     NSArray *indexPaths = [[NSArray alloc]
                            initWithObjects:indexPath, nil];
-    
-    MessageCell *messageCell = [self.tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
-    
-    // Set bubble image
-    messageCell.bubbleImage.image = [[UIImage imageNamed:@"bubbleRecipient"
-                                                inBundle:[NSBundle bundleForClass:[self class]]
-                                                compatibleWithTraitCollection:nil]
-                          stretchableImageWithLeftCapWidth:15 topCapHeight:14];
-    
-    messageCell.textView.text = @"changed";
-    
-    Message *randomMsg = [[Message alloc] init];
-    randomMsg.text = @"Text";
-    [messageCell setMessage:randomMsg];
-    
-    // Margins
-    CGFloat marginLeft = 5;
-    CGFloat marginRight = 2;
-    
-    // Position
-    CGFloat bubble_x;
-    CGFloat bubble_y = 0;
-    CGFloat bubble_width;
-    CGFloat bubble_height = messageCell.textView.frame.size.height + 8;
-    
-    bubble_x = marginRight;
-    bubble_width = messageCell.textView.frame.origin.x + messageCell.textView.frame.size.width + marginLeft;
-   
-    messageCell.bubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height);
-    messageCell.bubbleImage.autoresizingMask = messageCell.textView.autoresizingMask;
-    
-    // Reload row
+    // Change the data model only. (reload will cause the cell to reload)
+    message.text = @"NEW TEXT";
     [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     return;
 }

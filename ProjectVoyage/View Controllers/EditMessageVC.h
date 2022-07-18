@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface EditMessageVC : UIViewController
 
-@property (strong, nonatomic) Message *message;
-@property (weak, nonatomic) MessagesVC *delegate;
+@property (nonatomic, strong) Message *message;
+@property (nonatomic, weak) MessagesVC *delegate;
 
 @end
 
