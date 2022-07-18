@@ -11,27 +11,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, MessageStatus) {
-    MessageStatusSending,
-    MessageStatusSent,
-    MessageStatusReceived,
-    MessageStatusRead,
-    MessageStatusFailed
-};
-
-
-typedef NS_ENUM(NSInteger, MessageSender) {
-    MessageSenderMyself,
-    MessageSenderSomeone
+typedef bool last_sender {
+    myself = TRUE,
+    someone = FALSE
 };
 
 @interface Message : NSObject
 
-@property (assign, nonatomic) MessageSender sender;
-@property (assign, nonatomic) MessageStatus status;
+@property (assign, nonatomic) bool isSenderMyself;
 @property (strong, nonatomic) NSString *identifier;
 
-// GD change chatID to Chat object? You'll have to change the functions that store and retrieve messages then in the Local Storage file
 @property (strong, nonatomic) NSString *chatId;
 @property (strong, nonatomic) NSString *text;
 

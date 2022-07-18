@@ -13,8 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Chat : PFObject<PFSubclassing>
 
-@property (nonatomic, strong) NSString *chatID;
-@property (nonatomic, strong) NSString *chatDescription;
+@property (nonatomic, strong) NSString *chat_id;
+@property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSDate *date;
+
 @property (nonatomic, strong) NSString *recipientName;
 @property (nonatomic, strong) PFFileObject *recipientImage;
 @property (nonatomic, strong) PFUser *author;

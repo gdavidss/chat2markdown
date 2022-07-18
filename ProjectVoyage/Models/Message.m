@@ -13,8 +13,7 @@
     self = [super init];
     if (self)
     {
-        self.sender = MessageSenderMyself;
-        self.status = MessageStatusSending;
+        self.isSenderMyself = YES;
         self.text = @"";
         self.height = 44;
         self.date = [NSDate date];
@@ -27,7 +26,6 @@
     Message *message = [[Message alloc] init];
     message.text = dictionary[@"text"];
     message.identifier = dictionary[@"message_id"];
-    message.status = [dictionary[@"status"] integerValue] + 1;
     
     NSString *dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSSSS";
     

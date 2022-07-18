@@ -6,13 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Message.h"
+#import "Chat.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface MarkdownExportVC : UIViewController
 
-@property (weak, nonatomic) NSMutableArray<Message *> *messages;
+@property (strong, nonatomic) Chat *chat;
 
 @end
 

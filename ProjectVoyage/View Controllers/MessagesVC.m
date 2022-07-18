@@ -20,7 +20,7 @@
                                     UITableViewDataSource, UITableViewDelegate, ContainerProtocol>
 
 @property (weak, nonatomic) IBOutlet Inputbar *inputbar;
-//@property (strong, nonatomic) TableArray *tableArray;
+@property (strong, nonatomic) TableArray *tableArray;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *markdownButton;
 
 @end
@@ -229,8 +229,8 @@
     }
    else if ([segue.identifier isEqualToString:@"MarkdownSegue"]) {
        MarkdownExportVC *markdownExportVC = [segue destinationViewController];
-       NSMutableArray<Message *> *messages = sender;
-       markdownExportVC.messages = messages;
+       Chat *chat = sender;
+       markdownExportVC.chat = chat;
    }
 }
 
@@ -297,7 +297,7 @@
 }
 
 - (IBAction)didPressMarkdown:(id)sender {
-    [self performSegueWithIdentifier:@"MarkdownSegue" sender:self.chat.messages];
+    [self performSegueWithIdentifier:@"MarkdownSegue" sender:self.chat];
     return;
 }
 
