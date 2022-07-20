@@ -44,9 +44,9 @@
 }
 
 - (void) appendMetadata {
-    NSString *chatId = [NSString stringWithFormat:@"%@: %@", @"**_Chat ID_**", _chat.chat_id];
-    NSString *recipientName = [NSString stringWithFormat:@"%@: %@", @"**_Recipient Name_**", _chat.chat_id];
-    NSString *chatDescription = [NSString stringWithFormat:@"%@: %@", @"**_Chat description_**", _chat.chat_id];
+    NSString *chatId = [NSString stringWithFormat:@"%@: %@", @"**Chat ID**", _chat.chat_id];
+    NSString *recipientName = [NSString stringWithFormat:@"%@: %@", @"**Recipient Name**", _chat.chat_id];
+    NSString *chatDescription = [NSString stringWithFormat:@"%@: %@", @"**Chat description**", _chat.chat_id];
 
     [self generateBlock:@"Metadata" withIdentation:0 isItBold:YES];
     [self generateBlock:chatId withIdentation:1 isItBold:NO];
@@ -91,7 +91,7 @@
     NSArray<NSString *> *identations =
         [[NSArray alloc] initWithObjects:@"", @"  ", @"   ", @"    ", nil];
     
-    NSString *format = bold? @"%@- **%@** %@": @"%@- %@ %@";
+    NSString *format = bold? @"%@- **%@**%@": @"%@- %@%@";
     
     NSMutableString *block = [NSMutableString new];
     [block appendFormat:format, identations[num_identation], text, @"\n"];

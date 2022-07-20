@@ -13,7 +13,6 @@
 		6A9CDC4B2878DA610003EFA1 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC4A2878DA610003EFA1 /* Message.m */; };
 		6A9CDC5E2878E3020003EFA1 /* InputBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC5D2878E3020003EFA1 /* InputBar.m */; };
 		6A9CDC632878E3850003EFA1 /* LocalStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC622878E3850003EFA1 /* LocalStorage.m */; };
-		6A9CDC662878E38D0003EFA1 /* TableArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC652878E38D0003EFA1 /* TableArray.m */; };
 		6A9CDC692878E4120003EFA1 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC682878E4120003EFA1 /* HPGrowingTextView.m */; };
 		6A9CDC6D2878E46E0003EFA1 /* DAKeyboardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC6C2878E46E0003EFA1 /* DAKeyboardControl.m */; };
 		6A9CDC702878E6ED0003EFA1 /* MessagesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC6F2878E6ED0003EFA1 /* MessagesVC.m */; };
@@ -69,8 +68,6 @@
 		6A9CDC5D2878E3020003EFA1 /* InputBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InputBar.m; sourceTree = "<group>"; };
 		6A9CDC612878E3850003EFA1 /* LocalStorage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocalStorage.h; sourceTree = "<group>"; };
 		6A9CDC622878E3850003EFA1 /* LocalStorage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalStorage.m; sourceTree = "<group>"; };
-		6A9CDC642878E38D0003EFA1 /* TableArray.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableArray.h; sourceTree = "<group>"; };
-		6A9CDC652878E38D0003EFA1 /* TableArray.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableArray.m; sourceTree = "<group>"; };
 		6A9CDC672878E4120003EFA1 /* HPGrowingTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
 		6A9CDC682878E4120003EFA1 /* HPGrowingTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
 		6A9CDC6B2878E46E0003EFA1 /* DAKeyboardControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DAKeyboardControl.h; sourceTree = "<group>"; };
@@ -169,8 +166,6 @@
 				6A9CDC5D2878E3020003EFA1 /* InputBar.m */,
 				6A9CDC612878E3850003EFA1 /* LocalStorage.h */,
 				6A9CDC622878E3850003EFA1 /* LocalStorage.m */,
-				6A9CDC642878E38D0003EFA1 /* TableArray.h */,
-				6A9CDC652878E38D0003EFA1 /* TableArray.m */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -626,7 +621,6 @@
 				6A9CDC482878D9E30003EFA1 /* MessageCell.m in Sources */,
 				6AC2C8B5287648F000436B8D /* Chat.m in Sources */,
 				6A9CDC4B2878DA610003EFA1 /* Message.m in Sources */,
-				6A9CDC662878E38D0003EFA1 /* TableArray.m in Sources */,
 				6AF337A028875B5E004FD644 /* ChatCreateViewController.m in Sources */,
 				6AC2C8BB2877B2DD00436B8D /* Util.m in Sources */,
 			);

@@ -31,6 +31,11 @@
     }];
 }
 
+- (IBAction)trimEndSpaces:(id)sender {
+    UITextField *textField = sender;
+    textField.text = [Util removeEndSpaceFrom:textField.text];
+}
+
 - (void) postChat {
     [Chat postChat:_chatDescriptionTextField.text
           withRecipientName:_recipientNameTextField.text

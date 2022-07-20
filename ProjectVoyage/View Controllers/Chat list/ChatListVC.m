@@ -39,7 +39,6 @@
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
-     
 - (void) refreshHomeFeed:(UIRefreshControl *)refreshControl {
     [refreshControl beginRefreshing];
     
@@ -52,15 +51,14 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *chats, NSError *error) {
         if (chats != nil) {
             self.chats = chats;
-            NSLog(@"Chats succesfully loaded: %@", self.chats);
             [self.tableView reloadData];
         } else {
+            // GD Show alert error
             NSLog(@"%@", error.localizedDescription);
         }
     }];
     [refreshControl endRefreshing];
 }
-
 
 #pragma mark - Navigation
 

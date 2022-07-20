@@ -40,4 +40,18 @@
     imageView.layer.masksToBounds = YES;
 }
 
++ (NSString *)removeEndSpaceFrom:(NSString *)strToRemove {
+    NSUInteger location = 0;
+    unichar charBuffer[[strToRemove length]];
+    [strToRemove getCharacters:charBuffer];
+    int i = 0;
+    for(i = (int)[strToRemove length]; i >0; i--) {
+        NSCharacterSet* charSet = [NSCharacterSet whitespaceCharacterSet];
+        if(![charSet characterIsMember:charBuffer[i - 1]]) {
+            break;
+        }
+    }
+    return [strToRemove substringWithRange:NSMakeRange(location, i  - location)];
+}
+
 @end
