@@ -107,6 +107,11 @@ typedef NS_ENUM(NSInteger, MessageSender) {
     [_convertedMarkdown appendString:(NSString *)block];
 }
 
+- (IBAction)didPressCopy:(id)sender {
+    UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+    pasteboard.string = _convertedMarkdown;
+}
+
 // Order messages from least recent to most recent
 - (NSArray<Message *> *) orderMessages:(NSArray<Message *> *)messages {
     NSMutableArray *ordered_messages = [NSMutableArray new];
@@ -115,5 +120,6 @@ typedef NS_ENUM(NSInteger, MessageSender) {
     }
     return (NSArray *)ordered_messages;
 }
+
 
 @end

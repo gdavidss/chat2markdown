@@ -455,7 +455,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w5Y-HC-ift">
-                                <rect key="frame" x="0.0" y="100" width="414" height="796"/>
+                                <rect key="frame" x="5" y="100" width="414" height="796"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                         </subviews>
@@ -464,11 +464,23 @@
                         <constraints>
                             <constraint firstItem="w5Y-HC-ift" firstAttribute="top" secondItem="oEH-5m-g8G" secondAttribute="top" constant="12" id="0am-K1-9ST"/>
                             <constraint firstAttribute="bottom" secondItem="w5Y-HC-ift" secondAttribute="bottom" id="IfH-yc-j8k"/>
-                            <constraint firstItem="w5Y-HC-ift" firstAttribute="trailing" secondItem="oEH-5m-g8G" secondAttribute="trailing" id="xro-8O-Ski"/>
-                            <constraint firstItem="w5Y-HC-ift" firstAttribute="leading" secondItem="oEH-5m-g8G" secondAttribute="leading" id="ybn-dS-1f1"/>
+                            <constraint firstItem="w5Y-HC-ift" firstAttribute="trailing" secondItem="oEH-5m-g8G" secondAttribute="trailing" constant="5" id="xro-8O-Ski"/>
+                            <constraint firstItem="w5Y-HC-ift" firstAttribute="leading" secondItem="oEH-5m-g8G" secondAttribute="leading" constant="5" id="ybn-dS-1f1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="y2e-FS-TDH"/>
+                    <navigationItem key="navigationItem" id="y2e-FS-TDH">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="ZOw-Xo-6eg">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="MNy-WG-a5J">
+                                <rect key="frame" x="302" y="5" width="92" height="34.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Copy"/>
+                                <connections>
+                                    <action selector="didPressCopy:" destination="kcT-b7-kFK" eventType="touchUpInside" id="XwU-g4-uak"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="markdownView" destination="w5Y-HC-ift" id="HV0-od-p1g"/>
                     </connections>
