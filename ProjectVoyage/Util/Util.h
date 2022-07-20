@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image;
 + (NSString *) formatDateString:(NSDate *)stringDate;
++ (void) roundImage:(UIImageView *)imageView;
 
 @end
 

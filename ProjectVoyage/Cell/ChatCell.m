@@ -24,6 +24,8 @@
     _recipientLabel.text = chat.recipientName;
     _descriptionLabel.text = chat.chatDescription;
     _dateChat.text = [Util formatDateString:chat.createdAt];
+    
+    [Util roundImage:_recipientImage];
 }
 
 @end

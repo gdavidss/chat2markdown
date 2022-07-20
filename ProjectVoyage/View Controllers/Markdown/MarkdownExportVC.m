@@ -10,16 +10,8 @@
 @import Parse;
 @import MarkdownView;
 
-
 #define Myself ((BOOL)1)
 #define Someone  ((BOOL)0)
-
-
-/*
-typedef NS_ENUM(NSInteger, MessageSender) {
-    MessageSenderMyself,
-    MessageSenderSomeone
-};*/
 
 @interface MarkdownExportVC ()
 @property (nonatomic, strong) IBOutlet UIButton *mdCopyButton;
@@ -49,7 +41,6 @@ typedef NS_ENUM(NSInteger, MessageSender) {
     [self.markdownView addSubview:md];
     md.frame = self.markdownView.bounds;
     [md loadWithMarkdown:_convertedMarkdown enableImage:YES css:nil plugins:nil stylesheets:nil styled:YES];
-    
 }
 
 - (void) appendMetadata {

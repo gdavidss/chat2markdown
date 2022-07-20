@@ -7,6 +7,7 @@
 
 #import "ChatCreateViewController.h"
 #import "Chat.h"
+#import "Util.h"
 
 @interface ChatCreateViewController ()
 @property (nonatomic, weak) IBOutlet UITextField *recipientNameTextField;
@@ -20,9 +21,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [Util roundImage:_recipientImage];
 }
-
 
 - (IBAction)didPressCreate:(id)sender {
     // GD view controller not being dismissed

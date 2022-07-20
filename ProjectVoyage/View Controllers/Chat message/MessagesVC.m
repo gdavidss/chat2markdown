@@ -90,7 +90,7 @@
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f,self.view.frame.size.width, 10.0f)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = UIColorFromRGB(0xDFDBC4);//[UIColor clearColor];
+    self.tableView.backgroundColor = [UIColor clearColor]; //UIColorFromRGB(0xDFDBC4);//
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier: @"MessageCell"];
 }
 
