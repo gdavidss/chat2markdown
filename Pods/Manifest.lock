@@ -1,5 +1,6 @@
 PODS:
   - Bolts/Tasks (1.9.1)
+  - BulletinBoard (5.0.0)
   - MarkdownView (1.9.1)
   - Parse (1.19.3):
     - Parse/Core (= 1.19.3)
@@ -7,20 +8,23 @@ PODS:
     - Bolts/Tasks (= 1.9.1)
 
 DEPENDENCIES:
+  - BulletinBoard
   - MarkdownView
   - Parse
 
 SPEC REPOS:
   trunk:
     - Bolts
+    - BulletinBoard
     - MarkdownView
     - Parse
 
 SPEC CHECKSUMS:
   Bolts: 8c1e8aab2f603387b8b9924f57d1d64f43d3ffdc
+  BulletinBoard: dba77053c2a7b64953f63073f7534165af2edd21
   MarkdownView: 22249778219cc22901f1454e8355298dd0bda7f0
   Parse: 0abb63a0ff6fa34a3f64b81d595a294e2ece143a
 
-PODFILE CHECKSUM: 41cbee51de64095f2489ac16858d036158c8fd84
+PODFILE CHECKSUM: f2aab0b8ed70513d01c71b7dab5521bfa4fb35b7
 
 COCOAPODS: 1.11.3

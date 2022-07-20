@@ -220,8 +220,8 @@
                                     <outletCollection property="gestureRecognizers" destination="XWy-Os-CLG" appends="YES" id="zom-1V-zwJ"/>
                                 </connections>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recipient name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PaJ-kt-ON7">
-                                <rect key="frame" x="107" y="91" width="215" height="34"/>
+                            <textField opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Recipient name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PaJ-kt-ON7">
+                                <rect key="frame" x="107" y="91" width="239" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -236,28 +236,15 @@
                                     <action selector="trimEndSpaces:" destination="L0k-FJ-hGz" eventType="editingDidEnd" id="Oq9-r7-oe5"/>
                                 </connections>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="06/06/19" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G8i-3F-gaH">
-                                <rect key="frame" x="332" y="91" width="69" height="21"/>
-                                <gestureRecognizers/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="XWy-Os-CLG" appends="YES" id="2aP-dY-9Nk"/>
-                                </connections>
-                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ekX-Ia-btR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Uhl-Ju-pnA" firstAttribute="leading" secondItem="PaJ-kt-ON7" secondAttribute="leading" id="0ag-Mh-Ped"/>
-                            <constraint firstItem="G8i-3F-gaH" firstAttribute="top" secondItem="ghe-c0-hV2" secondAttribute="top" id="8Qu-hK-0yt"/>
                             <constraint firstItem="ghe-c0-hV2" firstAttribute="leading" secondItem="ekX-Ia-btR" secondAttribute="leading" constant="13" id="Pcq-Gi-noa"/>
                             <constraint firstItem="Uhl-Ju-pnA" firstAttribute="top" secondItem="PaJ-kt-ON7" secondAttribute="bottom" constant="13" id="StT-Hs-6cb"/>
-                            <constraint firstItem="ekX-Ia-btR" firstAttribute="trailing" secondItem="G8i-3F-gaH" secondAttribute="trailing" constant="13" id="VBX-XJ-Xdp"/>
                             <constraint firstItem="PaJ-kt-ON7" firstAttribute="leading" secondItem="ghe-c0-hV2" secondAttribute="trailing" constant="14" id="afq-DB-6nr"/>
                             <constraint firstItem="PaJ-kt-ON7" firstAttribute="top" secondItem="ekX-Ia-btR" secondAttribute="top" constant="35" id="fs1-iC-uaj"/>
-                            <constraint firstItem="G8i-3F-gaH" firstAttribute="leading" secondItem="PaJ-kt-ON7" secondAttribute="trailing" constant="10" id="kMU-pb-y4D"/>
                             <constraint firstItem="PaJ-kt-ON7" firstAttribute="top" secondItem="ghe-c0-hV2" secondAttribute="top" id="o0j-52-tEK"/>
                         </constraints>
                     </view>
@@ -276,7 +263,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="chatDescriptionTextField" destination="Uhl-Ju-pnA" id="IQr-GI-j8J"/>
-                        <outlet property="dateLabel" destination="G8i-3F-gaH" id="pqN-Sc-FaO"/>
                         <outlet property="recipientImage" destination="ghe-c0-hV2" id="bEN-ID-C3P"/>
                         <outlet property="recipientNameTextField" destination="PaJ-kt-ON7" id="B4H-PZ-Lqr"/>
                     </connections>
@@ -288,7 +274,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="5070" y="-593"/>
+            <point key="canvasLocation" x="5069.5652173913049" y="-593.30357142857144"/>
         </scene>
         <!--Chat list-->
         <scene sceneID="RZv-af-OSW">

@@ -33,7 +33,9 @@
     _messages = _chat.messages;
 
     [self appendMetadata];
-    [self appendChat];
+    if ([_messages count] != 0) {
+        [self appendChat];
+    }
 
     NSLog(@"%@", _convertedMarkdown);
     
@@ -44,15 +46,17 @@
 }
 
 - (void) appendMetadata {
-    NSString *chatId = [NSString stringWithFormat:@"%@: %@", @"**Chat ID**", _chat.chat_id];
-    NSString *recipientName = [NSString stringWithFormat:@"%@: %@", @"**Recipient Name**", _chat.chat_id];
-    NSString *chatDescription = [NSString stringWithFormat:@"%@: %@", @"**Chat description**", _chat.chat_id];
+    NSString *recipientName = [NSString stringWithFormat:@"%@: %@", @"**Recipient Name**", _chat.recipientName];
+    NSString *chatDescription = [NSString stringWithFormat:@"%@: %@", @"**Chat description**", _chat.chatDescription];
+    NSString *chatDate = [NSString stringWithFormat:@"%@: %@", @"**Chat date**", _chat.date];
+
 
     [self generateBlock:@"Metadata" withIdentation:0 isItBold:YES];
-    [self generateBlock:chatId withIdentation:1 isItBold:NO];
     [self generateBlock:recipientName withIdentation:1 isItBold:NO];
     [self generateBlock:chatDescription withIdentation:1 isItBold:NO];
-   
+    [self generateBlock:chatDate withIdentation:1 isItBold:NO];
+
+    
     return;
 }
 

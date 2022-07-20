@@ -11,7 +11,6 @@
 
 @implementation Chat
 
-@dynamic chat_id;
 @dynamic description;
 @dynamic date;
 @dynamic recipientName;
@@ -29,6 +28,7 @@
     Chat *newChat = [Chat new];
     newChat.recipientImage = [Util getPFFileFromImage:recipientImg];
     newChat.recipientName = recipientName;
+    newChat.date = [NSDate new];
     newChat.chatDescription = chatDescription;
     newChat.messages = [NSMutableArray new];
     

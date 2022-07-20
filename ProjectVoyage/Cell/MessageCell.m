@@ -68,12 +68,6 @@
     [self.contentView addSubview:_editButton];
     [self.contentView addSubview:_deleteButton];
     [self.contentView addSubview:_changeSenderButton];
-    
-    /*_bubbleImage.image = [[UIImage imageNamed:@"bubbleRecipient"
-                                     inBundle:[NSBundle bundleForClass:[self class]]
-                compatibleWithTraitCollection:nil]
-                          stretchableImageWithLeftCapWidth:15 topCapHeight:14];
-     */
 }
 
 - (void) prepareForReuse {
