@@ -411,7 +411,10 @@
                                 <rect key="frame" x="20" y="5" width="92" height="34.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Chats"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Chat list"/>
+                                <connections>
+                                    <action selector="didPressChatList:" destination="1r5-GT-bD9" eventType="touchUpInside" id="CJ3-lS-SHP"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="BZN-D8-wvJ">
@@ -690,6 +693,7 @@
         <!--Navigation Controller-->
         <scene sceneID="KgL-Vk-Du6">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uhd-Xf-MeO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="BHE-s0-uoX" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="7L5-Qg-Is5"/>
@@ -702,7 +706,6 @@
                         <segue destination="1r5-GT-bD9" kind="relationship" relationship="rootViewController" id="AkB-bt-LiW"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Uhd-Xf-MeO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4339" y="126"/>
         </scene>

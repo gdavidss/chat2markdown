@@ -29,6 +29,9 @@
     self.tableView.dataSource = self;
     
     [self initRefreshControl];
+}
+
+- (void) viewWillAppear:(BOOL)animated {
     [self refreshHomeFeed:self.refreshControl];
 }
 

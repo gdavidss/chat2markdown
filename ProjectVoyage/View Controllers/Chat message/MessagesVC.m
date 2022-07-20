@@ -80,7 +80,7 @@
     //[self.gateway dismiss];
 }
 
-#pragma mark -
+#pragma mark - Set Methods
 
 -(void)setInputbar {
     self.inputbar.placeholder = @"";
@@ -90,12 +90,21 @@
 }
 
 -(void) setTableView {
-    //self.tableArray = [[TableArray alloc] init];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f,self.view.frame.size.width, 10.0f)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tableView.backgroundColor = [UIColor clearColor]; //UIColorFromRGB(0xDFDBC4);//
+    self.tableView.backgroundColor = [UIColor clearColor]; // UIColorFromRGB(0xDFDBC4);
+    
+    /*
+    GD Implement drag and drop to move messages around
+    self.tableView.dragInteractionEnabled = true;
+    self.tableView.dragDelegate = self;
+    self.tableView.dropDelegate = self;
+     */
+    
+    // navigationItem.rightBarButtonItem = editButtonItem
+
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier: @"MessageCell"];
 }
 
@@ -116,8 +125,19 @@
 
 #pragma mark - Actions
 
+/*
 - (IBAction)userDidTapScreen:(id)sender {
     [_inputbar resignFirstResponder];
+}
+*/
+
+- (IBAction)didPressChatList:(id)sender {
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+- (IBAction)didPressMarkdown:(id)sender {
+    [self performSegueWithIdentifier:@"MarkdownSegue" sender:self.chat];
+    return;
 }
 
 #pragma mark - TableViewDataSource
@@ -146,6 +166,19 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     Message *message = self.chat.messages[indexPath.row];
     return message.height;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+// Delete message
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+       [self.chat.messages removeObjectAtIndex:indexPath.row];
+        NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+        [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -193,13 +226,12 @@
     }
 }
 
+
 #pragma mark - InputbarDelegate
 
 -(void)inputbarDidPressRightButton:(Inputbar *)inputbar {
     Message *message = [[Message alloc] init];
     message.text = [Util removeEndSpaceFrom:inputbar.text];
-    //inputbar.text;
-    message.chatId = _chat.objectId;
     
     //Store Message in memory
     [self.chat.messages addObject:message];
@@ -219,6 +251,20 @@
     
     //Send message to server
     //[self.gateway sendMessage:message];
+    
+    // Retrieve the object by id
+    /*
+    PFQuery *query = [PFQuery queryWithClassName:@"Chat"];
+    [query getObjectInBackgroundWithId:_chat.objectId
+                                 block:^(PFObject *chat, NSError *error) {
+        if (error) {
+            NSLog(@"%@", error);
+        }
+        NSLog(@"%@", chat);
+        chat[@"messages"] = (NSArray *)self.chat.messages;
+        [chat saveInBackground];
+    }];
+     */
 }
 
 -(void)inputbarDidChangeHeight:(CGFloat)new_height {
@@ -248,19 +294,6 @@
     [self performSegueWithIdentifier:@"EditMessageSegue" sender:message];
 }
 
-- (void)deleteMessage:(Message *)message {
-    // Update array
-    NSMutableArray<Message *> *chatMessages = self.chat.messages;
-    NSInteger messageIndex = [chatMessages indexOfObject:message];
-    [chatMessages removeObjectAtIndex:messageIndex];
-    
-    NSArray *indexPaths = [[NSArray alloc]
-                           initWithObjects:[NSIndexPath indexPathForRow:messageIndex inSection:0], nil];
-    
-    [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-    return;
-}
-
 - (void)changeSender:(Message *)message {
     // Gets the message cell based on the index of the array
     NSInteger messageIndex = [_chat.messages indexOfObject:message];
@@ -271,11 +304,6 @@
     // Change the data model only. (reload will cause the cell to reload)
     message.sender = message.sender == MessageSenderMyself? MessageSenderSomeone: MessageSenderMyself;
     [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
-    return;
-}
-
-- (IBAction)didPressMarkdown:(id)sender {
-    [self performSegueWithIdentifier:@"MarkdownSegue" sender:self.chat];
     return;
 }
 

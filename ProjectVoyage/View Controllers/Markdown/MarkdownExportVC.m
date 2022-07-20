@@ -14,8 +14,6 @@
 #define Someone  ((BOOL)0)
 
 @interface MarkdownExportVC ()
-@property (nonatomic, strong) IBOutlet UIButton *mdCopyButton;
-@property (nonatomic, strong) IBOutlet UITextView *textArea;
 @property (weak, nonatomic) NSMutableArray<Message *> *messages;
 @property (nonatomic, strong) NSMutableString *convertedMarkdown;
 @property (weak, nonatomic) IBOutlet UIView *markdownView;
@@ -36,8 +34,6 @@
     if ([_messages count] != 0) {
         [self appendChat];
     }
-
-    NSLog(@"%@", _convertedMarkdown);
     
     MarkdownView *md = [MarkdownView new];
     [self.markdownView addSubview:md];
@@ -47,17 +43,15 @@
 
 - (void) appendMetadata {
     NSString *recipientName = [NSString stringWithFormat:@"%@: %@", @"**Recipient Name**", _chat.recipientName];
-    NSString *chatDescription = [NSString stringWithFormat:@"%@: %@", @"**Chat description**", _chat.chatDescription];
-    NSString *chatDate = [NSString stringWithFormat:@"%@: %@", @"**Chat date**", _chat.date];
-
+    NSString *chatDescription = [NSString stringWithFormat:@"%@: %@", @"**Chat Description**", _chat.chatDescription];
+    NSString *chatDate = [NSString stringWithFormat:@"%@: %@", @"**Date**", _chat.date];
+    NSString *chatId = [NSString stringWithFormat:@"%@: %@", @"**Chat ID**", _chat.objectId];
 
     [self generateBlock:@"Metadata" withIdentation:0 isItBold:YES];
     [self generateBlock:recipientName withIdentation:1 isItBold:NO];
     [self generateBlock:chatDescription withIdentation:1 isItBold:NO];
     [self generateBlock:chatDate withIdentation:1 isItBold:NO];
-
-    
-    return;
+    [self generateBlock:chatId withIdentation:1 isItBold:NO];
 }
 
 - (void) appendChat {
@@ -87,7 +81,6 @@
         
         last_sender = current_sender;
     }
-    return;
 }
 
 - (void)generateBlock:(NSString *)text withIdentation:(NSInteger)num_identation isItBold:(bool)bold {

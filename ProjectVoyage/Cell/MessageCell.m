@@ -63,7 +63,7 @@
     [self.contentView addSubview:_bubbleImage];
     [self.contentView addSubview:_textView];
     
-    // Subviews for message container
+    // subviews for message container
     [self.contentView addSubview:_messageType];
     [self.contentView addSubview:_editButton];
     [self.contentView addSubview:_deleteButton];
