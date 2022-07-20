@@ -6,6 +6,7 @@
 //
 
 #import "ViewController.h"
+@import MarkdownView;
 
 @interface ViewController ()
 
@@ -16,7 +17,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    MarkdownView *md = [MarkdownView new];
+    [self.view addSubview:md];
+    md.frame = self.view.bounds;
+    [md loadWithMarkdown:@"# Hello World!" enableImage:YES css:nil plugins:nil stylesheets:nil styled:YES];
 }
+
+/*
+- (void)viewWillAppear:(BOOL)animated {
+    MarkdownView *md = [MarkdownView new];
+    
+    [self.view addSubview:md];
+    [md loadWithMarkdown:@"# Hello World!" enableImage:NO css:nil plugins:nil stylesheets:nil styled:NO];
+    
+}
+ */
+
 
 /*
 #pragma mark - Navigation

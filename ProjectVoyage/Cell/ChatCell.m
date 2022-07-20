@@ -22,7 +22,7 @@
 
     _recipientImage.image = [UIImage imageWithData:[chat.recipientImage getData]];
     _recipientLabel.text = chat.recipientName;
-    _descriptionLabel.text = chat.description;
+    _descriptionLabel.text = chat.chatDescription;
     _dateChat.text = [Util formatDateString:chat.createdAt];
 }
 

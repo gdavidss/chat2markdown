@@ -25,26 +25,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    // [self postChat];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
     [self initRefreshControl];
     [self refreshHomeFeed:self.refreshControl];
-}
-
-
-- (void) postChat {
-    [Chat postChat:@"teste description"
-          withRecipientName:@"rodolfo"
-          withRecipientImage:[UIImage imageNamed:@""]
-          withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            if (error != nil) {
-                NSLog(@"Error: %@", error.localizedDescription);
-            } else {
-                NSLog(@"Post made successfully");
-            }
-    }];
 }
 
 
@@ -83,10 +68,12 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    UINavigationController *navController = [segue destinationViewController];
-    MessagesVC *messagesVC = navController.viewControllers[0];
-    ChatCell *selectedChatCell = sender;
+    if ([segue.identifier  isEqual: @"MessagesSegue"] ) {
+        UINavigationController *navController = [segue destinationViewController];
+        MessagesVC *messagesVC = navController.viewControllers[0];
+        ChatCell *selectedChatCell = sender;
     messagesVC.chat = selectedChatCell.chat;
+    }
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

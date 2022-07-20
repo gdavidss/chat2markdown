@@ -16,7 +16,6 @@
     [dateFormatter setDateFormat:@"dd/MM/yyyy"];
 
     NSString *convertedString = [dateFormatter stringFromDate:date]; //here convert date in NSString
-    NSLog(@"Converted String : %@", convertedString);
     
     return convertedString;
 }
