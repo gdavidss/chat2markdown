@@ -10,10 +10,10 @@
 #import "Util.h"
 
 @interface ChatCreateViewController ()
-@property (nonatomic, weak) IBOutlet UITextField *recipientNameTextField;
-@property (nonatomic, weak) IBOutlet UITextField *chatDescriptionTextField;
-@property (nonatomic, weak) IBOutlet UILabel *dateLabel;
-@property (nonatomic, weak) IBOutlet UIImageView *recipientImage;
+@property (nonatomic, strong) IBOutlet UITextField *recipientNameTextField;
+@property (nonatomic, strong) IBOutlet UITextField *chatDescriptionTextField;
+@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
+@property (nonatomic, strong) IBOutlet UIImageView *recipientImage;
 
 @end
 

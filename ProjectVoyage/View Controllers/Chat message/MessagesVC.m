@@ -25,8 +25,8 @@
 @interface MessagesVC() <InputbarDelegate,
                                     UITableViewDataSource, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate>
 
-@property (weak, nonatomic) IBOutlet Inputbar *inputbar;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *markdownButton;
+@property (nonatomic, strong) IBOutlet Inputbar *inputbar;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *markdownButton;
 
 @end
 

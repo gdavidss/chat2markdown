@@ -14,9 +14,9 @@
 #define Someone  ((BOOL)0)
 
 @interface MarkdownExportVC ()
-@property (weak, nonatomic) NSMutableArray<Message *> *messages;
+@property (nonatomic, weak) NSMutableArray<Message *> *messages;
 @property (nonatomic, strong) NSMutableString *convertedMarkdown;
-@property (weak, nonatomic) IBOutlet UIView *markdownView;
+@property (nonatomic, strong) IBOutlet UIView *markdownView;
 
 @end
 

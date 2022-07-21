@@ -9,12 +9,12 @@
 @import Parse;
 
 @interface SignUpVC ()
-@property (weak, nonatomic) IBOutlet UIButton *submitBtn;
-@property (weak, nonatomic) IBOutlet UITextField *usernameField;
-@property (weak, nonatomic) IBOutlet UITextField *emailField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordField;
-@property (weak, nonatomic) IBOutlet UITextField *repeatPasswordField;
-@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (nonatomic, strong) IBOutlet UIButton *submitBtn;
+@property (nonatomic, strong) IBOutlet UITextField *usernameField;
+@property (nonatomic, strong) IBOutlet UITextField *emailField;
+@property (nonatomic, strong) IBOutlet UITextField *passwordField;
+@property (nonatomic, strong) IBOutlet UITextField *repeatPasswordField;
+@property (nonatomic, strong) IBOutlet UITextField *nameField;
 
 @end
 
