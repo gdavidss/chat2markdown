@@ -51,7 +51,8 @@
     [query orderByDescending:@"createdAt"];
     NSArray *queryKeys = [NSArray arrayWithObjects:@"author", @"recipientName", @"chatDescription", nil];
     [query includeKeys:queryKeys];
-
+    [query whereKey:@"author" equalTo:[PFUser currentUser]];
+    
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *chats, NSError *error) {
         if (chats != nil) {

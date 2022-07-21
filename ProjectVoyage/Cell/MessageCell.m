@@ -66,12 +66,6 @@
 - (void) setMessage:(Message *)message {
     _message = message;
     [self buildCell];
-    
-    /*
-    if (message.height < self.minHeight) {
-        message.height = self.minHeight;
-    }
-     */
 }
 
 - (void) buildCell {
@@ -125,6 +119,7 @@
     CGFloat bubble_y = 0;
     CGFloat bubble_width;
     CGFloat bubble_height = _textView.frame.size.height + 8;
+    _message.height = bubble_height;
     
     if (_message.sender == MessageSenderMyself) {
         // Set bubble image
@@ -142,12 +137,9 @@
         
         bubble_width = _textView.frame.origin.x + _textView.frame.size.width + marginLeft;
     }
+    
     _bubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height);
     _bubbleImage.autoresizingMask = _textView.autoresizingMask;
-    
-    //if (bubble_height > _message.height) {
-    _message.height = bubble_height;
-    //}
 }
 
 #pragma mark - UIImage Helper
