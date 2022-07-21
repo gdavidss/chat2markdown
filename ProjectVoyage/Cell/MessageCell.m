@@ -12,9 +12,7 @@
 @interface MessageCell ()
 // Container
 @property (nonatomic, strong) UILabel *messageType;
-@property (nonatomic, strong) UIButton *deleteButton;
 @property (nonatomic, strong) UIButton *editButton;
-@property (nonatomic, strong) UIButton *changeSenderButton;
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UIImageView *bubbleImage;
 @end
@@ -56,8 +54,6 @@
     _bubbleImage = [UIImageView new];
     _messageType = [UILabel new];
     _editButton = [UIButton new];
-    _changeSenderButton = [UIButton new];
-    _deleteButton = [UIButton new];
     
     // subviews for message bubble
     [self.contentView addSubview:_bubbleImage];
@@ -66,8 +62,6 @@
     // subviews for message container
     [self.contentView addSubview:_messageType];
     [self.contentView addSubview:_editButton];
-    [self.contentView addSubview:_deleteButton];
-    [self.contentView addSubview:_changeSenderButton];
 }
 
 - (void) prepareForReuse {
@@ -92,8 +86,6 @@
     [self setupBubbleView];
     
     [self setContainerButton:_editButton withTitle:@"Edit" withOrder:1 withMethod:@selector(didTapEdit)];
-    [self setContainerButton:_changeSenderButton withTitle:@"Change sender" withOrder:2 withMethod:@selector(didTapChangeSender)];
-    [self setContainerButton:_deleteButton withTitle:@"Delete" withOrder:3 withMethod:@selector(didTapDelete)];
     [self setNeedsLayout];
 }
 
@@ -232,16 +224,6 @@
 
 - (void)didTapEdit {
     [self.delegate editMessage:self.message];
-    return;
-}
-
-- (void)didTapDelete {
-    [self.delegate deleteMessage:self.message];
-    return;
-}
-
-- (void)didTapChangeSender {
-    [self.delegate changeSender:self.message];
     return;
 }
 

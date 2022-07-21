@@ -23,7 +23,7 @@
 #import "DAKeyboardControl.h"
 
 @interface MessagesVC() <InputbarDelegate,
-                                    UITableViewDataSource, UITableViewDelegate, ContainerProtocol>
+                                    UITableViewDataSource, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate>
 
 @property (weak, nonatomic) IBOutlet Inputbar *inputbar;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *markdownButton;
@@ -96,12 +96,12 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor]; // UIColorFromRGB(0xDFDBC4);
     
-    /*
-    GD Implement drag and drop to move messages around
+    
+    // Drag and drop methods to move messages around
     self.tableView.dragInteractionEnabled = true;
     self.tableView.dragDelegate = self;
     self.tableView.dropDelegate = self;
-     */
+     
     
     // navigationItem.rightBarButtonItem = editButtonItem
 
@@ -172,13 +172,32 @@
     return YES;
 }
 
-// Delete message
+// Swipe left to delete message
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
        [self.chat.messages removeObjectAtIndex:indexPath.row];
         NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
         [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     }
+}
+
+// Tap on message to change sender
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self changeSender:self.chat.messages[indexPath.row]];
+}
+
+- (NSArray<UIDragItem *> *)tableView:(UITableView *)tableView itemsForBeginningDragSession:(id<UIDragSession>)session atIndexPath:(NSIndexPath *)indexPath {
+    Message *messageToMove = self.chat.messages[indexPath.row];
+    UIDragItem *dragItem = [[UIDragItem alloc] initWithItemProvider:[[NSItemProvider alloc] init]];
+    dragItem.localObject = messageToMove;
+    return @[dragItem];
+}
+
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    Message *messageToMove = self.chat.messages[sourceIndexPath.row];
+    [self.chat.messages removeObjectAtIndex:sourceIndexPath.row];
+    [self.chat.messages insertObject:messageToMove atIndex:destinationIndexPath.row];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -252,7 +271,6 @@
     //Send message to server
     //[self.gateway sendMessage:message];
     
-    // Retrieve the object by id
     /*
     PFQuery *query = [PFQuery queryWithClassName:@"Chat"];
     [query getObjectInBackgroundWithId:_chat.objectId
