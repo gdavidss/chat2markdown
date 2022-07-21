@@ -30,14 +30,12 @@
     _emailField.text = currentUser[@"email"];
 }
 
-
 - (IBAction)logout:(id)sender {
     // PFUser.current() will now be nil
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         [self returnToLoginVC];
     }];
 }
-
 
 - (IBAction)didPressDeleteAccount:(id)sender {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Are you sure?" message:@"This action cannot be undone." preferredStyle:UIAlertControllerStyleAlert];
@@ -51,7 +49,6 @@
     [alert addAction:proceed];
     [self presentViewController:alert animated:YES completion:nil];
 }
-
 
 - (void) deleteAccount {
     [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -84,7 +81,6 @@
     }
 }
 
-
 - (void) throwUpdateErrorAlert {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wront when trying to update your account. Try it later." preferredStyle:UIAlertControllerStyleAlert];
     
@@ -94,7 +90,6 @@
     [alert addAction:acknowledge];
     [self presentViewController:alert animated:YES completion:nil];
 }
-
 
 - (void) throwSucessAlert {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sucess" message:@"Your account was updated sucessfully" preferredStyle:UIAlertControllerStyleAlert];
@@ -111,11 +106,10 @@
 
 - (void) returnToLoginVC {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"LoginVC"];
+    LoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
     SceneDelegate *mySceneDelegate = (SceneDelegate * ) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
     mySceneDelegate.window.rootViewController = loginVC;
 }
-
 
 - (BOOL) arePasswordsDifferent {
     if (_passwordField.text != _repeatPasswordField.text) {
@@ -130,7 +124,6 @@
     }
     return false;
 }
-
 
 - (BOOL) areThereEmptyFields {
     if ([_emailField.text  isEqual: @""] || [_usernameField.text isEqual: @""] || [_nameField.text isEqual: @""]) {

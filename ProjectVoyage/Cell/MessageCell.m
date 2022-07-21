@@ -67,9 +67,11 @@
     _message = message;
     [self buildCell];
     
+    /*
     if (message.height < self.minHeight) {
         message.height = self.minHeight;
     }
+     */
 }
 
 - (void) buildCell {
@@ -143,9 +145,9 @@
     _bubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height);
     _bubbleImage.autoresizingMask = _textView.autoresizingMask;
     
-    if (bubble_height > _message.height) {
-        _message.height = bubble_height;
-    }
+    //if (bubble_height > _message.height) {
+    _message.height = bubble_height;
+    //}
 }
 
 #pragma mark - UIImage Helper

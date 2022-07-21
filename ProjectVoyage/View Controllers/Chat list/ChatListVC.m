@@ -9,6 +9,7 @@
 #import "Chat.h"
 #import "ChatCell.h"
 #import "MessagesVC.h"
+#import "LoginVC.h"
 
 @interface ChatListVC () <UITableViewDataSource, UITableViewDelegate>
 
@@ -22,6 +23,8 @@
 
 @implementation ChatListVC
 
+#pragma mark - Initialization
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -34,7 +37,6 @@
 - (void) viewWillAppear:(BOOL)animated {
     [self refreshHomeFeed:self.refreshControl];
 }
-
 
 - (void) initRefreshControl {
     self.refreshControl = [[UIRefreshControl alloc] init];

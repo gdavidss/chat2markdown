@@ -165,6 +165,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     Message *message = self.chat.messages[indexPath.row];
+    NSLog(@"%f", message.height);
     return message.height;
 }
 
