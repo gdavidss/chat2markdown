@@ -10,9 +10,7 @@
 #import "Message.h"
 
 @interface MessageCell ()
-// Container
-@property (nonatomic, strong) UILabel *messageType;
-@property (nonatomic, strong) UIButton *editButton;
+
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UIImageView *bubbleImage;
 @end
@@ -52,16 +50,10 @@
     
     _textView = [UITextView new];
     _bubbleImage = [UIImageView new];
-    _messageType = [UILabel new];
-    _editButton = [UIButton new];
     
     // subviews for message bubble
     [self.contentView addSubview:_bubbleImage];
     [self.contentView addSubview:_textView];
-    
-    // subviews for message container
-    [self.contentView addSubview:_messageType];
-    [self.contentView addSubview:_editButton];
 }
 
 - (void) prepareForReuse {
@@ -82,65 +74,9 @@
 
 - (void) buildCell {
     [self setupTextView];
-    [self setupMessage];
     [self setupBubbleView];
     
-    [self setContainerButton:_editButton withTitle:@"Edit" withOrder:1 withMethod:@selector(didTapEdit)];
     [self setNeedsLayout];
-}
-
-#pragma mark - Container
-
-- (void) setupMessage {
-    UIFont *customFont = [UIFont fontWithName:@"Helvetica" size:15.0];
-    NSString *text = @"Written message";
-    
-    _messageType.font = customFont;
-    _messageType.numberOfLines = 1;
-    _messageType.baselineAdjustment = UIBaselineAdjustmentAlignBaselines;
-    _messageType.adjustsFontSizeToFitWidth = YES;
-    _messageType.minimumScaleFactor = 10.0f/12.0f;
-    _messageType.clipsToBounds = YES;
-    _messageType.backgroundColor = [UIColor clearColor];
-    _messageType.textColor = [UIColor grayColor];
-    _messageType.textAlignment = NSTextAlignmentLeft;
-    _messageType.text = text;
-    
-    // Position
-    CGFloat messageType_x;
-    CGFloat messageType_y = 0;
-    
-    // Get height and width of the UILabel based on the size of its text
-    CGSize textSize = [text sizeWithAttributes:@{NSFontAttributeName:_textView.font}];
-    
-    if (_message.sender == MessageSenderMyself) {
-        messageType_x = 10;
-    } else {
-        messageType_x = self.contentView.frame.size.width - textSize.width/2;
-    }
-    
-    _messageType.frame = CGRectMake(messageType_x, messageType_y, textSize.width, textSize.height);
-}
-
-- (void) setContainerButton:(UIButton *)button
-                  withTitle:(NSString *)title
-                  withOrder:(int)order
-                 withMethod:(nonnull SEL)method {
-    
-    [button addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
-    
-    button.titleLabel.font = [UIFont systemFontOfSize:15.0];
-    [button setTitle:title forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor linkColor] forState:UIControlStateNormal];
-    
-    // Margin from the UI label above
-    CGFloat margin_y = 25 * order;
-    
-    CGFloat button_y = _messageType.frame.origin.y + margin_y;
-    CGFloat button_x = _messageType.frame.origin.x;
-    
-    // GD Make the width dynamic depending on the label width of each button
-    button.frame = CGRectMake(button_x, button_y, 120, 18);
 }
 
 #pragma mark - TextView
@@ -218,13 +154,6 @@
     return [UIImage imageNamed:imageName
                       inBundle:[NSBundle bundleForClass:[self class]]
  compatibleWithTraitCollection:nil];
-}
-
-#pragma mark - Container methods
-
-- (void)didTapEdit {
-    [self.delegate editMessage:self.message];
-    return;
 }
 
 @end

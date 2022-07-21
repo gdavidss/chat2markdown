@@ -181,6 +181,18 @@
     }
 }
 
+// Swipe right to edit message
+- (UISwipeActionsConfiguration *)tableView:(UITableView *)tableView leadingSwipeActionsConfigurationForRowAtIndexPath:(NSIndexPath *)indexPath {
+    Message *messageToEdit = self.chat.messages[indexPath.row];
+    UIContextualAction *editAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"Edit" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
+        [self editMessage:messageToEdit];
+
+           completionHandler(YES);
+       }];
+    UISwipeActionsConfiguration *swipe = [UISwipeActionsConfiguration configurationWithActions:@[editAction]];
+    return swipe;
+}
+
 // Tap on message to change sender
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self changeSender:self.chat.messages[indexPath.row]];
