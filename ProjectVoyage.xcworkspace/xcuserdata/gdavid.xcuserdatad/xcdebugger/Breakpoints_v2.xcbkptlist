@@ -34,8 +34,8 @@
             filePath = "ProjectVoyage/View Controllers/Chat message/MessagesVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "303"
-            endingLineNumber = "303"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
             landmarkName = "-inputbarDidPressChangeSenderButton:"
             landmarkType = "7">
          </BreakpointContent>
@@ -114,10 +114,10 @@
             filePath = "ProjectVoyage/View Controllers/Chat message/MessagesVC.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "302"
-            endingLineNumber = "302"
-            landmarkName = "-inputbarDidPressChangeSenderButton:"
-            landmarkType = "7">
+            startingLineNumber = "300"
+            endingLineNumber = "300"
+            landmarkName = "MessagesVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

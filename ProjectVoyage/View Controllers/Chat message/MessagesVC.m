@@ -46,29 +46,27 @@
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+        
+    self.view.keyboardTriggerOffset = _inputbar.frame.size.height;
     
-    __weak Inputbar *inputbar = _inputbar;
-    __weak UITableView *tableView = _tableView;
-    __weak MessagesVC *controller = self;
-    
-    self.view.keyboardTriggerOffset = inputbar.frame.size.height;
+    __weak __typeof(self) weakSelf = self;
     [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView, BOOL opening, BOOL closing) {
-        /*
+         /*
          Try not to call "self" inside this block (retain cycle).
          But if you do, make sure to remove DAKeyboardControl
          when you are done with the view controller by calling:
          [self.view removeKeyboardControl];
          */
-        
-        CGRect toolBarFrame = inputbar.frame;
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) { return; }
+        CGRect toolBarFrame = strongSelf->_inputbar.frame;
         toolBarFrame.origin.y = keyboardFrameInView.origin.y - toolBarFrame.size.height;
-        inputbar.frame = toolBarFrame;
         
-        CGRect tableViewFrame = tableView.frame;
-        tableViewFrame.size.height = toolBarFrame.origin.y - 64;
-        tableView.frame = tableViewFrame;
+        CGRect tableViewFrame = strongSelf->_tableView.frame;
+        tableViewFrame.size.height = strongSelf->_inputbar.frame.origin.y - 64;
+        strongSelf->_tableView.frame = tableViewFrame;
         
-        [controller tableViewScrollToBottomAnimated:NO];
+        [strongSelf tableViewScrollToBottomAnimated:NO];
     }];
 }
 
