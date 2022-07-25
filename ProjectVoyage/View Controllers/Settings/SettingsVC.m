@@ -91,7 +91,7 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void) throwSucessAlert {
+- (void) displaySucessAlert {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sucess" message:@"Your account was updated sucessfully" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
