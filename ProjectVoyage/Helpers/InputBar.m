@@ -12,6 +12,7 @@
 @property (nonatomic, strong) HPGrowingTextView *textView;
 @property (nonatomic, strong) UIButton *sendButton;
 @property (nonatomic, strong) UIButton *changeSenderButton;
+@property (nonatomic, strong) UIButton *recordButton;
 
 @end
 
@@ -45,8 +46,9 @@
 
 - (void) addContent {
     [self addTextView];
-    [self addSendButton];
-    [self addChangeSenderButton];
+    [self addButton:self.sendButton withLabel:@"Send" withMethod:@selector(didPressSendButton:) withOrder:1];
+    [self addButton:self.recordButton withLabel:@"Record" withMethod:@selector(didPressRecordButton:) withOrder:2];
+    [self addButton:self.sendButton withLabel:@"Change" withMethod:@selector(didPressChangeSenderButton:) withOrder:3];
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 }
@@ -55,7 +57,7 @@
     CGSize size = self.frame.size;
     _textView = [[HPGrowingTextView alloc] initWithFrame:CGRectMake(10,
                                                                     5,
-                                                                    size.width - 10 - 2 * BUTTON_SIZE,
+                                                                    size.width - 10 - 3 * BUTTON_SIZE,
                                                                     size.height)];
     _textView.isScrollable = NO;
     _textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
@@ -87,38 +89,23 @@
     [self addSubview:_textView];
 }
 
--(void)addSendButton {
-    CGSize size = self.frame.size;
-    self.sendButton = [[UIButton alloc] init];
-    self.sendButton.frame = CGRectMake(size.width - BUTTON_SIZE, 0, BUTTON_SIZE, size.height);
-    self.sendButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
-    [self.sendButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [self.sendButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateSelected];
-    [self.sendButton setTitle:@"Done" forState:UIControlStateNormal];
-    self.sendButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
-    
-    [self.sendButton addTarget:self action:@selector(didPressSendButton:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self addSubview:self.sendButton];
-    
-    [self.sendButton setSelected:YES];
-}
+#pragma mark - Buttons
 
-- (void)addChangeSenderButton {
+- (void)addButton:(UIButton *)button withLabel:(NSString *)label withMethod:(nonnull SEL)method withOrder:(int)order {
     CGSize size = self.frame.size;
-    self.changeSenderButton = [[UIButton alloc] init];
-    self.changeSenderButton.frame = CGRectMake(size.width - 2 * BUTTON_SIZE, 0, BUTTON_SIZE, size.height);
-    self.changeSenderButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
-    [self.changeSenderButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [self.changeSenderButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateSelected];
-    [self.changeSenderButton setTitle:@"Change" forState:UIControlStateNormal];
-    self.changeSenderButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
+    button = [[UIButton alloc] init];
+    button.frame = CGRectMake(size.width - order * BUTTON_SIZE, 0, BUTTON_SIZE, size.height);
+    button.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
+    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateSelected];
+    [button setTitle:label forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
     
-    [self.changeSenderButton addTarget:self action:@selector(didPressChangeSenderButton:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
     
-    [self addSubview:self.changeSenderButton];
+    [self addSubview:button];
     
-    [self.changeSenderButton setSelected:NO];
+    [button setSelected:NO];
 }
 
 -(void)resignFirstResponder {
@@ -146,8 +133,6 @@
     
     [self.delegate inputbarDidPressChangeSenderButton:self];
 }
-
-
 
 -(void)didPressLeftButton:(UIButton *)sender
 {
