@@ -24,11 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface Inputbar : UIToolbar
 
-@property (nonatomic, assign) id<InputbarDelegate>delegate;
+@property (nonatomic, assign) id<InputbarDelegate> delegate;
 @property (nonatomic) NSString *placeholder;
 @property (nonatomic) UIImage *leftButtonImage;
-@property (nonatomic) NSString *rightButtonText;
-@property (nonatomic) UIColor  *rightButtonTextColor;
+@property (nonatomic) NSString *sendButtonText;
+@property (nonatomic) UIColor  *sendButtonTextColor;
 
 -(void)resignFirstResponder;
 -(NSString *)text;
@@ -37,12 +37,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol InputbarDelegate <NSObject>
 
--(void)inputbarDidPressRightButton:(Inputbar *)inputbar;
--(void)inputbarDidPressLeftButton:(Inputbar *)inputbar;
+- (void) inputbarDidPressSendButton:(Inputbar *)inputbar;
+- (void) inputbarDidPressChangeSenderButton:(Inputbar *)inputbar;
+- (void) inputbarDidPressLeftButton:(Inputbar *)inputbar;
 
 @optional
--(void)inputbarDidChangeHeight:(CGFloat)new_height;
--(void)inputbarDidBecomeFirstResponder:(Inputbar *)inputbar;
+- (void) inputbarDidChangeHeight:(CGFloat)new_height;
+- (void) inputbarDidBecomeFirstResponder:(Inputbar *)inputbar;
 
 @end
 

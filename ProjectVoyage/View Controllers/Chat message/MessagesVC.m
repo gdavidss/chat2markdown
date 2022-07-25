@@ -30,6 +30,7 @@
 
 @end
 
+// I'm testing a brown color here
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @implementation MessagesVC
@@ -85,8 +86,8 @@
 -(void)setInputbar {
     self.inputbar.placeholder = @"";
     self.inputbar.delegate = self;
-    self.inputbar.rightButtonText = @"Send";
-    self.inputbar.rightButtonTextColor = [UIColor colorWithRed:0 green:124/255.0 blue:1 alpha:1];
+    self.inputbar.sendButtonText = @"Send";
+    self.inputbar.sendButtonTextColor = [UIColor colorWithRed:0 green:124/255.0 blue:1 alpha:1];
 }
 
 -(void) setTableView {
@@ -260,9 +261,10 @@
 
 #pragma mark - InputbarDelegate
 
--(void)inputbarDidPressRightButton:(Inputbar *)inputbar {
+-(void)inputbarDidPressSendButton:(Inputbar *)inputbar {
     Message *message = [[Message alloc] init];
     message.text = [Util removeEndSpaceFrom:inputbar.text];
+    message.sender = _chat.current_sender;
     
     //Store Message in memory
     [self.chat.messages addObject:message];
@@ -276,7 +278,7 @@
     
     [self.tableView endUpdates];
     
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.chat.messages.count-1 inSection:0]
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.chat.messages.count - 1 inSection:0]
                     atScrollPosition:UITableViewScrollPositionBottom
                     animated:YES];
     
@@ -294,7 +296,12 @@
         chat[@"messages"] = (NSArray *)self.chat.messages;
         [chat saveInBackground];
     }];
-     */
+    */
+}
+
+-(void)inputbarDidPressChangeSenderButton:(Inputbar *)inputbar {
+    NSInteger current_sender = self.chat.current_sender;
+    self.chat.current_sender = (current_sender == MessageSenderMyself)? MessageSenderSomeone: MessageSenderMyself;
 }
 
 -(void)inputbarDidChangeHeight:(CGFloat)new_height {

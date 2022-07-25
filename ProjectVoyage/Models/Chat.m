@@ -11,13 +11,13 @@
 
 @implementation Chat
 
-@dynamic description;
+@dynamic chatDescription;
 @dynamic date;
 @dynamic recipientName;
 @dynamic recipientImage;
 @dynamic author;
 @dynamic messages;
-
+@dynamic current_sender;
 
 + (nonnull NSString *)parseClassName {
     return @"Chat";
@@ -31,6 +31,7 @@
     newChat.date = [NSDate new];
     newChat.chatDescription = chatDescription;
     newChat.messages = [NSMutableArray new];
+    newChat.current_sender = ChatSenderMyself;
     
     PFUser *currentUser = [PFUser currentUser];
     newChat.author = currentUser;
