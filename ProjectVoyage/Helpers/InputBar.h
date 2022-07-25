@@ -40,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void) inputbarDidPressSendButton:(Inputbar *)inputbar;
 - (void) inputbarDidPressChangeSenderButton:(Inputbar *)inputbar;
 - (void) inputbarDidPressLeftButton:(Inputbar *)inputbar;
+- (void) inputbarDidPressRecordButton:(Inputbar *)inputbar;
 
 @optional
 - (void) inputbarDidChangeHeight:(CGFloat)new_height;

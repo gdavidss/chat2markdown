@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSArray *chats;
+@property (nonatomic, strong) NSArray<PFUser *> *users;
 
 @end
 
@@ -36,6 +37,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [self refreshHomeFeed:self.refreshControl];
+    [self queryUsers];
 }
 
 - (void) initRefreshControl {
@@ -44,14 +46,31 @@
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
+- (void) queryUsers {
+    PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+    
+    NSArray *queryKeys = [NSArray arrayWithObjects:@"name", @"username", nil];
+    [query includeKeys:queryKeys];
+    
+    [query whereKey:@"objectId" notEqualTo:[PFUser currentUser].objectId];
+    
+    // fetch data asynchronously
+    __weak __typeof(self) weakSelf = self;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *found_users, NSError *error) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        strongSelf->_users = found_users;
+    }];
+}
+
 - (void) refreshHomeFeed:(UIRefreshControl *)refreshControl {
     [refreshControl beginRefreshing];
-    
     PFQuery *query = [PFQuery queryWithClassName:@"Chat"];
     [query orderByDescending:@"createdAt"];
     NSArray *queryKeys = [NSArray arrayWithObjects:@"author", @"recipientName", @"chatDescription", nil];
     [query includeKeys:queryKeys];
     [query whereKey:@"author" equalTo:[PFUser currentUser]];
+    
     
     // fetch data asynchronously
     __weak __typeof(self) weakSelf = self;
@@ -67,6 +86,30 @@
             NSLog(@"%@", error.localizedDescription);
         }
     }];
+    
+    /*
+    PFQuery *query = [PFQuery queryWithClassName:@"Chat"];
+    [query orderByDescending:@"createdAt"];
+    NSArray *queryKeys = [NSArray arrayWithObjects:@"author", @"recipientName", @"chatDescription", nil];
+    [query includeKeys:queryKeys];
+    [query whereKey:@"author" equalTo:[PFUser currentUser]];
+    
+    
+    // fetch data asynchronously
+    __weak __typeof(self) weakSelf = self;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *chats, NSError *error) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) { return; }
+        [refreshControl endRefreshing];
+        if (chats != nil) {
+            strongSelf->_chats = chats;
+            [strongSelf->_tableView reloadData];
+        } else {
+            // GD Show alert error
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+     */
 }
 
 #pragma mark - Navigation

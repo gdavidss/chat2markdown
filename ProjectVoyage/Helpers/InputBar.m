@@ -12,7 +12,6 @@
 @property (nonatomic, strong) HPGrowingTextView *textView;
 @property (nonatomic, strong) UIButton *sendButton;
 @property (nonatomic, strong) UIButton *changeSenderButton;
-@property (nonatomic, strong) UIButton *recordButton;
 
 @end
 
@@ -47,8 +46,7 @@
 - (void) addContent {
     [self addTextView];
     [self addButton:self.sendButton withLabel:@"Send" withMethod:@selector(didPressSendButton:) withOrder:1];
-    [self addButton:self.recordButton withLabel:@"Record" withMethod:@selector(didPressRecordButton:) withOrder:2];
-    [self addButton:self.sendButton withLabel:@"Change" withMethod:@selector(didPressChangeSenderButton:) withOrder:3];
+    [self addButton:self.sendButton withLabel:@"Change" withMethod:@selector(didPressChangeSenderButton:) withOrder:2];
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 }
@@ -119,22 +117,20 @@
 
 #pragma mark - Delegate
 
--(void)didPressSendButton:(UIButton *)sender
-{
+- (void)didPressSendButton:(UIButton *)sender {
     if (self.sendButton.isSelected) return;
     
     [self.delegate inputbarDidPressSendButton:self];
     self.textView.text = @"";
 }
 
--(void)didPressChangeSenderButton:(UIButton *)sender
-{
+- (void)didPressChangeSenderButton:(UIButton *)sender {
     if (self.changeSenderButton.isSelected) return;
     
     [self.delegate inputbarDidPressChangeSenderButton:self];
 }
 
--(void)didPressLeftButton:(UIButton *)sender
+- (void)didPressLeftButton:(UIButton *)sender
 {
     [self.delegate inputbarDidPressLeftButton:self];
 }

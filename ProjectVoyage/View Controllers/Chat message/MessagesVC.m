@@ -6,6 +6,8 @@
 //  Adapted from Rafael Castro
 //
 
+// Libraries
+#import <AVFoundation/AVFoundation.h>
 
 // Cells
 #import "MessageCell.h"
@@ -23,20 +25,19 @@
 #import "DAKeyboardControl.h"
 
 @interface MessagesVC() <InputbarDelegate,
-                                    UITableViewDataSource, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate>
+                                    UITableViewDataSource, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
 @property (nonatomic, strong) IBOutlet Inputbar *inputbar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *markdownButton;
 
 @end
 
-// I'm testing a brown color here
+// GD I'm testing a brown color here
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 @implementation MessagesVC
 
--(void)viewDidLoad
-{
+-(void)viewDidLoad {
     [super viewDidLoad];
     [self setInputbar];
     [self setTableView];
@@ -123,12 +124,6 @@
 }
 
 #pragma mark - Actions
-
-/*
-- (IBAction)userDidTapScreen:(id)sender {
-    [_inputbar resignFirstResponder];
-}
-*/
 
 - (IBAction)didPressChatList:(id)sender {
     [self dismissViewControllerAnimated:NO completion:nil];
@@ -297,12 +292,12 @@
     */
 }
 
--(void)inputbarDidPressChangeSenderButton:(Inputbar *)inputbar {
+- (void)inputbarDidPressChangeSenderButton:(Inputbar *)inputbar {
     NSInteger current_sender = self.chat.current_sender;
     self.chat.current_sender = (current_sender == MessageSenderMyself)? MessageSenderSomeone: MessageSenderMyself;
 }
 
--(void)inputbarDidChangeHeight:(CGFloat)new_height {
+- (void)inputbarDidChangeHeight:(CGFloat)new_height {
     //Update DAKeyboardControl
     self.view.keyboardTriggerOffset = new_height;
 }
