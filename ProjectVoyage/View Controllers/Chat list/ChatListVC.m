@@ -54,16 +54,19 @@
     [query whereKey:@"author" equalTo:[PFUser currentUser]];
     
     // fetch data asynchronously
+    __weak __typeof(self) weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *chats, NSError *error) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) { return; }
+        [refreshControl endRefreshing];
         if (chats != nil) {
-            self.chats = chats;
-            [self.tableView reloadData];
+            strongSelf->_chats = chats;
+            [strongSelf->_tableView reloadData];
         } else {
             // GD Show alert error
             NSLog(@"%@", error.localizedDescription);
         }
     }];
-    [refreshControl endRefreshing];
 }
 
 #pragma mark - Navigation
