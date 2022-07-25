@@ -40,10 +40,8 @@
           // call sign up function on the object
           [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
               if (error != nil) {
-                  NSLog(@"Error: %@", error.localizedDescription);
+                  [self alertFailedSignUp];
               } else {
-                  NSLog(@"User registered successfully");
-                  
                   // segue to home feed
                   [self performSegueWithIdentifier:@"submitSegue" sender:nil];
               }
@@ -51,6 +49,15 @@
     }
 }
 
+- (void) alertFailedSignUp {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sign-up failed" message:@"Something went wrong when trying to create your account." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:acknowledge];
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 - (BOOL) arePasswordsDifferent {
     if (_passwordField.text != _repeatPasswordField.text) {
@@ -61,9 +68,9 @@
         
         [alert addAction:acknowledge];
         [self presentViewController:alert animated:YES completion:nil];
-        return true;
+        return YES;
     }
-    return false;
+    return NO;
 }
 
 
@@ -77,9 +84,9 @@
         
         [alert addAction:acknowledge];
         [self presentViewController:alert animated:YES completion:nil];
-        return true;
+        return YES;
     }
-    return false;
+    return NO;
 }
 
 
@@ -95,9 +102,9 @@
         
         [alert addAction:acknowledge];
         [self presentViewController:alert animated:YES completion:nil];
-        return true;
+        return YES;
     }
-    return false;
+    return NO;
  }
 
 

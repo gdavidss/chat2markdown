@@ -25,8 +25,8 @@
 }
 
 - (IBAction)didPressCreate:(id)sender {
-    // GD view controller not being dismissed
-    [self dismissViewControllerAnimated:TRUE completion:^{
+    // GD Chat should render automatically
+    [self dismissViewControllerAnimated:YES completion:^{
         [self postChat];
     }];
 }

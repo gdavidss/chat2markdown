@@ -53,13 +53,23 @@
 - (void) deleteAccount {
     [[PFUser currentUser] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
-            NSLog(@"Something went wrong when trying to delete your account.");
+            [self alertFailedDeletion];
         } else {
             // Cleans current session and return to login view controller
             [PFUser logOut];
             [self returnToLoginVC];
         }
     }];
+}
+
+- (void) alertFailedDeletion {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Account deletion failed" message:@"Something went wrong when trying to delete your account." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:acknowledge];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 - (IBAction)didPressUpdate:(id)sender {
@@ -73,15 +83,15 @@
         }
         [currentUser saveInBackgroundWithBlock: ^(BOOL succeeded, NSError * _Nullable error) {
             if (error) {
-                [self throwUpdateErrorAlert];
+                [self displayUpdateErrorAlert];
             } else {
-                [self throwSucessAlert];
+                [self displaySuccessAlert];
             }
         }];
     }
 }
 
-- (void) throwUpdateErrorAlert {
+- (void) displayUpdateErrorAlert {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error" message:@"Something went wront when trying to update your account. Try it later." preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
@@ -91,7 +101,7 @@
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (void) throwSucessAlert {
+- (void) displaySuccessAlert {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Sucess" message:@"Your account was updated sucessfully" preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault
@@ -120,9 +130,9 @@
         
         [alert addAction:acknowledge];
         [self presentViewController:alert animated:YES completion:nil];
-        return true;
+        return YES;
     }
-    return false;
+    return NO;
 }
 
 - (BOOL) areThereEmptyFields {
@@ -134,9 +144,9 @@
         
         [alert addAction:acknowledge];
         [self presentViewController:alert animated:YES completion:nil];
-        return true;
+        return YES;
     }
-    return false;
+    return NO;
 }
 
 /*

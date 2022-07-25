@@ -22,7 +22,7 @@
 }
 
 - (IBAction)didPressEdit:(id)sender {
-    [self dismissViewControllerAnimated:TRUE completion:^{
+    [self dismissViewControllerAnimated:YES completion:^{
         if (self.message.text != self.editView.text) {
             self.message.text = self.editView.text;
             
