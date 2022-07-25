@@ -145,7 +145,6 @@
     if (self.changeSenderButton.isSelected) return;
     
     [self.delegate inputbarDidPressChangeSenderButton:self];
-    self.textView.text = @"";
 }
 
 

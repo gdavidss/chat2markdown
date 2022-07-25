@@ -27,9 +27,7 @@
 
 
 - (IBAction)submitSignUp:(id)sender {
-    if ([self areThereEmptyFields] || [self arePasswordsDifferent] || [self isEmailInvalid]) {
-        //return;
-    } else {
+    if (![self areThereEmptyFields] && ![self arePasswordsDifferent] && ![self isEmailInvalid]) {
         // initialize a user object
           PFUser *newUser = [PFUser user];
                    
