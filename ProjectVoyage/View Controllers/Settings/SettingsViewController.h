@@ -1,5 +1,5 @@
 //
-//  LoginVC.h
+//  SettingsVC.h
 //  ProjectVoyage
 //
 //  Created by Gui David on 7/6/22.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LoginVC : UIViewController
+@interface SettingsViewController : UIViewController
 
 @end
 

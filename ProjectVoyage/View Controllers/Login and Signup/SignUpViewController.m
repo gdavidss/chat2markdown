@@ -5,10 +5,10 @@
 //  Created by Gui David on 7/6/22.
 //
 
-#import "SignUpVC.h"
+#import "SignUpViewController.h"
 @import Parse;
 
-@interface SignUpVC ()
+@interface SignUpViewController ()
 @property (nonatomic, strong) IBOutlet UIButton *submitBtn;
 @property (nonatomic, strong) IBOutlet UITextField *usernameField;
 @property (nonatomic, strong) IBOutlet UITextField *emailField;
@@ -18,7 +18,7 @@
 
 @end
 
-@implementation SignUpVC
+@implementation SignUpViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Message.h"
-#import "MessagesVC.h"
+#import "MessagesViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

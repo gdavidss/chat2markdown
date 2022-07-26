@@ -24,18 +24,21 @@
     [Util roundImage:_recipientImage];
 }
 
+/*
 - (IBAction)didPressCreate:(id)sender {
     // GD Chat should render automatically
     [self dismissViewControllerAnimated:YES completion:^{
         [self postChat];
     }];
 }
+ */
 
 - (IBAction)trimEndSpaces:(id)sender {
     UITextField *textField = sender;
     textField.text = [Util removeEndSpaceFrom:textField.text];
 }
 
+/* GD Change this
 - (void) postChat {
     [Chat postChat:_chatDescriptionTextField.text
           withRecipientName:_recipientNameTextField.text
@@ -50,6 +53,7 @@
             }
     }];
 }
+*/
 
 - (IBAction)tapGesture:(id)sender {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];

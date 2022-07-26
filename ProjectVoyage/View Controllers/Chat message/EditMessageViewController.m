@@ -5,16 +5,16 @@
 //  Created by Gui David on 7/12/22.
 //
 
-#import "EditMessageVC.h"
+#import "EditMessageViewController.h"
 
-@interface EditMessageVC ()
+@interface EditMessageViewController ()
 @property (nonatomic, strong) IBOutlet UITextView *editView;
 @property (nonatomic, strong) IBOutlet UIButton *editButton;
 @property (nonatomic, strong) IBOutlet UIButton *restoreButton;
 
 @end
 
-@implementation EditMessageVC
+@implementation EditMessageViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

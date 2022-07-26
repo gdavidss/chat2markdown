@@ -21,7 +21,7 @@
 @end
 
 
-@interface MessagesVC: UIViewController
+@interface MessagesViewController: UIViewController
 @property (nonatomic, strong) Chat *chat;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 

@@ -23,7 +23,16 @@
     return @"Chat";
 }
 
++ (void) postChat: (NSString * _Nullable)chatDescription withRecipients:(NSArray<PFUser *> *)recipients withCompletion: (PFBooleanResultBlock  _Nullable)completion{
+    Chat *newChat = [Chat new];
+    newChat.recipients = recipients;
+    newChat.date = [NSDate new];
+    newChat.messages = [NSMutableArray new];
+    newChat.current_sender = ChatSenderMyself;
+    [newChat saveInBackgroundWithBlock: completion];
+}
 
+/* CC
 + (void) postChat: (NSString * _Nullable)chatDescription withRecipientName:(NSString *)recipientName withRecipientImage:(UIImage * _Nullable)recipientImg withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     Chat *newChat = [Chat new];
     newChat.recipientImage = [Util getPFFileFromImage:recipientImg];
@@ -38,5 +47,7 @@
     
     [newChat saveInBackgroundWithBlock: completion];
 }
+ */
+
 
 @end

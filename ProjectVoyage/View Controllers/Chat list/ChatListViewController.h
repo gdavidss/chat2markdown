@@ -1,5 +1,5 @@
 //
-//  SettingsVC.h
+//  ChatListVC.h
 //  ProjectVoyage
 //
 //  Created by Gui David on 7/6/22.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface SettingsVC : UIViewController
+@interface ChatListViewController : UIViewController
 
 @end
 

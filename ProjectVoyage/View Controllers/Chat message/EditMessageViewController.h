@@ -7,14 +7,14 @@
 
 #import <UIKit/UIKit.h>
 #import "Message.h"
-#import "MessagesVC.h"
+#import "MessagesViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface EditMessageVC : UIViewController
+@interface EditMessageViewController : UIViewController
 
 @property (nonatomic, strong) Message *message;
-@property (nonatomic, weak) MessagesVC *delegate;
+@property (nonatomic, weak) MessagesViewController *delegate;
 
 @end
 

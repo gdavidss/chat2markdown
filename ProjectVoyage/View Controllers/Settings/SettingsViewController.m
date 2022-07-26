@@ -5,12 +5,12 @@
 //  Created by Gui David on 7/6/22.
 //
 
-#import "SettingsVC.h"
-#import "LoginVC.h"
+#import "SettingsViewController.h"
+#import "LoginViewController.h"
 #import "SceneDelegate.h"
 @import Parse;
 
-@interface SettingsVC ()
+@interface SettingsViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation SettingsVC
+@implementation SettingsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -116,7 +116,7 @@
 
 - (void) returnToLoginVC {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginVC *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    LoginViewController *loginVC = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
     SceneDelegate *mySceneDelegate = (SceneDelegate * ) UIApplication.sharedApplication.connectedScenes.allObjects.firstObject.delegate;
     mySceneDelegate.window.rootViewController = loginVC;
 }

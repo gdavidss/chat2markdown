@@ -5,10 +5,10 @@
 //  Created by Gui David on 7/6/22.
 //
 
-#import "LoginVC.h"
+#import "LoginViewController.h"
 @import Parse;
 
-@interface LoginVC ()
+@interface LoginViewController ()
 @property (nonatomic, strong) IBOutlet UITextField *usernameField;
 @property (nonatomic, strong) IBOutlet UITextField *passwordField;
 @property (nonatomic, strong) IBOutlet UIButton *loginBtn;
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation LoginVC
+@implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

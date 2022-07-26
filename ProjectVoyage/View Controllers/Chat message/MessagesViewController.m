@@ -13,8 +13,8 @@
 #import "MessageCell.h"
 
 // View controllers
-#import "MessagesVC.h"
-#import "EditMessageVC.h"
+#import "MessagesViewController.h"
+#import "EditMessageViewController.h"
 #import "MarkdownExportVC.h"
 
 // Util
@@ -24,7 +24,7 @@
 #import "Inputbar.h"
 #import "DAKeyboardControl.h"
 
-@interface MessagesVC() <InputbarDelegate,
+@interface MessagesViewController() <InputbarDelegate,
                                     UITableViewDataSource, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
 @property (nonatomic, strong) IBOutlet Inputbar *inputbar;
@@ -35,7 +35,7 @@
 // GD I'm testing a brown color here
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-@implementation MessagesVC
+@implementation MessagesViewController
 
 -(void)viewDidLoad {
     [super viewDidLoad];
@@ -306,7 +306,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
    if ([segue.identifier isEqualToString:@"EditMessageSegue"]) {
-        EditMessageVC *editMessageVC = [segue destinationViewController];
+        EditMessageViewController *editMessageVC = [segue destinationViewController];
         Message *messageToPass = sender;
         editMessageVC.message = messageToPass;
         editMessageVC.delegate = self;
