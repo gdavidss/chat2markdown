@@ -38,23 +38,6 @@
     textField.text = [Util removeEndSpaceFrom:textField.text];
 }
 
-/* GD Change this
-- (void) postChat {
-    [Chat postChat:_chatDescriptionTextField.text
-          withRecipientName:_recipientNameTextField.text
-          withRecipientImage:_recipientImage.image
-          withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            if (error != nil) {
-                // GD Display alert error
-                NSLog(@"Error: %@",
-                      error.localizedDescription);
-            } else {
-                NSLog(@"Post made successfully");
-            }
-    }];
-}
-*/
-
 - (IBAction)tapGesture:(id)sender {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;

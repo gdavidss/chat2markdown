@@ -37,11 +37,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [self queryUsers];
-    //[self generateChats];
-    //[self performSelector:@selector(generateChats) withObject:self afterDelay:5.0 ];
-    //[self performSelector:@selector(refreshHomeFeed:) withObject:self.refreshControl afterDelay:15.0 ];
-    // [self refreshHomeFeed:self.refreshControl];
-
+    // [self generateChats];
 }
 
 - (void) initRefreshControl {
@@ -78,9 +74,7 @@
     NSArray *queryKeys = [NSArray arrayWithObjects:@"recipients", @"chatDescription", nil];
     [query includeKeys:queryKeys];
     
-    for (PFUser *user in _users) {
-        [query whereKey:@"recipients" containsAllObjectsInArray:@[user, [PFUser currentUser]]];
-        
+    [query whereKey:@"recipients" containsAllObjectsInArray:@[[PFUser currentUser]]];
         // fetch data asynchronously
         __weak __typeof(self) weakSelf = self;
         [query findObjectsInBackgroundWithBlock:^(NSArray *chats, NSError *error) {
@@ -89,13 +83,13 @@
             if (!strongSelf) return;
             // GD Do I need to give an error if it's nil? what if it's just empty?
             if (chats != nil) {
-                [strongSelf->_chats addObject:chats];
+                strongSelf->_chats = chats;
+                [strongSelf->_tableView reloadData];
             } else {
                 // GD Show alert error
                 NSLog(@"%@", error.localizedDescription);
             }
         }];
-    }
     
     /* CC
     PFQuery *query = [PFQuery queryWithClassName:@"Chat"];

@@ -32,9 +32,8 @@ typedef NS_ENUM(NSInteger, MessageSender) {
 @property (nonatomic, strong) NSString *chatId;
 @property (nonatomic, strong) NSString *text;
 
-@property (nonatomic, assign) MessageSender sender;
+@property (nonatomic, assign) PFUser *sender;
 
-// GD isn't this redundant? I think order is more important than date for displaying it correctly.
 @property (strong, nonatomic) NSDate *date;
 
 // GD why do I need height here? Reconsider this being handled automatically by message cell
