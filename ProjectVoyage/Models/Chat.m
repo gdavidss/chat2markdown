@@ -13,7 +13,6 @@
 
 @dynamic chatDescription;
 @dynamic date;
-@dynamic recipientName;
 @dynamic author;
 @dynamic recipients;
 @dynamic messages;

@@ -21,7 +21,6 @@ typedef NS_ENUM(NSInteger, ChatSender) {
 @property (nonatomic, strong) NSString *chatDescription;
 @property (nonatomic, strong) NSDate *date;
 
-@property (nonatomic, strong) NSString *recipientName;
 @property (nonatomic, strong) NSArray<PFUser *> *recipients;
 @property (nonatomic, strong) PFFileObject *image;
 @property (nonatomic, strong) PFUser *author;

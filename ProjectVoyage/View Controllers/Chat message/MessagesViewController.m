@@ -135,7 +135,7 @@
 
 - (void) setChat:(Chat *)chat {
     _chat = chat;
-    self.title = chat.recipientName;
+    self.title = [NSString stringWithFormat:@"%@ & %@", chat.recipients[0].username, chat.recipients[1].username];;
 }
 
 #pragma mark - Actions
@@ -334,6 +334,7 @@
        MarkdownExportVC *markdownExportVC = [segue destinationViewController];
        Chat *chat = sender;
        markdownExportVC.chat = chat;
+       markdownExportVC.otherRecipientUsername = _otherRecipient.username;
    }
 }
 

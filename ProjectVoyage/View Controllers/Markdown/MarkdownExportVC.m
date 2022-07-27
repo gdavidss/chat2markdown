@@ -42,7 +42,9 @@
 }
 
 - (void) appendMetadata {
-    NSString *recipientName = [NSString stringWithFormat:@"%@: %@", @"**Recipient Name**", _chat.recipientName];
+    NSString *chat_title = [NSString stringWithFormat:@"%@, %@", _chat.recipients[0].username, _chat.recipients[1].username];
+    
+    NSString *recipientName = [NSString stringWithFormat:@"%@: %@", @"**Recipients**", chat_title];
     NSString *chatDescription = [NSString stringWithFormat:@"%@: %@", @"**Chat Description**", _chat.chatDescription];
     NSString *chatDate = [NSString stringWithFormat:@"%@: %@", @"**Date**", _chat.date];
     NSString *chatId = [NSString stringWithFormat:@"%@: %@", @"**Chat ID**", _chat.objectId];
@@ -63,7 +65,7 @@
     if (last_sender == Myself) {
         [self generateBlock:[PFUser currentUser].username withIdentation:1 isItBold:YES];
     } else {
-        [self generateBlock:_chat.recipientName withIdentation:1 isItBold:YES];
+        [self generateBlock:_otherRecipientUsername withIdentation:1 isItBold:YES];
     }
     
     for (Message *message in ordered_messages) {
@@ -73,7 +75,7 @@
             if (current_sender == Myself) {
                 [self generateBlock:[PFUser currentUser].username withIdentation:1 isItBold:YES];
             } else {
-                [self generateBlock:_chat.recipientName withIdentation:1 isItBold:YES];
+                [self generateBlock:_otherRecipientUsername withIdentation:1 isItBold:YES];
             }
         }
         
