@@ -27,6 +27,8 @@
 #import "Inputbar.h"
 #import "DAKeyboardControl.h"
 
+@import ParseLiveQuery;
+
 @interface MessagesViewController() <InputbarDelegate,
                                     UITableViewDataSource, MessageGatewayDelegate, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
@@ -60,6 +62,7 @@
         [message fetch];
     }
 }
+
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
