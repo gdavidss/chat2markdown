@@ -302,7 +302,7 @@
                     animated:YES];
     
     //Send message to server
-    [message save];
+    [message saveInBackground];
     
     PFQuery *query = [PFQuery queryWithClassName:@"Chat"];
     [query getObjectInBackgroundWithId:_chat.objectId
