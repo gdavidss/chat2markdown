@@ -19,7 +19,6 @@ typedef NS_ENUM(NSInteger, ChatSender) {
 @interface Chat : PFObject<PFSubclassing>
 
 @property (nonatomic, strong) NSString *chatDescription;
-@property (nonatomic, strong) NSDate *date;
 
 @property (nonatomic, strong) NSArray<PFUser *> *recipients;
 @property (nonatomic, strong) PFFileObject *image;

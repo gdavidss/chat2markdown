@@ -269,13 +269,15 @@
 #pragma mark - InputbarDelegate
 
 -(void)inputbarDidPressSendButton:(Inputbar *)inputbar {
-    Message *message = [[Message alloc] init];
+    Message *message = [Message new];
     message.text = [Util removeEndSpaceFrom:inputbar.text];
     
     if (_chat.current_sender == MessageSenderSomeone) {
         message.isSenderMyself = NO;
+        message.sender = [PFUser currentUser];
     } else {
         message.isSenderMyself = YES;
+        message.sender = _otherRecipient;
     }
     
     //Store Message in memory
@@ -295,7 +297,7 @@
                     animated:YES];
     
     //Send message to server
-    //[self.gateway sendMessage:message];
+    [message save];
     
     /*
     PFQuery *query = [PFQuery queryWithClassName:@"Chat"];

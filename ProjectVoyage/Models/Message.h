@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
-#import "Chat.h"
+@import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,17 +27,13 @@ typedef NS_ENUM(NSInteger, MessageSender) {
 @interface Message : PFObject<PFSubclassing>
 
 @property (nonatomic, assign) bool isSenderMyself;
-@property (nonatomic, strong) NSString *identifier;
 
-@property (nonatomic, strong) NSString *chatId;
 @property (nonatomic, strong) NSString *text;
-
 @property (nonatomic, assign) PFUser *sender;
-
-@property (strong, nonatomic) NSDate *date;
 
 @property (assign, nonatomic) CGFloat height;
 
++ (void) postMessage: (NSString * _Nullable)text withSender:(PFUser *)sender withHeight:(CGFloat)height withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 

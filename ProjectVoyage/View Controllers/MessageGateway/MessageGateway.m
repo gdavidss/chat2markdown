@@ -108,8 +108,8 @@
     // When you receive the response, you should update message status
     // Now I'm just faking update message
     //
-//    [message saveInBackgroundWithBlock: completion];
-    //TODO
+    //[message saveInBackgroundWithBlock: completion];
+    return;
 }
 
 

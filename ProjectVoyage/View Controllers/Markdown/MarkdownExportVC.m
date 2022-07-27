@@ -46,7 +46,7 @@
     
     NSString *recipientName = [NSString stringWithFormat:@"%@: %@", @"**Recipients**", chat_title];
     NSString *chatDescription = [NSString stringWithFormat:@"%@: %@", @"**Chat Description**", _chat.chatDescription];
-    NSString *chatDate = [NSString stringWithFormat:@"%@: %@", @"**Date**", _chat.date];
+    NSString *chatDate = [NSString stringWithFormat:@"%@: %@", @"**Date**", _chat.createdAt];
     NSString *chatId = [NSString stringWithFormat:@"%@: %@", @"**Chat ID**", _chat.objectId];
 
     [self generateBlock:@"Metadata" withIdentation:0 isItBold:YES];

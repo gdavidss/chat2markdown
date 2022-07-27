@@ -12,7 +12,6 @@
 @implementation Chat
 
 @dynamic chatDescription;
-@dynamic date;
 @dynamic author;
 @dynamic recipients;
 @dynamic messages;
@@ -26,7 +25,6 @@
 + (void) postChat: (NSString * _Nullable)chatDescription withImage:(UIImage * _Nullable )image withRecipients:(NSArray<PFUser *> *)recipients withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Chat *newChat = [Chat new];
     newChat.recipients = recipients;
-    newChat.date = [NSDate new];
     newChat.messages = [NSMutableArray new];
     newChat.current_sender = ChatSenderMyself;
     newChat.image = [Util getPFFileFromImage:image];

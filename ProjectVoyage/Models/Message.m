@@ -9,43 +9,34 @@
 
 @implementation Message
 
+@dynamic isSenderMyself;
+@dynamic sender;
+@dynamic text;
+@dynamic height;
+
 - (id)init {
     self = [super init];
     if (self)
     {
+        /*
         _sender = MessageSenderMyself;
         _text = @"";
-        _height = 0 ;
-        _date = [NSDate date];
-        _identifier = @"";
+        _height = 0;
+         */
     }
     return self;
 }
 
-+ (Message *)messageFromDictionary:(NSDictionary *)dictionary {
-    Message *message = [[Message alloc] init];
-    message.text = dictionary[@"text"];
-    message.identifier = dictionary[@"message_id"];
-    
-    NSString *dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSSSS";
-    
-    //Date in UTC
-    NSTimeZone *inputTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"UTC"];
-    NSDateFormatter *inputDateFormatter = [[NSDateFormatter alloc] init];
-    [inputDateFormatter setTimeZone:inputTimeZone];
-    [inputDateFormatter setDateFormat:dateFormat];
-    NSDate *date = [inputDateFormatter dateFromString:dictionary[@"sent"]];
-    
-    //Convert time in UTC to Local TimeZone
-    NSTimeZone *outputTimeZone = [NSTimeZone localTimeZone];
-    NSDateFormatter *outputDateFormatter = [[NSDateFormatter alloc] init];
-    [outputDateFormatter setTimeZone:outputTimeZone];
-    [outputDateFormatter setDateFormat:dateFormat];
-    NSString *outputString = [outputDateFormatter stringFromDate:date];
-    
-    message.date = [outputDateFormatter dateFromString:outputString];
-    
-    return message;
++ (nonnull NSString *)parseClassName {
+    return @"Message";
+}
+
++ (void) postMessage: (NSString * _Nullable)text withSender:(PFUser *)sender withHeight:(CGFloat)height withCompletion: (PFBooleanResultBlock  _Nullable)completion{
+    Message *newMessage = [Message new];
+    newMessage.sender = sender;
+    newMessage.text = text;
+    newMessage.height = height;
+    [newMessage saveInBackgroundWithBlock: completion];
 }
 
 @end
