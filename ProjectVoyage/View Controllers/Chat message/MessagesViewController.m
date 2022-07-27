@@ -189,7 +189,13 @@
 // Swipe left to delete message
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-       [self.chat.messages removeObjectAtIndex:indexPath.row];
+        Message *message = self.chat.messages[indexPath.row];
+        
+        // Update backend
+        [self.chat removeObject:message forKey:@"messages"];
+        [message deleteInBackground];
+        [self.chat saveInBackground];
+        
         NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
         [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     }
@@ -223,6 +229,9 @@
     Message *messageToMove = self.chat.messages[sourceIndexPath.row];
     [self.chat.messages removeObjectAtIndex:sourceIndexPath.row];
     [self.chat.messages insertObject:messageToMove atIndex:destinationIndexPath.row];
+    
+    self.chat[@"messages"] = self.chat.messages;
+    [self.chat saveInBackground];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
@@ -360,6 +369,7 @@
     message.isSenderMyself = (message.isSenderMyself)? NO: YES;
     message.sender = message.sender == [PFUser currentUser]? _otherRecipient: [PFUser currentUser];
     [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+    [message saveInBackground];
     return;
 }
 

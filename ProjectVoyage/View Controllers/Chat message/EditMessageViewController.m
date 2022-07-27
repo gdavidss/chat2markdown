@@ -26,6 +26,9 @@
         if (self.message.text != self.editView.text) {
             self.message.text = self.editView.text;
             
+            // Save message to backend
+            [self.message saveInBackground];
+            
             // Update array
             NSMutableArray<Message *> *chatMessages = self.delegate.chat.messages;
             NSInteger messageIndex = [chatMessages indexOfObject:self.message];
