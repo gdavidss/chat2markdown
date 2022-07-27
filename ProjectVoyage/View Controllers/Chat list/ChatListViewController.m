@@ -17,7 +17,7 @@
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) NSMutableArray *chats;
+@property (nonatomic, strong) NSArray *chats;
 @property (nonatomic, strong) NSArray<PFUser *> *users;
 
 @end
@@ -65,7 +65,6 @@
     }];
 }
 
-
 - (void) refreshHomeFeed:(UIRefreshControl *)refreshControl {
     [refreshControl beginRefreshing];
     
@@ -90,30 +89,6 @@
                 NSLog(@"%@", error.localizedDescription);
             }
         }];
-    
-    /* CC
-    PFQuery *query = [PFQuery queryWithClassName:@"Chat"];
-    [query orderByDescending:@"createdAt"];
-    NSArray *queryKeys = [NSArray arrayWithObjects:@"author", @"recipientName", @"chatDescription", nil];
-    [query includeKeys:queryKeys];
-    [query whereKey:@"author" equalTo:[PFUser currentUser]];
-    
-    
-    // fetch data asynchronously
-    __weak __typeof(self) weakSelf = self;
-    [query findObjectsInBackgroundWithBlock:^(NSArray *chats, NSError *error) {
-        __strong __typeof(weakSelf) strongSelf = weakSelf;
-        if (!strongSelf) { return; }
-        [refreshControl endRefreshing];
-        if (chats != nil) {
-            strongSelf->_chats = chats;
-            [strongSelf->_tableView reloadData];
-        } else {
-            // GD Show alert error
-            NSLog(@"%@", error.localizedDescription);
-        }
-    }];
-     */
 }
 
 - (void) generateChats {
