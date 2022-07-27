@@ -15,7 +15,7 @@
     {
         _sender = MessageSenderMyself;
         _text = @"";
-        _height = 0;
+        _height = 0 ;
         _date = [NSDate date];
         _identifier = @"";
     }

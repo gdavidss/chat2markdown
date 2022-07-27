@@ -14,40 +14,24 @@
 @dynamic chatDescription;
 @dynamic date;
 @dynamic recipientName;
-@dynamic recipientImage;
 @dynamic author;
+@dynamic recipients;
 @dynamic messages;
 @dynamic current_sender;
+@dynamic image;
 
 + (nonnull NSString *)parseClassName {
     return @"Chat";
 }
 
-+ (void) postChat: (NSString * _Nullable)chatDescription withRecipients:(NSArray<PFUser *> *)recipients withCompletion: (PFBooleanResultBlock  _Nullable)completion{
++ (void) postChat: (NSString * _Nullable)chatDescription withImage:(UIImage * _Nullable )image withRecipients:(NSArray<PFUser *> *)recipients withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Chat *newChat = [Chat new];
     newChat.recipients = recipients;
     newChat.date = [NSDate new];
     newChat.messages = [NSMutableArray new];
     newChat.current_sender = ChatSenderMyself;
+    newChat.image = [Util getPFFileFromImage:image];
     [newChat saveInBackgroundWithBlock: completion];
 }
-
-/* CC
-+ (void) postChat: (NSString * _Nullable)chatDescription withRecipientName:(NSString *)recipientName withRecipientImage:(UIImage * _Nullable)recipientImg withCompletion: (PFBooleanResultBlock  _Nullable)completion {
-    Chat *newChat = [Chat new];
-    newChat.recipientImage = [Util getPFFileFromImage:recipientImg];
-    newChat.recipientName = recipientName;
-    newChat.date = [NSDate new];
-    newChat.chatDescription = chatDescription;
-    newChat.messages = [NSMutableArray new];
-    newChat.current_sender = ChatSenderMyself;
-    
-    PFUser *currentUser = [PFUser currentUser];
-    newChat.author = currentUser;
-    
-    [newChat saveInBackgroundWithBlock: completion];
-}
- */
-
 
 @end

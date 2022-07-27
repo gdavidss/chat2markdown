@@ -93,7 +93,7 @@
     CGFloat textView_h = _textView.frame.size.height;
     UIViewAutoresizing autoresizing;
     
-    if (_message.sender == MessageSenderMyself) {
+    if (_message.isSenderMyself) {
         textView_x = self.contentView.frame.size.width - textView_w - 20;
         textView_y = -3;
         autoresizing = UIViewAutoresizingFlexibleLeftMargin;
@@ -121,14 +121,13 @@
     CGFloat bubble_height = _textView.frame.size.height + 8;
     _message.height = bubble_height;
     
-    if (_message.sender == MessageSenderMyself) {
+    if (_message.isSenderMyself) {
         // Set bubble image
         _bubbleImage.image = [[self imageNamed:@"bubbleSender"]
                               stretchableImageWithLeftCapWidth:15 topCapHeight:14];
         
         bubble_x = _textView.frame.origin.x - marginLeft;
         bubble_width = self.contentView.frame.size.width - bubble_x - marginRight;
-        
     } else {
         bubble_x = marginRight;
         

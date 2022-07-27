@@ -9,9 +9,9 @@
 #import "Util.h"
 
 @interface ChatCell()
-@property (nonatomic, strong) IBOutlet UILabel *recipientLabel;
+@property (nonatomic, strong) IBOutlet UILabel *chatTitle;
 @property (nonatomic, strong) IBOutlet UILabel *descriptionLabel;
-@property (nonatomic, strong) IBOutlet UIImageView *recipientImage;
+@property (nonatomic, strong) IBOutlet UIImageView *chatImage;
 @property (nonatomic, strong) IBOutlet UILabel *dateChat;
 @end
 
@@ -20,12 +20,13 @@
 - (void) setChat:(Chat *)chat {
     _chat = chat;
 
-    _recipientImage.image = [UIImage imageWithData:[chat.recipientImage getData]];
-    _recipientLabel.text = chat.recipientName;
+    _chatImage.image = [UIImage imageWithData:[chat.image getData]];
+    NSString *chat_title = [NSString stringWithFormat:@"%@ & %@", chat.recipients[0].username, chat.recipients[1].username];
+    _chatTitle.text = chat_title;
     _descriptionLabel.text = chat.chatDescription;
     _dateChat.text = [Util formatDateString:chat.createdAt];
     
-    [Util roundImage:_recipientImage];
+    [Util roundImage:_chatImage];
 }
 
 @end

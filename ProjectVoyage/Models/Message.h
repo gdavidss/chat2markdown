@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, MessageSender) {
     MessageSenderSomeone
 };
 
-@interface Message : NSObject
+@interface Message : PFObject<PFSubclassing>
 
 @property (nonatomic, assign) bool isSenderMyself;
 @property (nonatomic, strong) NSString *identifier;
@@ -36,10 +36,8 @@ typedef NS_ENUM(NSInteger, MessageSender) {
 
 @property (strong, nonatomic) NSDate *date;
 
-// GD why do I need height here? Reconsider this being handled automatically by message cell
 @property (assign, nonatomic) CGFloat height;
 
-+(Message *)messageFromDictionary:(NSDictionary *)dictionary;
 
 @end
 

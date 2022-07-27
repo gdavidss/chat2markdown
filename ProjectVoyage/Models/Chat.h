@@ -23,14 +23,14 @@ typedef NS_ENUM(NSInteger, ChatSender) {
 
 @property (nonatomic, strong) NSString *recipientName;
 @property (nonatomic, strong) NSArray<PFUser *> *recipients;
-@property (nonatomic, strong) PFFileObject *recipientImage;
+@property (nonatomic, strong) PFFileObject *image;
 @property (nonatomic, strong) PFUser *author;
 
 @property (nonatomic, assign) NSInteger current_sender;
 
 @property (nonatomic, strong) NSMutableArray<Message *> *messages;
 
-+ (void) postChat: (NSString * _Nullable)chatDescription withRecipients:(NSArray<PFUser *> *)recipients withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) postChat: (NSString * _Nullable)chatDescription withImage:(UIImage * _Nullable )image withRecipients:(NSArray<PFUser *> *)recipients withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 

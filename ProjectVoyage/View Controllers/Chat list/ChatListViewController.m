@@ -125,6 +125,7 @@
 - (void) postChatWithUser:(PFUser *)user {
     NSArray<PFUser *> *recipients = [NSArray arrayWithObjects:[PFUser currentUser], user, nil];
     [Chat postChat:@"This should be editable"
+          withImage:nil
           withRecipients:recipients
           withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {

@@ -67,7 +67,7 @@
     }
     
     for (Message *message in ordered_messages) {
-        bool current_sender = (message.sender == MessageSenderMyself)? Myself: Someone;
+        bool current_sender = (message.isSenderMyself)? Myself: Someone;
         
         if (last_sender != current_sender) {
             if (current_sender == Myself) {

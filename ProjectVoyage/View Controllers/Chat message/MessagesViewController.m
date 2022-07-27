@@ -20,15 +20,22 @@
 // Util
 #import "Util.h"
 
+// Gateways
+#import "MessageGateway.h"
+
 // Helpers
 #import "Inputbar.h"
 #import "DAKeyboardControl.h"
 
 @interface MessagesViewController() <InputbarDelegate,
-                                    UITableViewDataSource, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+                                    UITableViewDataSource, MessageGatewayDelegate, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
 @property (nonatomic, strong) IBOutlet Inputbar *inputbar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *markdownButton;
+@property (nonatomic, strong) MessageGateway *gateway;
+
+// This assumes that there's only one other recipient in each chat, should be changed if groups are allowed
+@property (nonatomic, strong) PFUser *otherRecipient;
 
 @end
 
@@ -41,7 +48,8 @@
     [super viewDidLoad];
     [self setInputbar];
     [self setTableView];
-    //[self setGateway];
+    [self setGateway];
+    [self getChatRecipient];
     [self.tableView registerClass:MessageCell.class forCellReuseIdentifier:@"MessageCell"];
 }
 
@@ -80,6 +88,19 @@
     //[self.gateway dismiss];
 }
 
+// remove current user from _chat.recipients and return the only user left
+// this method does not work for groups
+- (void) getChatRecipient {
+    NSMutableArray<PFUser *> *otherUsers = [_chat.recipients mutableCopy];
+    for (PFUser *user in otherUsers) {
+        if ([user[@"email"] isEqual:[PFUser currentUser][@"email"]]) {
+            [otherUsers removeObject:user];
+            _otherRecipient = otherUsers[0];
+            break;
+        }
+    }
+}
+
 #pragma mark - Set Methods
 
 -(void)setInputbar {
@@ -87,6 +108,13 @@
     self.inputbar.delegate = self;
     self.inputbar.sendButtonText = @"Send";
     self.inputbar.sendButtonTextColor = [UIColor colorWithRed:0 green:124/255.0 blue:1 alpha:1];
+}
+
+-(void)setGateway {
+    self.gateway = [MessageGateway sharedInstance];
+    self.gateway.delegate = self;
+    self.gateway.chat = self.chat;
+    // [self.gateway loadOldMessages];
 }
 
 -(void) setTableView {
@@ -102,21 +130,8 @@
     self.tableView.dragDelegate = self;
     self.tableView.dropDelegate = self;
      
-    
-    // navigationItem.rightBarButtonItem = editButtonItem
-
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier: @"MessageCell"];
 }
-
-/*
--(void)setGateway
-{
-    self.gateway = [MessageGateway sharedInstance];
-    self.gateway.delegate = self;
-    self.gateway.chat = self.chat;
-    [self.gateway loadOldMessages];
-}
-*/
 
 - (void) setChat:(Chat *)chat {
     _chat = chat;
@@ -180,7 +195,6 @@
     Message *messageToEdit = self.chat.messages[indexPath.row];
     UIContextualAction *editAction = [UIContextualAction contextualActionWithStyle:UIContextualActionStyleNormal title:@"Edit" handler:^(UIContextualAction * _Nonnull action, __kindof UIView * _Nonnull sourceView, void (^ _Nonnull completionHandler)(BOOL)) {
         [self editMessage:messageToEdit];
-
            completionHandler(YES);
        }];
     UISwipeActionsConfiguration *swipe = [UISwipeActionsConfiguration configurationWithActions:@[editAction]];
@@ -257,7 +271,12 @@
 -(void)inputbarDidPressSendButton:(Inputbar *)inputbar {
     Message *message = [[Message alloc] init];
     message.text = [Util removeEndSpaceFrom:inputbar.text];
-    message.sender = _chat.current_sender;
+    
+    if (_chat.current_sender == MessageSenderSomeone) {
+        message.isSenderMyself = NO;
+    } else {
+        message.isSenderMyself = YES;
+    }
     
     //Store Message in memory
     [self.chat.messages addObject:message];
@@ -332,7 +351,8 @@
                            initWithObjects:indexPath, nil];
     
     // Change the data model only. (reload will cause the cell to reload)
-    message.sender = message.sender == MessageSenderMyself? MessageSenderSomeone: MessageSenderMyself;
+    message.isSenderMyself = (message.isSenderMyself)? NO: YES;
+    message.sender = message.sender == [PFUser currentUser]? _otherRecipient: [PFUser currentUser];
     [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     return;
 }

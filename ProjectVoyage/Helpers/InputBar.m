@@ -45,8 +45,8 @@
 
 - (void) addContent {
     [self addTextView];
-    [self addButton:self.sendButton withLabel:@"Send" withMethod:@selector(didPressSendButton:) withOrder:1];
-    [self addButton:self.sendButton withLabel:@"Change" withMethod:@selector(didPressChangeSenderButton:) withOrder:2];
+    [self addButton:self.sendButton withLabel:@"Send" withMethod:@selector(didPressSendButton:) withOrder:1 isSelected:YES];
+    [self addButton:self.changeSenderButton withLabel:@"Change" withMethod:@selector(didPressChangeSenderButton:) withOrder:2 isSelected:NO];
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 }
@@ -89,7 +89,7 @@
 
 #pragma mark - Buttons
 
-- (void)addButton:(UIButton *)button withLabel:(NSString *)label withMethod:(nonnull SEL)method withOrder:(int)order {
+- (void)addButton:(UIButton *)button withLabel:(NSString *)label withMethod:(nonnull SEL)method withOrder:(int)order isSelected:(BOOL)selection{
     CGSize size = self.frame.size;
     button = [[UIButton alloc] init];
     button.frame = CGRectMake(size.width - order * BUTTON_SIZE, 0, BUTTON_SIZE, size.height);
@@ -103,7 +103,7 @@
     
     [self addSubview:button];
     
-    [button setSelected:NO];
+    [button setSelected:selection];
 }
 
 -(void)resignFirstResponder {
@@ -141,7 +141,6 @@
     _placeholder = placeholder;
     _textView.placeholder = placeholder;
 }
-
 
 -(void)setSendButtonTextColor:(UIColor *)sendButtonTextColor {
     [self.sendButton setTitleColor:sendButtonTextColor forState:UIControlStateNormal];
