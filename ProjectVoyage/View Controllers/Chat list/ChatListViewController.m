@@ -91,6 +91,8 @@
         }];
 }
 
+
+
 - (void) generateChats {
     for (PFUser *user in _users) {
         [self postChatWithUser:user];
@@ -104,21 +106,14 @@
           withRecipients:recipients
           withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
             if (error != nil) {
-                // GD Display alert error
-                NSLog(@"Error: %@",
-                      error.localizedDescription);
-            } else {
-                NSLog(@"Post made successfully");
+                [self alertFailedChat];
             }
     }];
 }
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     if ([segue.identifier  isEqual: @"MessagesSegue"] ) {
         UINavigationController *navController = [segue destinationViewController];
         MessagesViewController *messagesVC = navController.viewControllers[0];
@@ -135,6 +130,28 @@
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.chats.count;
+}
+
+#pragma mark - Alert errors
+
+- (void) alertFailedChat {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Chat post failed" message:@"Something went wrong when trying to create the chat." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:acknowledge];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (void) alertFailedRefresh {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Refresh homefeed failed" message:@"Something went wrong when trying to refresh the feed." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"Try again" style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction * action) {[self refreshHomeFeed:self.refreshControl];}];
+    
+    [alert addAction:acknowledge];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 @end
