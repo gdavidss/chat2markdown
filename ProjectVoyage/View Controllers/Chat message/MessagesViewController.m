@@ -46,11 +46,19 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    [self loadMessages];
     [self setInputbar];
     [self setTableView];
     [self setGateway];
     [self getChatRecipient];
     [self.tableView registerClass:MessageCell.class forCellReuseIdentifier:@"MessageCell"];
+}
+
+// GD Is there a way to only load this once and cache it so I don't fetch it everytime I open this?
+- (void) loadMessages {
+    for (Message *message in _chat.messages) {
+        [message fetch];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -78,7 +86,6 @@
         [strongSelf tableViewScrollToBottomAnimated:NO];
     }];
 }
-
 
 -(void)viewDidDisappear:(BOOL)animated
 {
@@ -123,7 +130,6 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f,self.view.frame.size.width, 10.0f)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor]; // UIColorFromRGB(0xDFDBC4);
-    
     
     // Drag and drop methods to move messages around
     self.tableView.dragInteractionEnabled = true;
@@ -299,7 +305,6 @@
     //Send message to server
     [message save];
     
-    /*
     PFQuery *query = [PFQuery queryWithClassName:@"Chat"];
     [query getObjectInBackgroundWithId:_chat.objectId
                                  block:^(PFObject *chat, NSError *error) {
@@ -307,10 +312,9 @@
             NSLog(@"%@", error);
         }
         NSLog(@"%@", chat);
-        chat[@"messages"] = (NSArray *)self.chat.messages;
+        chat[@"messages"] = self.chat.messages;
         [chat saveInBackground];
     }];
-    */
 }
 
 - (void)inputbarDidPressChangeSenderButton:(Inputbar *)inputbar {

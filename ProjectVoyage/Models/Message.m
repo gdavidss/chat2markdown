@@ -16,14 +16,6 @@
 
 - (id)init {
     self = [super init];
-    if (self)
-    {
-        /*
-        _sender = MessageSenderMyself;
-        _text = @"";
-        _height = 0;
-         */
-    }
     return self;
 }
 
