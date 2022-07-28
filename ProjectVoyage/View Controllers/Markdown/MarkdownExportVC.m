@@ -58,19 +58,19 @@
     [self generateBlock:@"Messages" withIdentation:0 isItBold:YES];
 
     NSArray<Message *> *ordered_messages = [self orderMessages:_messages];
-    bool last_sender = (ordered_messages[0].sender == MessageSenderMyself)? Myself: Someone;
+    NSString *lastSender = ordered_messages[0].sender.objectId;
     
-    if (last_sender == Myself) {
+    if ([lastSender isEqual:[PFUser currentUser].objectId]) {
         [self generateBlock:[PFUser currentUser].username withIdentation:1 isItBold:YES];
     } else {
         [self generateBlock:_otherRecipientUsername withIdentation:1 isItBold:YES];
     }
     
     for (Message *message in ordered_messages) {
-        bool current_sender = (message.isSenderMyself)? Myself: Someone;
+        NSString *currentSender = message.sender.objectId;
         
-        if (last_sender != current_sender) {
-            if (current_sender == Myself) {
+        if (![lastSender isEqual:currentSender]) {
+            if ([currentSender isEqual:[PFUser currentUser].objectId]) {
                 [self generateBlock:[PFUser currentUser].username withIdentation:1 isItBold:YES];
             } else {
                 [self generateBlock:_otherRecipientUsername withIdentation:1 isItBold:YES];
@@ -79,7 +79,7 @@
         
         [self generateBlock:message.text withIdentation:3 isItBold:NO];
         
-        last_sender = current_sender;
+        lastSender = currentSender;
     }
 }
 
