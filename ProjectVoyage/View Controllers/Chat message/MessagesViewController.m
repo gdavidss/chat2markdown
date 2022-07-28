@@ -36,6 +36,9 @@
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *markdownButton;
 @property (nonatomic, strong) MessageGateway *gateway;
 
+@property (nonatomic, strong) PFLiveQueryClient *liveQueryClient;
+@property (nonatomic, strong) PFLiveQuerySubscription *subscription;
+
 // This assumes that there's only one other recipient in each chat, should be changed if groups are allowed
 @property (nonatomic, strong) PFUser *otherRecipient;
 
@@ -49,11 +52,87 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     [self loadMessages];
+    // set methods
     [self setInputbar];
     [self setTableView];
     [self setGateway];
+    
     [self getChatRecipient];
+    
+    // live queries
+    [self liveQueryChat];
+    [self liveQueryMessage];
+    
     [self.tableView registerClass:MessageCell.class forCellReuseIdentifier:@"MessageCell"];
+}
+
+#pragma mark - Live query
+
+// Listens if messages are added, deleted or swapped places
+- (void) liveQueryChat {
+    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+
+    NSString *app_id = [dict objectForKey: @"app_id"];
+    NSString *client_id = [dict objectForKey: @"client_id"];
+
+    // using live query to immediately show the change
+    self.liveQueryClient = [[PFLiveQueryClient alloc] initWithServer:@"wss://chat2markdown.b4a.io" applicationId:app_id clientKey:client_id];
+    PFQuery *chatQuery = [PFQuery queryWithClassName:@"Chat"];
+    self.subscription = [self.liveQueryClient subscribeToQuery:chatQuery];
+   
+   __unsafe_unretained typeof(self) weakSelf = self;
+   [self.subscription addUpdateHandler:^(PFQuery<PFObject *> * _Nonnull query, PFObject * _Nonnull object) {
+       __strong typeof (self) strongSelf = weakSelf;
+       if (object) {
+           strongSelf.chat.messages = object[@"messages"];
+           dispatch_async(dispatch_get_main_queue(), ^{
+               [strongSelf loadMessages];
+               // GD Maybe only reload data at the specific IndexPath?
+               [strongSelf.tableView reloadData];
+           });
+       }
+   }];
+}
+
+// Listens if messages are edited or the sender gets changed
+- (void) liveQueryMessage {
+    NSString *path = [[NSBundle mainBundle] pathForResource: @"Keys" ofType: @"plist"];
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile: path];
+
+    NSString *app_id = [dict objectForKey: @"app_id"];
+    NSString *client_id = [dict objectForKey: @"client_id"];
+
+    // using live query to immediately show the change
+    self.liveQueryClient = [[PFLiveQueryClient alloc] initWithServer:@"wss://chat2markdown.b4a.io" applicationId:app_id clientKey:client_id];
+    PFQuery *chatQuery = [PFQuery queryWithClassName:@"Message"];
+    self.subscription = [self.liveQueryClient subscribeToQuery:chatQuery];
+   
+   __unsafe_unretained typeof(self) weakSelf = self;
+   [self.subscription addUpdateHandler:^(PFQuery<PFObject *> * _Nonnull query, PFObject * _Nonnull object) {
+       __strong typeof (self) strongSelf = weakSelf;
+       if (object) {
+           Message *message = [strongSelf findMessageByObjectId:object.objectId];
+           message.text = object[@"text"];
+           message.sender = object[@"sender"];
+           // CC i'm trying to update the sender, but I guess i will have to change this whole logic
+           // message.isSenderMyself = object[@"isSenderMyself"];
+           dispatch_async(dispatch_get_main_queue(), ^{
+               //[message fetch];
+               // GD Maybe only reload data at the specific IndexPath?
+               [strongSelf.tableView reloadData];
+           });
+       }
+   }];
+}
+
+- (Message *) findMessageByObjectId:(NSString *)objectId {
+    for (Message *message in self.chat.messages) {
+            if ([message.objectId isEqual:objectId]) {
+                return message;
+        }
+    }
+    return nil;
 }
 
 // GD Is there a way to only load this once and cache it so I don't fetch it everytime I open this?
@@ -62,7 +141,6 @@
         [message fetch];
     }
 }
-
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];

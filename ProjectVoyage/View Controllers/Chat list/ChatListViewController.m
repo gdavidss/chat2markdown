@@ -10,6 +10,7 @@
 #import "ChatCell.h"
 #import "MessagesViewController.h"
 #import "LoginViewController.h"
+@import ParseLiveQuery;
 
 @interface ChatListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -20,6 +21,8 @@
 @property (nonatomic, strong) NSArray *chats;
 @property (nonatomic, strong) NSArray<PFUser *> *users;
 
+@property (nonatomic, strong) PFLiveQueryClient *liveQueryClient;
+@property (nonatomic, strong) PFLiveQuerySubscription *subscription;
 @end
 
 @implementation ChatListViewController
