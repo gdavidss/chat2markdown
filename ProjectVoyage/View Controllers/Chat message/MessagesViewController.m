@@ -62,12 +62,7 @@
     // live queries
     [self liveQueryMessage];
     [self liveQueryChat];
-    
-    // Whether the built-in pagination is enabled
-    self.paginationEnabled = YES;
-    
-    // The number of objects to show per page
-    self.objectsPerPage = 10;
+  
     [self.tableView registerClass:MessageCell.class forCellReuseIdentifier:@"MessageCell"];
 }
 

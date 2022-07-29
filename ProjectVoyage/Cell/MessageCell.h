@@ -21,5 +21,14 @@ for incoming or outgoing messages
 @property (nonatomic, strong) Message *message;
 @property (nonatomic, weak) id <ContainerProtocol> delegate;
 
+// Container
+@property (strong, nonatomic) UILabel *messageType;
+@property (strong, nonatomic) UIButton *deleteButton;
+@property (strong, nonatomic) UIButton *editButton;
+@property (strong, nonatomic) UIButton *changeSenderButton;
+@property (strong, nonatomic) UIButton *moveButton;
+
+- (CGFloat) bubbleCellHeight;
+
 @end
 NS_ASSUME_NONNULL_END

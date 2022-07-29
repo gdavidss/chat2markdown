@@ -71,7 +71,7 @@ const int NUM_LAYERS = 4;
 - (void) buildCell {
     [self setupTextView];
     [self setupBubbleView];
-    
+
     [self setNeedsLayout];
 }
 
@@ -150,6 +150,12 @@ const int NUM_LAYERS = 4;
     return [UIImage imageNamed:imageName
                       inBundle:[NSBundle bundleForClass:[self class]]
                       compatibleWithTraitCollection:nil];
+}
+
+
+- (void)didTapDelete {
+    [self.delegate deleteMessage:self.message];
+    return;
 }
 
 @end
