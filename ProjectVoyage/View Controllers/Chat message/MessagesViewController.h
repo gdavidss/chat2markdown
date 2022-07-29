@@ -21,7 +21,7 @@
 @end
 
 
-@interface MessagesViewController: UIViewController
+@interface MessagesViewController: PFQueryTableViewController
 @property (nonatomic, strong) Chat *chat;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 

@@ -3,8 +3,10 @@
 //  Whatsapp
 //
 //  Created by Gui David
-//  Adapted from Rafael Castro
-//
+//  Adapted fro
+
+
+// Import ParseUI to oojective-c
 
 // Libraries
 #import <AVFoundation/AVFoundation.h>
@@ -25,6 +27,8 @@
 #import "DAKeyboardControl.h"
 
 @import ParseLiveQuery;
+
+// add PFQueryTableViewController as a subclass of MessagesViewController
 
 @interface MessagesViewController() <InputbarDelegate,
                                     UITableViewDataSource, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
@@ -59,6 +63,11 @@
     [self liveQueryMessage];
     [self liveQueryChat];
     
+    // Whether the built-in pagination is enabled
+    self.paginationEnabled = YES;
+    
+    // The number of objects to show per page
+    self.objectsPerPage = 10;
     [self.tableView registerClass:MessageCell.class forCellReuseIdentifier:@"MessageCell"];
 }
 

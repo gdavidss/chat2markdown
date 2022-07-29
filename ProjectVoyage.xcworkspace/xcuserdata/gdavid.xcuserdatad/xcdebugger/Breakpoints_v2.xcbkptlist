@@ -210,8 +210,8 @@
             filePath = "ProjectVoyage/View Controllers/Chat message/MessagesViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "368"
-            endingLineNumber = "368"
+            startingLineNumber = "373"
+            endingLineNumber = "373"
             landmarkName = "-inputbarDidPressSendButton:"
             landmarkType = "7">
          </BreakpointContent>
@@ -226,9 +226,9 @@
             filePath = "ProjectVoyage/View Controllers/Chat message/MessagesViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
-            landmarkName = "-inputbarDidPressChangeSenderButton:"
+            startingLineNumber = "411"
+            endingLineNumber = "411"
+            landmarkName = "-inputbarDidPressSendButton:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -242,9 +242,9 @@
             filePath = "ProjectVoyage/View Controllers/Chat message/MessagesViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "-viewDidAppear:"
+            startingLineNumber = "156"
+            endingLineNumber = "156"
+            landmarkName = "-loadMessages"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -258,9 +258,9 @@
             filePath = "ProjectVoyage/View Controllers/Chat message/MessagesViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "-viewDidAppear:"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "-loadMessages"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -274,8 +274,8 @@
             filePath = "ProjectVoyage/View Controllers/Chat message/MessagesViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "274"
-            endingLineNumber = "274"
+            startingLineNumber = "279"
+            endingLineNumber = "279"
             landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
@@ -322,9 +322,9 @@
             filePath = "ProjectVoyage/View Controllers/Chat message/MessagesViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "207"
-            endingLineNumber = "207"
-            landmarkName = "-setTableView"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "-setInputbar"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -332,14 +332,14 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "BCBCD08B-A942-4188-9A8A-E5F887B4FFB5"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ProjectVoyage/View Controllers/Chat message/MessagesViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "-liveQueryMessage"
             landmarkType = "7">
          </BreakpointContent>
@@ -354,8 +354,8 @@
             filePath = "ProjectVoyage/View Controllers/Chat message/MessagesViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "-liveQueryChat"
             landmarkType = "7">
          </BreakpointContent>
