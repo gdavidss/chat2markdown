@@ -34,13 +34,12 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
     [self initRefreshControl];
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    [self queryUsers];
-    // [self generateChats];
+    // [self queryUsers];
+    [self refreshHomeFeed:self.refreshControl];
 }
 
 - (void) initRefreshControl {
@@ -93,8 +92,6 @@
             }
         }];
 }
-
-
 
 - (void) generateChats {
     for (PFUser *user in _users) {

@@ -15,8 +15,8 @@
 @property (nonatomic, strong) UIImageView *bubbleImage;
 @end
 
-#define LAYER_HEIGHT 25
-#define NUM_LAYERS 4
+const int LAYER_HEIGHT = 25;
+const int NUM_LAYERS = 4;
 
 @implementation MessageCell
 
@@ -78,8 +78,9 @@
 #pragma mark - TextView
 
 - (void) setupTextView {
-    CGFloat max_width = 0.5 * self.contentView.frame.size.width;
-    _textView.frame = CGRectMake(0, 0, max_width, MAXFLOAT);
+    CGFloat aspectRatio = 0.5;
+    CGFloat maxWidth = aspectRatio * self.contentView.frame.size.width;
+    _textView.frame = CGRectMake(0, 0, maxWidth, MAXFLOAT);
     _textView.font = [UIFont fontWithName:@"Helvetica" size:17.0];
     _textView.backgroundColor = [UIColor clearColor];
     _textView.userInteractionEnabled = NO;
@@ -93,12 +94,13 @@
     CGFloat textView_h = _textView.frame.size.height;
     UIViewAutoresizing autoresizing;
     
-    if (_message.isSenderMyself) {
-        textView_x = self.contentView.frame.size.width - textView_w - 20;
+    const int marginRight = 20;
+    if ([_message.sender.objectId isEqual:[PFUser currentUser].objectId]) {
+        textView_x = self.contentView.frame.size.width - textView_w - marginRight;
         textView_y = -3;
         autoresizing = UIViewAutoresizingFlexibleLeftMargin;
     } else {
-        textView_x = 20;
+        textView_x = marginRight;
         textView_y = -1;
         autoresizing = UIViewAutoresizingFlexibleRightMargin;
     }
@@ -111,17 +113,18 @@
 
 - (void) setupBubbleView {
     // Margins
-    CGFloat marginLeft = 5;
-    CGFloat marginRight = 2;
+    const int marginLeft = 5;
+    const int marginRight = 2;
+    const int heightGap = 8;
     
     // Position
     CGFloat bubble_x;
     CGFloat bubble_y = 0;
     CGFloat bubble_width;
-    CGFloat bubble_height = _textView.frame.size.height + 8;
+    CGFloat bubble_height = _textView.frame.size.height + heightGap;
     _message.height = bubble_height;
     
-    if (_message.isSenderMyself) {
+    if ([_message.sender.objectId isEqual:[PFUser currentUser].objectId]) {
         // Set bubble image
         _bubbleImage.image = [[self imageNamed:@"bubbleSender"]
                               stretchableImageWithLeftCapWidth:15 topCapHeight:14];
@@ -146,7 +149,7 @@
 - (UIImage *) imageNamed:(NSString *)imageName {
     return [UIImage imageNamed:imageName
                       inBundle:[NSBundle bundleForClass:[self class]]
- compatibleWithTraitCollection:nil];
+                      compatibleWithTraitCollection:nil];
 }
 
 @end

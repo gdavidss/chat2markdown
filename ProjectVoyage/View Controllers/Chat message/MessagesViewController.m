@@ -20,9 +20,6 @@
 // Util
 #import "Util.h"
 
-// Gateways
-#import "MessageGateway.h"
-
 // Helpers
 #import "Inputbar.h"
 #import "DAKeyboardControl.h"
@@ -30,11 +27,10 @@
 @import ParseLiveQuery;
 
 @interface MessagesViewController() <InputbarDelegate,
-                                    UITableViewDataSource, MessageGatewayDelegate, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+                                    UITableViewDataSource, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
 @property (nonatomic, strong) IBOutlet Inputbar *inputbar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *markdownButton;
-@property (nonatomic, strong) MessageGateway *gateway;
 
 @property (nonatomic, strong) PFLiveQueryClient *liveQueryClient;
 @property (nonatomic, strong) PFLiveQuerySubscription *subscription;
@@ -52,16 +48,16 @@
 -(void)viewDidLoad {
     [super viewDidLoad];
     [self loadMessages];
+    
     // set methods
     [self setInputbar];
     [self setTableView];
-    [self setGateway];
     
     [self getChatRecipient];
     
     // live queries
-    [self liveQueryChat];
     [self liveQueryMessage];
+    [self liveQueryChat];
     
     [self.tableView registerClass:MessageCell.class forCellReuseIdentifier:@"MessageCell"];
 }
@@ -85,14 +81,25 @@
    [self.subscription addUpdateHandler:^(PFQuery<PFObject *> * _Nonnull query, PFObject * _Nonnull object) {
        __strong typeof (self) strongSelf = weakSelf;
        if (object) {
-           strongSelf.chat.messages = object[@"messages"];
+           NSMutableArray *newMessages = object[@"messages"];
+           if (newMessages.count == strongSelf.chat.messages.count) {
+               return;
+           }
+           strongSelf.chat.messages = newMessages;
            dispatch_async(dispatch_get_main_queue(), ^{
                [strongSelf loadMessages];
-               // GD Maybe only reload data at the specific IndexPath?
                [strongSelf.tableView reloadData];
            });
        }
    }];
+}
+
+- (void) reloadRowContainingMessage:(Message *)message {
+    NSInteger messageIndex = [_chat.messages indexOfObject:message];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:messageIndex inSection:0];
+    NSArray *indexPaths = [[NSArray alloc]
+                           initWithObjects:indexPath, nil];
+    [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
 }
 
 // Listens if messages are edited or the sender gets changed
@@ -102,11 +109,11 @@
 
     NSString *app_id = [dict objectForKey: @"app_id"];
     NSString *client_id = [dict objectForKey: @"client_id"];
-
+    
     // using live query to immediately show the change
     self.liveQueryClient = [[PFLiveQueryClient alloc] initWithServer:@"wss://chat2markdown.b4a.io" applicationId:app_id clientKey:client_id];
-    PFQuery *chatQuery = [PFQuery queryWithClassName:@"Message"];
-    self.subscription = [self.liveQueryClient subscribeToQuery:chatQuery];
+    PFQuery *messageQuery = [PFQuery queryWithClassName:@"Message"];
+    self.subscription = [self.liveQueryClient subscribeToQuery:messageQuery];
    
    __unsafe_unretained typeof(self) weakSelf = self;
    [self.subscription addUpdateHandler:^(PFQuery<PFObject *> * _Nonnull query, PFObject * _Nonnull object) {
@@ -115,12 +122,10 @@
            Message *message = [strongSelf findMessageByObjectId:object.objectId];
            message.text = object[@"text"];
            message.sender = object[@"sender"];
-           // CC i'm trying to update the sender, but I guess i will have to change this whole logic
-           // message.isSenderMyself = object[@"isSenderMyself"];
            dispatch_async(dispatch_get_main_queue(), ^{
-               //[message fetch];
                // GD Maybe only reload data at the specific IndexPath?
-               [strongSelf.tableView reloadData];
+               [message fetch];
+               [strongSelf reloadRowContainingMessage:message];
            });
        }
    }];
@@ -195,13 +200,6 @@
     self.inputbar.delegate = self;
     self.inputbar.sendButtonText = @"Send";
     self.inputbar.sendButtonTextColor = [UIColor colorWithRed:0 green:124/255.0 blue:1 alpha:1];
-}
-
--(void)setGateway {
-    self.gateway = [MessageGateway sharedInstance];
-    self.gateway.delegate = self;
-    self.gateway.chat = self.chat;
-    // [self.gateway loadOldMessages];
 }
 
 -(void) setTableView {
@@ -367,11 +365,9 @@
     Message *message = [Message new];
     message.text = [Util removeEndSpaceFrom:inputbar.text];
     
-    if (_chat.current_sender == MessageSenderSomeone) {
-        message.isSenderMyself = NO;
+    if (_chat.current_sender == MessageSenderMyself) {
         message.sender = [PFUser currentUser];
     } else {
-        message.isSenderMyself = YES;
         message.sender = _otherRecipient;
     }
     
@@ -446,9 +442,12 @@
     NSArray *indexPaths = [[NSArray alloc]
                            initWithObjects:indexPath, nil];
     
-    // Change the data model only. (reload will cause the cell to reload)
-    message.isSenderMyself = (message.isSenderMyself)? NO: YES;
-    message.sender = message.sender == [PFUser currentUser]? _otherRecipient: [PFUser currentUser];
+    if ([message.sender.objectId isEqual:[PFUser currentUser].objectId])
+        message.sender = _otherRecipient;
+    else {
+        message.sender = [PFUser currentUser];
+    }
+    
     [self.tableView reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
     [message saveInBackground];
     return;

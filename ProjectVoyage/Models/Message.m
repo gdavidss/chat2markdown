@@ -9,7 +9,6 @@
 
 @implementation Message
 
-@dynamic isSenderMyself;
 @dynamic sender;
 @dynamic text;
 @dynamic height;

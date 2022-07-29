@@ -26,8 +26,6 @@ typedef NS_ENUM(NSInteger, MessageSender) {
 
 @interface Message : PFObject<PFSubclassing>
 
-@property (nonatomic, assign) bool isSenderMyself;
-
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, assign) PFUser *sender;
 

@@ -11,11 +11,11 @@
 @import Parse;
 
 @interface SettingsViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *nameField;
-@property (weak, nonatomic) IBOutlet UITextField *usernameField;
-@property (weak, nonatomic) IBOutlet UITextField *emailField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordField;
-@property (weak, nonatomic) IBOutlet UITextField *repeatPasswordField;
+@property (nonatomic, strong) IBOutlet UITextField *nameField;
+@property (nonatomic, strong) IBOutlet UITextField *usernameField;
+@property (nonatomic, strong) IBOutlet UITextField *emailField;
+@property (nonatomic, strong) IBOutlet UITextField *passwordField;
+@property (nonatomic, strong) IBOutlet UITextField *repeatPasswordField;
 
 @end
 

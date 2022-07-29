@@ -15,15 +15,15 @@
 		6A9CDC632878E3850003EFA1 /* LocalStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC622878E3850003EFA1 /* LocalStorage.m */; };
 		6A9CDC692878E4120003EFA1 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC682878E4120003EFA1 /* HPGrowingTextView.m */; };
 		6A9CDC6D2878E46E0003EFA1 /* DAKeyboardControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC6C2878E46E0003EFA1 /* DAKeyboardControl.m */; };
-		6A9CDC702878E6ED0003EFA1 /* MessagesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC6F2878E6ED0003EFA1 /* MessagesVC.m */; };
+		6A9CDC702878E6ED0003EFA1 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC6F2878E6ED0003EFA1 /* MessagesViewController.m */; };
 		6A9CDC732878E93C0003EFA1 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC722878E93C0003EFA1 /* HPTextViewInternal.m */; };
-		6A9CDC7B287DDC420003EFA1 /* EditMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC7A287DDC420003EFA1 /* EditMessageVC.m */; };
+		6A9CDC7B287DDC420003EFA1 /* EditMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC7A287DDC420003EFA1 /* EditMessageViewController.m */; };
 		6A9CDC7F2881E5970003EFA1 /* MarkdownExportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC7E2881E5970003EFA1 /* MarkdownExportVC.m */; };
-		6AC2C8AB2876269D00436B8D /* SignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AA2876269D00436B8D /* SignUpVC.m */; };
+		6AC2C8AB2876269D00436B8D /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AA2876269D00436B8D /* SignUpViewController.m */; };
 		6AC2C8AE2876347500436B8D /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AD2876347500436B8D /* Keys.plist */; };
-		6AC2C8B12876411B00436B8D /* ChatListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B02876411B00436B8D /* ChatListVC.m */; };
+		6AC2C8B12876411B00436B8D /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B02876411B00436B8D /* ChatListViewController.m */; };
 		6AC2C8B5287648F000436B8D /* Chat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B4287648F000436B8D /* Chat.m */; };
-		6AC2C8B8287659B900436B8D /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B7287659B900436B8D /* SettingsVC.m */; };
+		6AC2C8B8287659B900436B8D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B7287659B900436B8D /* SettingsViewController.m */; };
 		6AC2C8BB2877B2DD00436B8D /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8BA2877B2DD00436B8D /* Util.m */; };
 		6AC2C8BF2878A21B00436B8D /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8BE2878A21B00436B8D /* ChatCell.m */; };
 		6AD5983828760C140058386E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5983728760C140058386E /* AppDelegate.m */; };
@@ -35,10 +35,8 @@
 		6AD5985328760C170058386E /* ProjectVoyageTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5985228760C170058386E /* ProjectVoyageTests.m */; };
 		6AD5985D28760C170058386E /* ProjectVoyageUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5985C28760C170058386E /* ProjectVoyageUITests.m */; };
 		6AD5985F28760C170058386E /* ProjectVoyageUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD5985E28760C170058386E /* ProjectVoyageUITestsLaunchTests.m */; };
-		6AD598712876245C0058386E /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD598702876245C0058386E /* LoginVC.m */; };
+		6AD598712876245C0058386E /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AD598702876245C0058386E /* LoginViewController.m */; };
 		6AF337A028875B5E004FD644 /* ChatCreateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AF3379F28875B5E004FD644 /* ChatCreateViewController.m */; };
-		6AFBFE702889EC7400F6F8B2 /* SpeechToTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBFE6F2889EC7400F6F8B2 /* SpeechToTextViewController.m */; };
-		6AFBFE7A288A115D00F6F8B2 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AFBFE79288A115D00F6F8B2 /* APIManager.swift */; };
 		B5BA60BAC5D1A304853B4754 /* Pods_ProjectVoyageTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84F51A004A7968E444CAD93A /* Pods_ProjectVoyageTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -74,23 +72,23 @@
 		6A9CDC682878E4120003EFA1 /* HPGrowingTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
 		6A9CDC6B2878E46E0003EFA1 /* DAKeyboardControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DAKeyboardControl.h; sourceTree = "<group>"; };
 		6A9CDC6C2878E46E0003EFA1 /* DAKeyboardControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DAKeyboardControl.m; sourceTree = "<group>"; };
-		6A9CDC6E2878E6ED0003EFA1 /* MessagesVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessagesVC.h; sourceTree = "<group>"; };
-		6A9CDC6F2878E6ED0003EFA1 /* MessagesVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagesVC.m; sourceTree = "<group>"; };
+		6A9CDC6E2878E6ED0003EFA1 /* MessagesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
+		6A9CDC6F2878E6ED0003EFA1 /* MessagesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
 		6A9CDC712878E93C0003EFA1 /* HPTextViewInternal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
 		6A9CDC722878E93C0003EFA1 /* HPTextViewInternal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
-		6A9CDC79287DDC420003EFA1 /* EditMessageVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditMessageVC.h; sourceTree = "<group>"; };
-		6A9CDC7A287DDC420003EFA1 /* EditMessageVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditMessageVC.m; sourceTree = "<group>"; };
+		6A9CDC79287DDC420003EFA1 /* EditMessageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditMessageViewController.h; sourceTree = "<group>"; };
+		6A9CDC7A287DDC420003EFA1 /* EditMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditMessageViewController.m; sourceTree = "<group>"; };
 		6A9CDC7D2881E5970003EFA1 /* MarkdownExportVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkdownExportVC.h; sourceTree = "<group>"; };
 		6A9CDC7E2881E5970003EFA1 /* MarkdownExportVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarkdownExportVC.m; sourceTree = "<group>"; };
-		6AC2C8A92876269D00436B8D /* SignUpVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpVC.h; sourceTree = "<group>"; };
-		6AC2C8AA2876269D00436B8D /* SignUpVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpVC.m; sourceTree = "<group>"; };
+		6AC2C8A92876269D00436B8D /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
+		6AC2C8AA2876269D00436B8D /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		6AC2C8AD2876347500436B8D /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
-		6AC2C8AF2876411B00436B8D /* ChatListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatListVC.h; sourceTree = "<group>"; };
-		6AC2C8B02876411B00436B8D /* ChatListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatListVC.m; sourceTree = "<group>"; };
+		6AC2C8AF2876411B00436B8D /* ChatListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatListViewController.h; sourceTree = "<group>"; };
+		6AC2C8B02876411B00436B8D /* ChatListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatListViewController.m; sourceTree = "<group>"; };
 		6AC2C8B3287648F000436B8D /* Chat.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Chat.h; sourceTree = "<group>"; };
 		6AC2C8B4287648F000436B8D /* Chat.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Chat.m; sourceTree = "<group>"; };
-		6AC2C8B6287659B900436B8D /* SettingsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
-		6AC2C8B7287659B900436B8D /* SettingsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsVC.m; sourceTree = "<group>"; };
+		6AC2C8B6287659B900436B8D /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		6AC2C8B7287659B900436B8D /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		6AC2C8B92877B2DD00436B8D /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
 		6AC2C8BA2877B2DD00436B8D /* Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		6AC2C8BD2878A21B00436B8D /* ChatCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
@@ -110,14 +108,10 @@
 		6AD5985828760C170058386E /* ProjectVoyageUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectVoyageUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD5985C28760C170058386E /* ProjectVoyageUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectVoyageUITests.m; sourceTree = "<group>"; };
 		6AD5985E28760C170058386E /* ProjectVoyageUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProjectVoyageUITestsLaunchTests.m; sourceTree = "<group>"; };
-		6AD5986F2876245C0058386E /* LoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
-		6AD598702876245C0058386E /* LoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		6AD5986F2876245C0058386E /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		6AD598702876245C0058386E /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		6AF3379E28875B5E004FD644 /* ChatCreateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatCreateViewController.h; sourceTree = "<group>"; };
 		6AF3379F28875B5E004FD644 /* ChatCreateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatCreateViewController.m; sourceTree = "<group>"; };
-		6AFBFE6E2889EC7400F6F8B2 /* SpeechToTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeechToTextViewController.h; sourceTree = "<group>"; };
-		6AFBFE6F2889EC7400F6F8B2 /* SpeechToTextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeechToTextViewController.m; sourceTree = "<group>"; };
-		6AFBFE762889F4BF00F6F8B2 /* ProjectVoyage-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ProjectVoyage-Bridging-Header.h"; sourceTree = "<group>"; };
-		6AFBFE79288A115D00F6F8B2 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		6B7791EBA84C0E82298B12F3 /* Pods-ProjectVoyage-ProjectVoyageUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectVoyage-ProjectVoyageUITests.release.xcconfig"; path = "Target Support Files/Pods-ProjectVoyage-ProjectVoyageUITests/Pods-ProjectVoyage-ProjectVoyageUITests.release.xcconfig"; sourceTree = "<group>"; };
 		84F51A004A7968E444CAD93A /* Pods_ProjectVoyageTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ProjectVoyageTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB45CBBD996C76DDA2B7404 /* Pods-ProjectVoyageTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ProjectVoyageTests.debug.xcconfig"; path = "Target Support Files/Pods-ProjectVoyageTests/Pods-ProjectVoyageTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -192,10 +186,10 @@
 		6A9CDC77287DDBCA0003EFA1 /* Login and Signup */ = {
 			isa = PBXGroup;
 			children = (
-				6AD5986F2876245C0058386E /* LoginVC.h */,
-				6AD598702876245C0058386E /* LoginVC.m */,
-				6AC2C8A92876269D00436B8D /* SignUpVC.h */,
-				6AC2C8AA2876269D00436B8D /* SignUpVC.m */,
+				6AD5986F2876245C0058386E /* LoginViewController.h */,
+				6AD598702876245C0058386E /* LoginViewController.m */,
+				6AC2C8A92876269D00436B8D /* SignUpViewController.h */,
+				6AC2C8AA2876269D00436B8D /* SignUpViewController.m */,
 			);
 			path = "Login and Signup";
 			sourceTree = "<group>";
@@ -203,8 +197,8 @@
 		6A9CDC78287DDBE80003EFA1 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				6AC2C8B6287659B900436B8D /* SettingsVC.h */,
-				6AC2C8B7287659B900436B8D /* SettingsVC.m */,
+				6AC2C8B6287659B900436B8D /* SettingsViewController.h */,
+				6AC2C8B7287659B900436B8D /* SettingsViewController.m */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -221,10 +215,10 @@
 		6AA6AD012887593C00F16EF2 /* Chat list */ = {
 			isa = PBXGroup;
 			children = (
-				6AC2C8AF2876411B00436B8D /* ChatListVC.h */,
+				6AC2C8AF2876411B00436B8D /* ChatListViewController.h */,
 				6AF3379E28875B5E004FD644 /* ChatCreateViewController.h */,
 				6AF3379F28875B5E004FD644 /* ChatCreateViewController.m */,
-				6AC2C8B02876411B00436B8D /* ChatListVC.m */,
+				6AC2C8B02876411B00436B8D /* ChatListViewController.m */,
 			);
 			path = "Chat list";
 			sourceTree = "<group>";
@@ -232,10 +226,10 @@
 		6AA6AD022887594700F16EF2 /* Chat message */ = {
 			isa = PBXGroup;
 			children = (
-				6A9CDC6E2878E6ED0003EFA1 /* MessagesVC.h */,
-				6A9CDC6F2878E6ED0003EFA1 /* MessagesVC.m */,
-				6A9CDC79287DDC420003EFA1 /* EditMessageVC.h */,
-				6A9CDC7A287DDC420003EFA1 /* EditMessageVC.m */,
+				6A9CDC6E2878E6ED0003EFA1 /* MessagesViewController.h */,
+				6A9CDC6F2878E6ED0003EFA1 /* MessagesViewController.m */,
+				6A9CDC79287DDC420003EFA1 /* EditMessageViewController.h */,
+				6A9CDC7A287DDC420003EFA1 /* EditMessageViewController.m */,
 			);
 			path = "Chat message";
 			sourceTree = "<group>";
@@ -307,7 +301,6 @@
 		6AD5983528760C140058386E /* ProjectVoyage */ = {
 			isa = PBXGroup;
 			children = (
-				6AFBFE6D2889EC2400F6F8B2 /* API Managers */,
 				6AC2C8C02878A22000436B8D /* Cell */,
 				6AC2C8BC2877B2E900436B8D /* Util */,
 				6AC2C8B2287648B700436B8D /* Models */,
@@ -352,17 +345,6 @@
 				6AA6AD012887593C00F16EF2 /* Chat list */,
 			);
 			path = "View Controllers";
-			sourceTree = "<group>";
-		};
-		6AFBFE6D2889EC2400F6F8B2 /* API Managers */ = {
-			isa = PBXGroup;
-			children = (
-				6AFBFE6E2889EC7400F6F8B2 /* SpeechToTextViewController.h */,
-				6AFBFE6F2889EC7400F6F8B2 /* SpeechToTextViewController.m */,
-				6AFBFE79288A115D00F6F8B2 /* APIManager.swift */,
-				6AFBFE762889F4BF00F6F8B2 /* ProjectVoyage-Bridging-Header.h */,
-			);
-			path = "API Managers";
 			sourceTree = "<group>";
 		};
 		BE7EFF3296B8261FCBA144D3 /* Pods */ = {
@@ -623,25 +605,23 @@
 			files = (
 				6AD5983828760C140058386E /* AppDelegate.m in Sources */,
 				6A9CDC6D2878E46E0003EFA1 /* DAKeyboardControl.m in Sources */,
-				6AC2C8B8287659B900436B8D /* SettingsVC.m in Sources */,
+				6AC2C8B8287659B900436B8D /* SettingsViewController.m in Sources */,
 				6A9CDC5E2878E3020003EFA1 /* InputBar.m in Sources */,
-				6AD598712876245C0058386E /* LoginVC.m in Sources */,
+				6AD598712876245C0058386E /* LoginViewController.m in Sources */,
 				6AC2C8BF2878A21B00436B8D /* ChatCell.m in Sources */,
-				6A9CDC7B287DDC420003EFA1 /* EditMessageVC.m in Sources */,
-				6AC2C8AB2876269D00436B8D /* SignUpVC.m in Sources */,
+				6A9CDC7B287DDC420003EFA1 /* EditMessageViewController.m in Sources */,
+				6AC2C8AB2876269D00436B8D /* SignUpViewController.m in Sources */,
 				6AD5984928760C160058386E /* main.m in Sources */,
 				6A9CDC632878E3850003EFA1 /* LocalStorage.m in Sources */,
 				6A9CDC692878E4120003EFA1 /* HPGrowingTextView.m in Sources */,
-				6A9CDC702878E6ED0003EFA1 /* MessagesVC.m in Sources */,
+				6A9CDC702878E6ED0003EFA1 /* MessagesViewController.m in Sources */,
 				6A9CDC7F2881E5970003EFA1 /* MarkdownExportVC.m in Sources */,
-				6AC2C8B12876411B00436B8D /* ChatListVC.m in Sources */,
-				6AFBFE702889EC7400F6F8B2 /* SpeechToTextViewController.m in Sources */,
+				6AC2C8B12876411B00436B8D /* ChatListViewController.m in Sources */,
 				6AD5983B28760C140058386E /* SceneDelegate.m in Sources */,
 				6A9CDC732878E93C0003EFA1 /* HPTextViewInternal.m in Sources */,
 				6A9CDC482878D9E30003EFA1 /* MessageCell.m in Sources */,
 				6AC2C8B5287648F000436B8D /* Chat.m in Sources */,
 				6A9CDC4B2878DA610003EFA1 /* Message.m in Sources */,
-				6AFBFE7A288A115D00F6F8B2 /* APIManager.swift in Sources */,
 				6AF337A028875B5E004FD644 /* ChatCreateViewController.m in Sources */,
 				6AC2C8BB2877B2DD00436B8D /* Util.m in Sources */,
 			);
@@ -876,7 +856,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 9BB45CBBD996C76DDA2B7404 /* Pods-ProjectVoyageTests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -895,7 +874,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 269F2F3F83A5FB5494793E36 /* Pods-ProjectVoyageTests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -914,7 +892,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A9958BC8A3A106659C0D2114 /* Pods-ProjectVoyage-ProjectVoyageUITests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -931,7 +908,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6B7791EBA84C0E82298B12F3 /* Pods-ProjectVoyage-ProjectVoyageUITests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

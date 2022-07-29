@@ -7,7 +7,7 @@
 
 #import "Chat.h"
 #import "Util.h"
-@import Parse;
+// @import Parse;
 
 @implementation Chat
 

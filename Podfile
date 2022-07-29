@@ -8,7 +8,7 @@ target 'ProjectVoyage' do
   # Pods for ProjectVoyage
   pod 'Parse'
   pod 'MarkdownView'
-  
+  pod 'ParseLiveQuery'  
 
   target 'ProjectVoyageTests' do
     inherit! :search_paths
