@@ -55,7 +55,7 @@
     self.chat.numberOfUnreadMessages = 0;
     [self sendReadStatusToMessages:read_ids];
 }
--(NSArray *)queryUnreadMessagesInArray:(NSArray *)array
+-(NSArray *)filterUnreadMessagesInArray:(NSArray *)array
 {
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.status == %d", MessageStatusReceived];
     return [array filteredArrayUsingPredicate:predicate];
