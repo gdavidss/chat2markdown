@@ -5,12 +5,20 @@
 //  Created by Gui David on 7/6/22.
 //
 
+
+// View controllers
 #import "ChatListViewController.h"
-#import "Chat.h"
-#import "ChatCell.h"
 #import "MessagesViewController.h"
 #import "LoginViewController.h"
-@import ParseLiveQuery;
+
+// Models
+#import "Message.h"
+#import "Chat.h"
+
+// Cells
+#import "ChatCell.h"
+
+@import Parse;
 
 @interface ChatListViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -18,11 +26,9 @@
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (nonatomic, strong) NSArray *chats;
+@property (nonatomic, strong) NSMutableArray *chats;
 @property (nonatomic, strong) NSArray<PFUser *> *users;
 
-@property (nonatomic, strong) PFLiveQueryClient *liveQueryClient;
-@property (nonatomic, strong) PFLiveQuerySubscription *subscription;
 @end
 
 @implementation ChatListViewController
@@ -119,6 +125,27 @@
         MessagesViewController *messagesVC = navController.viewControllers[0];
         ChatCell *selectedChatCell = sender;
     messagesVC.chat = selectedChatCell.chat;
+    }
+}
+
+// Swipe left to delete message
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        Chat *chat = self.chats[indexPath.row];
+        
+        [self deleteAllMessagesForChat:chat];
+        [chat deleteInBackground];
+        [self.chats removeObject:chat];
+        
+        NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
+        [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+- (void) deleteAllMessagesForChat:(Chat *)chat {
+    NSArray<Message *> *messages = chat.messages;
+    for (Message *message in messages) {
+        [message deleteInBackground];
     }
 }
 
