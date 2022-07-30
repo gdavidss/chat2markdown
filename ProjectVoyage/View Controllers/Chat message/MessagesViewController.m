@@ -149,7 +149,6 @@
     PFQuery *query = [chatMessagesRelation query];
     [query orderByAscending:@"createdAt"];
     
-    
     NSArray *queryKeys = [NSArray arrayWithObjects:@"text", @"sender", nil];
     [query includeKeys:queryKeys];
         
@@ -161,6 +160,7 @@
         if (messages != nil) {
             strongSelf->_chat.messages = [messages mutableCopy];
             [strongSelf->_tableView reloadData];
+            [strongSelf scrollToBottom];
         } else {
             // GD throw alert
             NSLog(@"%@", error.localizedDescription);
@@ -325,7 +325,6 @@
     return @[dragItem];
 }
 
-
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     Message *messageToMove = self.chat.messages[sourceIndexPath.row];
     [self.chat.messages removeObjectAtIndex:sourceIndexPath.row];
@@ -366,7 +365,6 @@
     return view;
 }
 
-
 - (void)tableViewScrollToBottomAnimated:(BOOL)animated {
     NSInteger numberOfRows = self.chat.messages.count;
     
@@ -380,6 +378,12 @@
     }
 }
 
+- (void) scrollToBottom {
+    if (_chat.messages.count > [[_tableView visibleCells] count]) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_chat.messages.count - 1) inSection:0];
+        [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    }
+}
 
 #pragma mark - InputbarDelegate
 
