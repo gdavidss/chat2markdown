@@ -28,10 +28,7 @@
 
 @import ParseLiveQuery;
 
-// add PFQueryTableViewController as a subclass of MessagesViewController
-
-@interface MessagesViewController() <InputbarDelegate,
-                                    UITableViewDataSource, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
+@interface MessagesViewController() <InputbarDelegate, UITableViewDataSource, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
 @property (nonatomic, strong) IBOutlet Inputbar *inputbar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *markdownButton;
@@ -42,6 +39,9 @@
 // This assumes that there's only one other recipient in each chat, should be changed if groups are allowed
 @property (nonatomic, strong) PFUser *otherRecipient;
 
+@property (nonatomic, assign) NSInteger currentPageNumber;
+@property (nonatomic, assign) bool shouldKeepScrolling;
+
 @end
 
 // GD I'm testing a brown color here
@@ -51,6 +51,7 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    self.chat.messages = [NSMutableArray new];
     [self loadMessages];
     
     // set methods
@@ -78,6 +79,9 @@
 
     // using live query to immediately show the change
     self.liveQueryClient = [[PFLiveQueryClient alloc] initWithServer:@"wss://chat2markdown.b4a.io" applicationId:app_id clientKey:client_id];
+    //PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
+    //PFQuery *chatQuery = [chatMessagesRelation query];
+    
     PFQuery *chatQuery = [PFQuery queryWithClassName:@"Chat"];
     self.subscription = [self.liveQueryClient subscribeToQuery:chatQuery];
    
@@ -85,11 +89,6 @@
    [self.subscription addUpdateHandler:^(PFQuery<PFObject *> * _Nonnull query, PFObject * _Nonnull object) {
        __strong typeof (self) strongSelf = weakSelf;
        if (object) {
-           NSMutableArray *newMessages = object[@"messages"];
-           if (newMessages.count == strongSelf.chat.messages.count) {
-               return;
-           }
-           strongSelf.chat.messages = newMessages;
            dispatch_async(dispatch_get_main_queue(), ^{
                [strongSelf loadMessages];
                [strongSelf.tableView reloadData];
@@ -146,10 +145,29 @@
 
 // GD Is there a way to only load this once and cache it so I don't fetch it everytime I open this?
 - (void) loadMessages {
-    for (Message *message in _chat.messages) {
-        [message fetch];
-    }
+    PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
+    PFQuery *query = [chatMessagesRelation query];
+    [query orderByAscending:@"createdAt"];
+    
+    
+    NSArray *queryKeys = [NSArray arrayWithObjects:@"text", @"sender", nil];
+    [query includeKeys:queryKeys];
+        
+    // fetch data asynchronously
+    __weak __typeof(self) weakSelf = self;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *messages, NSError *error) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        if (messages != nil) {
+            strongSelf->_chat.messages = [messages mutableCopy];
+            [strongSelf->_tableView reloadData];
+        } else {
+            // GD throw alert
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
 }
+
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -392,18 +410,10 @@
                     animated:YES];
     
     //Send message to server
-    [message saveInBackground];
+    PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
+    [chatMessagesRelation addObject:message];
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Chat"];
-    [query getObjectInBackgroundWithId:_chat.objectId
-                                 block:^(PFObject *chat, NSError *error) {
-        if (error) {
-            NSLog(@"%@", error);
-        }
-        NSLog(@"%@", chat);
-        chat[@"messages"] = self.chat.messages;
-        [chat saveInBackground];
-    }];
+    [_chat saveInBackground];
 }
 
 - (void)inputbarDidPressChangeSenderButton:(Inputbar *)inputbar {

@@ -78,9 +78,10 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"Chat"];
     [query orderByDescending:@"createdAt"];
-    NSArray *queryKeys = [NSArray arrayWithObjects:@"recipients", @"chatDescription", nil];
+    // NSArray *queryKeys = [NSArray arrayWithObjects:@"recipients", @"chatDescription", nil];
+    NSArray *queryKeys = [NSArray arrayWithObjects:@"recipients", @"chatDescription", @"messages_3", nil];
     [query includeKeys:queryKeys];
-    
+        
     [query whereKey:@"recipients" containsAllObjectsInArray:@[[PFUser currentUser]]];
         // fetch data asynchronously
         __weak __typeof(self) weakSelf = self;
@@ -120,7 +121,7 @@
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier  isEqual: @"MessagesSegue"] ) {
+    if ([segue.identifier isEqual: @"MessagesSegue"] ) {
         UINavigationController *navController = [segue destinationViewController];
         MessagesViewController *messagesVC = navController.viewControllers[0];
         ChatCell *selectedChatCell = sender;

@@ -18,6 +18,10 @@
     return self;
 }
 
+- (BOOL)isEqual:(Message *)message {
+    return [self.objectId isEqual:message.objectId];
+}
+
 + (nonnull NSString *)parseClassName {
     return @"Message";
 }
