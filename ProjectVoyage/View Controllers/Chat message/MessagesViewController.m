@@ -79,8 +79,6 @@
 
     // using live query to immediately show the change
     self.liveQueryClient = [[PFLiveQueryClient alloc] initWithServer:@"wss://chat2markdown.b4a.io" applicationId:app_id clientKey:client_id];
-    //PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
-    //PFQuery *chatQuery = [chatMessagesRelation query];
     
     PFQuery *chatQuery = [PFQuery queryWithClassName:@"Chat"];
     self.subscription = [self.liveQueryClient subscribeToQuery:chatQuery];
@@ -113,7 +111,7 @@
     NSString *app_id = [dict objectForKey: @"app_id"];
     NSString *client_id = [dict objectForKey: @"client_id"];
     
-    // using live query to immediately show the change
+    // Using live query to immediately show the change
     self.liveQueryClient = [[PFLiveQueryClient alloc] initWithServer:@"wss://chat2markdown.b4a.io" applicationId:app_id clientKey:client_id];
     PFQuery *messageQuery = [PFQuery queryWithClassName:@"Message"];
     self.subscription = [self.liveQueryClient subscribeToQuery:messageQuery];
@@ -121,10 +119,11 @@
    __unsafe_unretained typeof(self) weakSelf = self;
    [self.subscription addUpdateHandler:^(PFQuery<PFObject *> * _Nonnull query, PFObject * _Nonnull object) {
        __strong typeof (self) strongSelf = weakSelf;
-       if (object) {
+       if (object){
            Message *message = [strongSelf findMessageByObjectId:object.objectId];
            message.text = object[@"text"];
            message.sender = object[@"sender"];
+           
            dispatch_async(dispatch_get_main_queue(), ^{
                // GD Maybe only reload data at the specific IndexPath?
                [message fetch];
@@ -143,7 +142,6 @@
     return nil;
 }
 
-// GD Is there a way to only load this once and cache it so I don't fetch it everytime I open this?
 - (void) loadMessages {
     PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
     PFQuery *query = [chatMessagesRelation query];
@@ -151,8 +149,8 @@
     
     NSArray *queryKeys = [NSArray arrayWithObjects:@"text", @"sender", nil];
     [query includeKeys:queryKeys];
-        
-    // fetch data asynchronously
+    
+    // Fetch data asynchronously
     __weak __typeof(self) weakSelf = self;
     [query findObjectsInBackgroundWithBlock:^(NSArray *messages, NSError *error) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
@@ -167,7 +165,6 @@
         }
     }];
 }
-
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
@@ -191,12 +188,12 @@
         tableViewFrame.size.height = strongSelf->_inputbar.frame.origin.y - 64;
         strongSelf->_tableView.frame = tableViewFrame;
         
-        [strongSelf tableViewScrollToBottomAnimated:NO];
+        // CC This was an old attempt of scrolling down when opening the chat
+        // [strongSelf tableViewScrollToBottomAnimated:NO];
     }];
 }
 
--(void)viewDidDisappear:(BOOL)animated
-{
+-(void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.view endEditing:YES];
     [self.view removeKeyboardControl];
@@ -236,12 +233,13 @@
     self.tableView.dragDelegate = self;
     self.tableView.dropDelegate = self;
      
+    [self.tableView setScrollsToTop:YES];
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier: @"MessageCell"];
 }
 
 - (void) setChat:(Chat *)chat {
     _chat = chat;
-    self.title = [NSString stringWithFormat:@"%@ & %@", chat.recipients[0].username, chat.recipients[1].username];;
+    self.title = [NSString stringWithFormat:@"%@ & %@", chat.recipients[0].username, chat.recipients[1].username];
 }
 
 #pragma mark - Actions
@@ -365,10 +363,10 @@
     return view;
 }
 
+// CC This was an old attempt of scrolling down when opening the chat
+/*
 - (void)tableViewScrollToBottomAnimated:(BOOL)animated {
     NSInteger numberOfRows = self.chat.messages.count;
-    
-    // Open chat in the very last message
     if (numberOfRows) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(self.chat.messages.count - 1) inSection:0];
         
@@ -376,12 +374,28 @@
                     atScrollPosition:UITableViewScrollPositionBottom
                     animated:animated];
     }
-}
+}*/
 
+// Open the chat in the very last message
 - (void) scrollToBottom {
     if (_chat.messages.count > [[_tableView visibleCells] count]) {
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_chat.messages.count - 1) inSection:0];
         [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+    }
+}
+
+- (void) shouldLoadPage {
+    NSUInteger indexOfLastMessage = self.chat.messages.count - 1;
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:indexOfLastMessage inSection:0];
+    if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath]) {
+        NSLog(@"saw it!");
+        //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView.contentOffset.y + _tableView.safeAreaInsets.top == 0) {
+        NSLog(@"reached the end");
     }
 }
 
@@ -430,21 +444,22 @@
     self.view.keyboardTriggerOffset = new_height;
 }
 
+
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-   if ([segue.identifier isEqualToString:@"EditMessageSegue"]) {
+    if ([segue.identifier isEqualToString:@"EditMessageSegue"]) {
         EditMessageViewController *editMessageVC = [segue destinationViewController];
         Message *messageToPass = sender;
         editMessageVC.message = messageToPass;
         editMessageVC.delegate = self;
     }
-   else if ([segue.identifier isEqualToString:@"MarkdownSegue"]) {
-       MarkdownExportVC *markdownExportVC = [segue destinationViewController];
-       Chat *chat = sender;
-       markdownExportVC.chat = chat;
-       markdownExportVC.otherRecipientUsername = _otherRecipient.username;
-   }
+    else if ([segue.identifier isEqualToString:@"MarkdownSegue"]) {
+        MarkdownExportVC *markdownExportVC = [segue destinationViewController];
+        Chat *chat = sender;
+        markdownExportVC.chat = chat;
+        markdownExportVC.otherRecipientUsername = _otherRecipient.username;
+    }
 }
 
 #pragma mark - Container methods
