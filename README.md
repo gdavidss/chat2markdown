@@ -1,7 +1,5 @@
-Original App Design Project - README Template
-===
 
-# Project Voyage
+# chat2markdown
 
 ## Table of Contents
 1. [Overview](#Overview)
@@ -12,17 +10,18 @@ Original App Design Project - README Template
 ## Overview
 ### Description
 
-Are you the kind of person who sends 10-minute voice messages to your friends investigating the nature of things or making jokes that could totally be in a stand-up comedy show?
+chat2markdown is an experimental chat app that allows you and your friends to modify all messages in the chat… all for the sake of a good markdown file.
 
-If so, this app is for you.
- 
-Project Voyage is an app based on Automated Speech Recognition (ASR). It transcribes voice messages to text, allowing the user to produce, and manipulate it as they wish, a written dialogue between two people. The user can then export the dialogue in Markdown so they can copy and paste it in their favorite notetaking app.
+philosophical assumptions:
+- data shouldn’t exist in silos
+- chats are collective artifacts
+- having all the knobs of a system is good sometimes
 
 ### App Evaluation
-- **Category:** Self-cognition
-- **Mobile:** Yes, sir. Mobile is fundamental here because it is the most direct from of sending voice messages. PCs have the disadvantage of having to download the voice message. Plus, most transcription apps on app store are too purpose broad.
+- **Category:** Messaging, note-taking
+- **Mobile:** Mobile is fundamental here because it is the most direct from of sending messages.
 - **Story:** Users will be able to transcribe their conversations that contains voice messages and export them forever.
-- **Market:** Self-improvement
+- **Market:** Messaging
 - **Habit:** The app might assist and integrate the personal habit of sending meaningful voice messages to people, while being able to regularly retrieve information from these messages. 
 - **Scope:** On the most basic level, the user should be able to upload a voice message directly from WhatsApp and have it displayed in screen as a message bubble to copy and paste in raw text. Users can also import written messages from WhatsApp if it helps complementing a dialogue. They can also edit any of the text of all parties in the dialogue as they wish. In cybernetic terms, they have requisite variety over all existing symbols in the dialogue.
 
@@ -97,7 +96,6 @@ Project Voyage is an app based on Automated Speech Recognition (ASR). It transcr
 ![](https://i.imgur.com/zRpov42.png)
 
 ## Schema 
-[This section will be completed in Unit 9]
 ### Models
 
 #### User
@@ -105,31 +103,36 @@ Project Voyage is an app based on Automated Speech Recognition (ASR). It transcr
   | Property       | Type     | Description                                 |
 | -------------- | -------- | ------------------------------------------- |
 | objectId       | String   | unique id for the user (default field)      |
+| emailVerified       | Bool   | Whether or not email is verified                   |
 | name       | String   | User's name 
 | username       | String   | User's username to log in                   |
 | password       | String   | Users hashed/encrypted password             |
 | email          | String   | User's email address      |
 | createdAt      | DateTime | Date for when user created their account  |
 
-#### Chat
 
+#### Chat
   | Property       | Type     | Description                                 |
 | -------------- | -------- | ------------------------------------------- |
 | objectId       | String   | unique id for the chat     |
-| person       | String   | Person who received/sent messages to user in the chat                    |
-| description       | String   | Description of subject of the chat           |
-| createdAt | DateTime | Date for when chat was created |
-| messages | Array | List of all messages  in the chat |
+| createdAt | Date | Date for when chat was created |
+| updatedAt | Date | Date for when chat was updated |
+| ACL       | ACL   | Access control list (Public Read + Write by default)            |
+| recipients      | NSArray<PFUser *>   | Person who "received" the messages                   |
+| chatDescription       | String   | Description of subject of the chat           |
+| messages | Relation | List of all messages  in the chat |
+| current_sender | Number | Current sender in the chat |
 
-#### Message bubble
+
+#### Message
 
   | Property       | Type     | Description                                 |
 | -------------- | -------- | ------------------------------------------- |
 | objectId       | String   | unique id for the message     |
-| sentBy       | String   | Person who sent the message                    |
-| content       | String   | The content of the message           |
+| text       | String   | The content of the message           |
+| sender       | PFUser *  | A pointer to the user who sent the message           |
 | audio | File (nullable) | Audio file if the message was transcribed |
-| isItAudio | BOOL |  Verify if message contains a voice message to be transcribed |
+| CreatedAt | DateTime | Date for when message was created |
 
 
 ### Networking
