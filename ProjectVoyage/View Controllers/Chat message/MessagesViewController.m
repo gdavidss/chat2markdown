@@ -39,8 +39,10 @@
 // This assumes that there's only one other recipient in each chat, should be changed if groups are allowed
 @property (nonatomic, strong) PFUser *otherRecipient;
 
+// pagination variables
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) bool shouldKeepScrolling;
+@property (nonatomic, assign) int MESSAGES_PER_PAGE;
 
 @end
 
@@ -51,7 +53,11 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    
     self.chat.messages = [NSMutableArray new];
+    _currentPageNumber = 0;
+    _MESSAGES_PER_PAGE = 10;
+    
     [self loadMessages];
     
     // set methods
@@ -145,23 +151,37 @@
 - (void) loadMessages {
     PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
     PFQuery *query = [chatMessagesRelation query];
-    [query orderByAscending:@"createdAt"];
+    [query orderByDescending:@"createdAt"];
     
     NSArray *queryKeys = [NSArray arrayWithObjects:@"text", @"sender", nil];
     [query includeKeys:queryKeys];
     
+    query.limit = _MESSAGES_PER_PAGE;
+    query.skip = _MESSAGES_PER_PAGE * _currentPageNumber;
+        
     // Fetch data asynchronously
     __weak __typeof(self) weakSelf = self;
-    [query findObjectsInBackgroundWithBlock:^(NSArray *messages, NSError *error) {
+    [query findObjectsInBackgroundWithBlock:^(NSArray *reversedMessages, NSError *error) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         if (!strongSelf) return;
-        if (messages != nil) {
-            strongSelf->_chat.messages = [messages mutableCopy];
-            [strongSelf->_tableView reloadData];
-            [strongSelf scrollToBottom];
-        } else {
-            // GD throw alert
+        if (reversedMessages == nil) {
             NSLog(@"%@", error.localizedDescription);
+        } else if ([reversedMessages count] > 0) {
+            strongSelf->_shouldKeepScrolling = YES;
+            
+            NSArray<Message *> *messages = [[reversedMessages reverseObjectEnumerator] allObjects];
+            
+            NSMutableArray *newMessages = [messages mutableCopy];
+            [newMessages addObjectsFromArray:strongSelf->_chat.messages];
+            strongSelf->_chat.messages = newMessages;
+            [strongSelf->_tableView reloadData];
+            // GD The method below should only be called when the chat is first opened but...
+            // the problem is that in viewDidLoad the messages haven't been loaded yet
+            // because this thread hasn't finished loading the messages.
+            
+            //[strongSelf scrollToBottom];
+        } else {
+            strongSelf->_shouldKeepScrolling = NO;
         }
     }];
 }
@@ -187,9 +207,6 @@
         CGRect tableViewFrame = strongSelf->_tableView.frame;
         tableViewFrame.size.height = strongSelf->_inputbar.frame.origin.y - 64;
         strongSelf->_tableView.frame = tableViewFrame;
-        
-        // CC This was an old attempt of scrolling down when opening the chat
-        // [strongSelf tableViewScrollToBottomAnimated:NO];
     }];
 }
 
@@ -227,12 +244,12 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f,self.view.frame.size.width, 10.0f)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor]; // UIColorFromRGB(0xDFDBC4);
-    
+
     // Drag and drop methods to move messages around
     self.tableView.dragInteractionEnabled = true;
     self.tableView.dragDelegate = self;
     self.tableView.dropDelegate = self;
-     
+    
     [self.tableView setScrollsToTop:YES];
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier: @"MessageCell"];
 }
@@ -363,39 +380,22 @@
     return view;
 }
 
-// CC This was an old attempt of scrolling down when opening the chat
-/*
-- (void)tableViewScrollToBottomAnimated:(BOOL)animated {
-    NSInteger numberOfRows = self.chat.messages.count;
-    if (numberOfRows) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(self.chat.messages.count - 1) inSection:0];
-        
-        [_tableView scrollToRowAtIndexPath:indexPath
-                    atScrollPosition:UITableViewScrollPositionBottom
-                    animated:animated];
-    }
-}*/
-
-// Open the chat in the very last message
 - (void) scrollToBottom {
-    if (_chat.messages.count > [[_tableView visibleCells] count]) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_chat.messages.count - 1) inSection:0];
-        [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-    }
-}
-
-- (void) shouldLoadPage {
-    NSUInteger indexOfLastMessage = self.chat.messages.count - 1;
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:indexOfLastMessage inSection:0];
-    if ([self.tableView.indexPathsForVisibleRows containsObject:indexPath]) {
-        NSLog(@"saw it!");
-        //[self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
+    // CC-  This if statement was in place to check the case where you opened a chat
+    // and there were more loaded messages than it could be possibly be visible on screen
+    // if (_chat.messages.count > [[_tableView visibleCells] count]) {
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_chat.messages.count - 1) inSection:0];
+    [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (scrollView.contentOffset.y + _tableView.safeAreaInsets.top == 0) {
-        NSLog(@"reached the end");
+    if (_shouldKeepScrolling) {
+        if (scrollView.contentOffset.y + _tableView.safeAreaInsets.top == 0) {
+            _currentPageNumber++;
+            [self loadMessages];
+            NSLog(@"Reloaded more messages!");
+        }
     }
 }
 
