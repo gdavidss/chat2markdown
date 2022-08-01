@@ -186,20 +186,24 @@
     }];
 }
 
--(void)viewDidAppear:(BOOL)animated {
+
+-(void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
-        
-    self.view.keyboardTriggerOffset = _inputbar.frame.size.height;
+    
     
     __weak __typeof(self) weakSelf = self;
+    self.view.keyboardTriggerOffset = _inputbar.frame.size.height;
+    
     [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView, BOOL opening, BOOL closing) {
-         /*
+        /*
          Try not to call "self" inside this block (retain cycle).
          But if you do, make sure to remove DAKeyboardControl
          when you are done with the view controller by calling:
          [self.view removeKeyboardControl];
          */
         __strong __typeof(weakSelf) strongSelf = weakSelf;
+        
         if (!strongSelf) { return; }
         CGRect toolBarFrame = strongSelf->_inputbar.frame;
         toolBarFrame.origin.y = keyboardFrameInView.origin.y - toolBarFrame.size.height;
@@ -207,6 +211,8 @@
         CGRect tableViewFrame = strongSelf->_tableView.frame;
         tableViewFrame.size.height = strongSelf->_inputbar.frame.origin.y - 64;
         strongSelf->_tableView.frame = tableViewFrame;
+        
+        [strongSelf scrollToBottomAnimated:NO];
     }];
 }
 
@@ -380,13 +386,12 @@
     return view;
 }
 
-- (void) scrollToBottom {
+- (void) scrollToBottomAnimated:(BOOL)animated {
     // CC-  This if statement was in place to check the case where you opened a chat
     // and there were more loaded messages than it could be possibly be visible on screen
     // if (_chat.messages.count > [[_tableView visibleCells] count]) {
-    
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_chat.messages.count - 1) inSection:0];
-    [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:animated];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -417,15 +422,14 @@
     //Insert Message in UI
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chat.messages.count - 1 inSection:0];
     
-    [self.tableView beginUpdates];
+    [_tableView beginUpdates];
+    [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+    [_tableView endUpdates];
+    [_tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow:self.chat.messages.count - 1 inSection:0]
+                                        atScrollPosition:UITableViewScrollPositionBottom
+                                        animated:YES];
     
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
-    
-    [self.tableView endUpdates];
-    
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.chat.messages.count - 1 inSection:0]
-                    atScrollPosition:UITableViewScrollPositionBottom
-                    animated:YES];
+    [self scrollToBottomAnimated:YES];
     
     //Send message to server
     PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
