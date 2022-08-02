@@ -19,13 +19,10 @@
 
 - (void) setChat:(Chat *)chat {
     _chat = chat;
-
     _chatImage.image = [UIImage imageWithData:[chat.image getData]];
-    NSString *chat_title = [NSString stringWithFormat:@"%@ & %@", chat.recipients[0].username, chat.recipients[1].username];
-    _chatTitle.text = chat_title;
+    _chatTitle.text = chat.chatTitle;
     _descriptionLabel.text = chat.chatDescription;
     _dateChat.text = [Util formatDateString:chat.createdAt];
-    
     [Util roundImage:_chatImage];
 }
 

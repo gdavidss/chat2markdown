@@ -10,7 +10,7 @@
 
 @interface UserCell ()
 
-@property (nonatomic, strong) IBOutlet UIImageView *userPictureImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *userPicture;
 @property (nonatomic, strong) IBOutlet UILabel *nameLabel;
 
 @end
@@ -21,12 +21,16 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    _nameLabel.text = _name;
-    if (_userPicture) {
-        [_userPictureImageView setImage:_userPicture];
+}
+
+- (void) setUser:(PFUser *)user {
+    _nameLabel.text = user[NAME];
+    if (user[PROFILE_PICTURE]) {
+        [_userPicture setImage:user[PROFILE_PICTURE]];
     } else {
-        [_userPictureImageView setImage:[UIImage imageNamed:@"user"]];
+        [_userPicture setImage:[UIImage imageNamed:@"user.png"]];
     }
+    [Util roundImage:_userPicture];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

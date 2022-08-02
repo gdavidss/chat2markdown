@@ -7,67 +7,108 @@
 
 #import "ChatCreateViewController.h"
 #import "GlobalVariables.h"
-#import "UserCell.h"
 #import "Chat.h"
 #import "Util.h"
 
-@interface ChatCreateViewController () <UITableViewDataSource, UITableViewDelegate>
-
-@property (nonatomic, strong) NSArray *users;
+@interface ChatCreateViewController ()
+@property (nonatomic, strong) IBOutlet UITextField *chatTitleTextField;
+@property (nonatomic, strong) IBOutlet UITextField *chatDescriptionTextField;
+@property (nonatomic, strong) IBOutlet UIImageView *chatImage;
+@property (nonatomic, assign) BOOL didChangeImage;
 
 @end
 
-@implementation ChatCreateViewController 
+@implementation ChatCreateViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self queryUsers];
+    [Util roundImage:_chatImage];
+    
+    _didChangeImage = NO;
+    
+    if (_user[PROFILE_PICTURE]) {
+        [_chatImage setImage:_user[PROFILE_PICTURE]];
+    } else {
+        [_chatImage setImage:[UIImage imageNamed:@"user.png"]];
+    }
+    
+    _chatTitleTextField.text = [NSString stringWithFormat:@"%@ & %@", [PFUser currentUser].username, _user.username];
 }
 
-#pragma mark - TableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+- (IBAction)trimEndSpaces:(id)sender {
+    UITextField *textField = sender;
+    textField.text = [Util removeEndSpaceFrom:textField.text];
 }
 
-- (void) queryUsers {
-    PFQuery *query = [PFQuery queryWithClassName:USER_CLASS];
+- (IBAction)didTapCreateChat:(id)sender {
+    NSArray<PFUser *> *recipients = [NSArray arrayWithObjects:[PFUser currentUser], _user, nil];
+    UIImage *_Nullable chatPicture = _didChangeImage? _chatImage.image: nil;
     
-    NSArray *queryKeys = [NSArray arrayWithObjects:NAME, USERNAME, nil];
-    [query includeKeys:queryKeys];
-    
-    [query whereKey:@"objectId" notEqualTo:[PFUser currentUser].objectId];
-    
-    // fetch data asynchronously
-    __weak __typeof(self) weakSelf = self;
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *found_users, NSError *error) {
-        __strong __typeof(weakSelf) strongSelf = weakSelf;
-        if (!strongSelf) return;
-        strongSelf->_users = found_users;
+    [Chat postChat:_chatTitleTextField.text
+         withDescription:_chatDescriptionTextField.text
+         withImage:chatPicture
+         withRecipients:recipients
+         withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if (error != nil) {
+                [self alertFailedChat];
+            } else {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
     }];
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _users.count + 1;
-}
+- (IBAction)tapGesture:(id)sender {
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"UserCell";
-    UserCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    cell = [[UserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    
-    if (indexPath.row == 0) {
-        // generate solo chat
-        cell.name = @"Myself";
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     } else {
-        PFUser *user = _users[indexPath.row];
-        cell.name = user[NAME];
-        // CC I haven't yet allowed users to upload profile pics
-        // cell.userPicture = user[PICTURE]
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
-    return cell;
+
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    // Get the image captured by the UIImagePickerController
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+
+    // Do something with the image
+    [_chatImage setImage:editedImage];
+    _didChangeImage = YES;
+    
+    // Dismiss UIImagePickerController to go back to compose view controller
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+/* CC - I used this method to generate a bunch of chats
+- (void) generateChats {
+    for (PFUser *user in _users) {
+        [self postChatWithUser:user];
+    }
+}
+ */
+
+- (void) alertFailedChat {
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Chat post failed" message:@"Something went wrong when trying to create the chat." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * action) {}];
+    
+    [alert addAction:acknowledge];
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+/*
+#pragma mark - Navigation
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

@@ -47,7 +47,6 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    //[self queryUsers];
     [self refreshHomeFeed:self.refreshControl];
 }
 
@@ -57,38 +56,19 @@
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
-- (void) queryUsers {
-    PFQuery *query = [PFQuery queryWithClassName:USER_CLASS];
-    
-    NSArray *queryKeys = [NSArray arrayWithObjects:NAME, USERNAME, nil];
-    [query includeKeys:queryKeys];
-    
-    [query whereKey:@"objectId" notEqualTo:[PFUser currentUser].objectId];
-    
-    // fetch data asynchronously
-    __weak __typeof(self) weakSelf = self;
-    
-    [query findObjectsInBackgroundWithBlock:^(NSArray *found_users, NSError *error) {
-        __strong __typeof(weakSelf) strongSelf = weakSelf;
-        if (!strongSelf) return;
-        strongSelf->_users = found_users;
-        [strongSelf refreshHomeFeed:strongSelf.refreshControl];
-    }];
-}
-
 - (void) refreshHomeFeed:(UIRefreshControl *)refreshControl {
     [refreshControl beginRefreshing];
     
     PFQuery *query = [PFQuery queryWithClassName:CHAT_CLASS];
-    [query orderByDescending:@"createdAt"];
+    [query orderByDescending:UPDATED_AT];
     
     // GD You need to find a way to query both from local datastore and online too
-    [query fromLocalDatastore];
+    //[query fromLocalDatastore];
     
-    NSArray *queryKeys = [NSArray arrayWithObjects:RECIPIENTS, CHAT_DESCRIPTION, MESSAGES, nil];
+    NSArray *queryKeys = [NSArray arrayWithObjects:RECIPIENTS, CHAT_DESCRIPTION, MESSAGES, IMAGE, nil];
     [query includeKeys:queryKeys];
         
-    [query whereKey:@"recipients" containsAllObjectsInArray:@[[PFUser currentUser]]];
+    [query whereKey:RECIPIENTS containsAllObjectsInArray:@[[PFUser currentUser]]];
         // fetch data asynchronously
         __weak __typeof(self) weakSelf = self;
         [query findObjectsInBackgroundWithBlock:^(NSArray *chats, NSError *error) {
@@ -104,24 +84,6 @@
                 NSLog(@"%@", error.localizedDescription);
             }
         }];
-}
-
-- (void) generateChats {
-    for (PFUser *user in _users) {
-        [self postChatWithUser:user];
-    }
-}
-
-- (void) postChatWithUser:(PFUser *)user {
-    NSArray<PFUser *> *recipients = [NSArray arrayWithObjects:[PFUser currentUser], user, nil];
-    [Chat postChat:@"This should be editable"
-          withImage:nil
-          withRecipients:recipients
-          withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            if (error != nil) {
-                [self alertFailedChat];
-            }
-    }];
 }
 
 #pragma mark - Navigation
@@ -158,7 +120,7 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ChatCell *chatCell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell" forIndexPath:indexPath];
-    chatCell.chat = self.chats[indexPath.row];
+    chatCell.chat = _chats[indexPath.row];
     return chatCell;
 }
 
@@ -167,16 +129,6 @@
 }
 
 #pragma mark - Alert errors
-
-- (void) alertFailedChat {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Chat post failed" message:@"Something went wrong when trying to create the chat." preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * action) {}];
-    
-    [alert addAction:acknowledge];
-    [self presentViewController:alert animated:YES completion:nil];
-}
     
 - (void) alertFailedRefresh {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Refresh homefeed failed" message:@"Something went wrong when trying to refresh the feed." preferredStyle:UIAlertControllerStyleAlert];

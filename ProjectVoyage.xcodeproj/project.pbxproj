@@ -11,6 +11,7 @@
 		4E1A13A42A53BB29FA7F1897 /* Pods_ProjectVoyage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD7FEFD683F07E31C748D340 /* Pods_ProjectVoyage.framework */; };
 		6A8603332898810700564C1A /* GlobalVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8603322898810700564C1A /* GlobalVariables.m */; };
 		6A8603392898879000564C1A /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8603382898879000564C1A /* UserCell.m */; };
+		6A8603442898CAB700564C1A /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A8603432898CAB700564C1A /* UserListViewController.m */; };
 		6A9CDC482878D9E30003EFA1 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC472878D9E30003EFA1 /* MessageCell.m */; };
 		6A9CDC4B2878DA610003EFA1 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC4A2878DA610003EFA1 /* Message.m */; };
 		6A9CDC5E2878E3020003EFA1 /* InputBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC5D2878E3020003EFA1 /* InputBar.m */; };
@@ -66,6 +67,8 @@
 		6A8603322898810700564C1A /* GlobalVariables.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GlobalVariables.m; sourceTree = "<group>"; };
 		6A8603372898879000564C1A /* UserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
 		6A8603382898879000564C1A /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
+		6A8603422898CAB700564C1A /* UserListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserListViewController.h; sourceTree = "<group>"; };
+		6A8603432898CAB700564C1A /* UserListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserListViewController.m; sourceTree = "<group>"; };
 		6A9CDC462878D9E30003EFA1 /* MessageCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageCell.h; sourceTree = "<group>"; };
 		6A9CDC472878D9E30003EFA1 /* MessageCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageCell.m; sourceTree = "<group>"; };
 		6A9CDC492878DA610003EFA1 /* Message.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
@@ -172,6 +175,15 @@
 				6A8603322898810700564C1A /* GlobalVariables.m */,
 			);
 			path = GlobalVariables;
+			sourceTree = "<group>";
+		};
+		6A8603412898CA7C00564C1A /* User list */ = {
+			isa = PBXGroup;
+			children = (
+				6A8603422898CAB700564C1A /* UserListViewController.h */,
+				6A8603432898CAB700564C1A /* UserListViewController.m */,
+			);
+			path = "User list";
 			sourceTree = "<group>";
 		};
 		6A9CDC602878E3630003EFA1 /* Helpers */ = {
@@ -356,6 +368,7 @@
 		6AD5986E287623D60058386E /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				6A8603412898CA7C00564C1A /* User list */,
 				6A9CDC7C2881E5810003EFA1 /* Markdown */,
 				6A9CDC77287DDBCA0003EFA1 /* Login and Signup */,
 				6A9CDC78287DDBE80003EFA1 /* Settings */,
@@ -626,6 +639,7 @@
 				6A9CDC6D2878E46E0003EFA1 /* DAKeyboardControl.m in Sources */,
 				6AC2C8B8287659B900436B8D /* SettingsViewController.m in Sources */,
 				6A9CDC5E2878E3020003EFA1 /* InputBar.m in Sources */,
+				6A8603442898CAB700564C1A /* UserListViewController.m in Sources */,
 				6AD598712876245C0058386E /* LoginViewController.m in Sources */,
 				6AC2C8BF2878A21B00436B8D /* ChatCell.m in Sources */,
 				6A8603392898879000564C1A /* UserCell.m in Sources */,
@@ -737,7 +751,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -794,7 +808,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

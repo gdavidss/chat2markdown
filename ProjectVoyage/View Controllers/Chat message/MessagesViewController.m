@@ -393,8 +393,10 @@
     // CC-  This if statement was in place to check the case where you opened a chat
     // and there were more loaded messages than it could be possibly be visible on screen
     // if (_chat.messages.count > [[_tableView visibleCells] count]) {
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_chat.messages.count - 1) inSection:0];
-    [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+    if (_chat.messages.count > 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_chat.messages.count - 1) inSection:0];
+        [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:animated];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

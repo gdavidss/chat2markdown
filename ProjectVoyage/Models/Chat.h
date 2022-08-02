@@ -11,24 +11,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_ENUM(NSInteger, ChatSender) {
-    ChatSenderMyself,
-    ChatSenderSomeone
-};
-
 @interface Chat : PFObject<PFSubclassing>
 
+@property (nonatomic, strong) NSString *chatTitle;
 @property (nonatomic, strong) NSString *chatDescription;
 
 @property (nonatomic, strong) NSArray<PFUser *> *recipients;
 @property (nonatomic, strong) PFFileObject *image;
-@property (nonatomic, strong) PFUser *author;
 
 @property (nonatomic, assign) NSInteger current_sender;
 
 @property (nonatomic, strong) NSMutableArray<Message *> *messages;
 
-+ (void) postChat: (NSString * _Nullable)chatDescription withImage:(UIImage * _Nullable )image withRecipients:(NSArray<PFUser *> *)recipients withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) postChat: (NSString * _Nullable)chatTitle withDescription:(NSString * _Nullable)chatDescription withImage:(UIImage * _Nullable )image withRecipients:(NSArray<PFUser *> *)recipients withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 
