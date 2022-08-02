@@ -315,6 +315,9 @@
         
         // Update backend
         [self.chat removeObject:message forKey:@"messages"];
+        
+        // GD Check to see if deleteInBackground also unpins it
+        // [message unpinInBackground];
         [message deleteInBackground];
         [self.chat saveInBackground];
         
@@ -433,6 +436,8 @@
     
     //Send message to server
     PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
+    
+    [message pinInBackground];
     [chatMessagesRelation addObject:message];
     
     [_chat saveInBackground];

@@ -28,6 +28,8 @@
     newChat.messages = [NSMutableArray new];
     newChat.current_sender = ChatSenderMyself;
     newChat.image = [Util getPFFileFromImage:image];
+    
+    [newChat pinInBackground];
     [newChat saveInBackgroundWithBlock: completion];
 }
 

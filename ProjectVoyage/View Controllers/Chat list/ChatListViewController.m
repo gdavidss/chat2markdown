@@ -11,6 +11,9 @@
 #import "MessagesViewController.h"
 #import "LoginViewController.h"
 
+// Global variables
+#import "GlobalVariables.h"
+
 // Models
 #import "Message.h"
 #import "Chat.h"
@@ -44,7 +47,7 @@
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    // [self queryUsers];
+    //[self queryUsers];
     [self refreshHomeFeed:self.refreshControl];
 }
 
@@ -55,9 +58,9 @@
 }
 
 - (void) queryUsers {
-    PFQuery *query = [PFQuery queryWithClassName:@"_User"];
+    PFQuery *query = [PFQuery queryWithClassName:USER_CLASS];
     
-    NSArray *queryKeys = [NSArray arrayWithObjects:@"name", @"username", nil];
+    NSArray *queryKeys = [NSArray arrayWithObjects:NAME, USERNAME, nil];
     [query includeKeys:queryKeys];
     
     [query whereKey:@"objectId" notEqualTo:[PFUser currentUser].objectId];
@@ -76,10 +79,13 @@
 - (void) refreshHomeFeed:(UIRefreshControl *)refreshControl {
     [refreshControl beginRefreshing];
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Chat"];
+    PFQuery *query = [PFQuery queryWithClassName:CHAT_CLASS];
     [query orderByDescending:@"createdAt"];
-    // NSArray *queryKeys = [NSArray arrayWithObjects:@"recipients", @"chatDescription", nil];
-    NSArray *queryKeys = [NSArray arrayWithObjects:@"recipients", @"chatDescription", @"messages_3", nil];
+    
+    // GD You need to find a way to query both from local datastore and online too
+    [query fromLocalDatastore];
+    
+    NSArray *queryKeys = [NSArray arrayWithObjects:RECIPIENTS, CHAT_DESCRIPTION, MESSAGES, nil];
     [query includeKeys:queryKeys];
         
     [query whereKey:@"recipients" containsAllObjectsInArray:@[[PFUser currentUser]]];
@@ -91,7 +97,7 @@
             if (!strongSelf) return;
             // GD Do I need to give an error if it's nil? what if it's just empty?
             if (chats != nil) {
-                strongSelf->_chats = chats;
+                strongSelf->_chats = [chats mutableCopy];
                 [strongSelf->_tableView reloadData];
             } else {
                 // GD Show alert error
@@ -171,7 +177,7 @@
     [alert addAction:acknowledge];
     [self presentViewController:alert animated:YES completion:nil];
 }
-
+    
 - (void) alertFailedRefresh {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Refresh homefeed failed" message:@"Something went wrong when trying to refresh the feed." preferredStyle:UIAlertControllerStyleAlert];
     

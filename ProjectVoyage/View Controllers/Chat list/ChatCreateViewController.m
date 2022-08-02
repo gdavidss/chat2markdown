@@ -6,14 +6,14 @@
 //
 
 #import "ChatCreateViewController.h"
+#import "GlobalVariables.h"
+#import "UserCell.h"
 #import "Chat.h"
 #import "Util.h"
 
-@interface ChatCreateViewController ()
-@property (nonatomic, strong) IBOutlet UITextField *recipientNameTextField;
-@property (nonatomic, strong) IBOutlet UITextField *chatDescriptionTextField;
-@property (nonatomic, strong) IBOutlet UILabel *dateLabel;
-@property (nonatomic, strong) IBOutlet UIImageView *recipientImage;
+@interface ChatCreateViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) NSArray *users;
 
 @end
 
@@ -21,52 +21,53 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [Util roundImage:_recipientImage];
+    [self queryUsers];
 }
 
-- (IBAction)trimEndSpaces:(id)sender {
-    UITextField *textField = sender;
-    textField.text = [Util removeEndSpaceFrom:textField.text];
+#pragma mark - TableViewDataSource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
 }
 
-- (IBAction)tapGesture:(id)sender {
-    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
-    imagePickerVC.delegate = self;
-    imagePickerVC.allowsEditing = YES;
-
-    // The Xcode simulator does not support taking pictures, so let's first check that the camera is indeed supported on the device before trying to present it.
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    }
-    else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-
-    [self presentViewController:imagePickerVC animated:YES completion:nil];
-}
-
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+- (void) queryUsers {
+    PFQuery *query = [PFQuery queryWithClassName:USER_CLASS];
     
-    // Get the image captured by the UIImagePickerController
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-
-    // Do something with the image
-    [self.recipientImage setImage:editedImage];
+    NSArray *queryKeys = [NSArray arrayWithObjects:NAME, USERNAME, nil];
+    [query includeKeys:queryKeys];
     
-    // Dismiss UIImagePickerController to go back to compose view controller
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [query whereKey:@"objectId" notEqualTo:[PFUser currentUser].objectId];
+    
+    // fetch data asynchronously
+    __weak __typeof(self) weakSelf = self;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *found_users, NSError *error) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        if (!strongSelf) return;
+        strongSelf->_users = found_users;
+    }];
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _users.count + 1;
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"UserCell";
+    UserCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    cell = [[UserCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    
+    if (indexPath.row == 0) {
+        // generate solo chat
+        cell.name = @"Myself";
+    } else {
+        PFUser *user = _users[indexPath.row];
+        cell.name = user[NAME];
+        // CC I haven't yet allowed users to upload profile pics
+        // cell.userPicture = user[PICTURE]
+    }
+    return cell;
+}
+
 
 @end

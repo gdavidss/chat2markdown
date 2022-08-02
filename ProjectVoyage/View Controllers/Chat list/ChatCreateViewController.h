@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ChatCreateViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
+
 @end
 
 NS_ASSUME_NONNULL_END
