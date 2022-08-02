@@ -63,7 +63,7 @@
     [query orderByDescending:UPDATED_AT];
     
     // GD You need to find a way to query both from local datastore and online too
-    //[query fromLocalDatastore];
+    // [query fromLocalDatastore];
     
     NSArray *queryKeys = [NSArray arrayWithObjects:RECIPIENTS, CHAT_DESCRIPTION, MESSAGES, IMAGE, nil];
     [query includeKeys:queryKeys];

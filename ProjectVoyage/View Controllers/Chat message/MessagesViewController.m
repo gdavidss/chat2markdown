@@ -11,6 +11,9 @@
 // Libraries
 #import <AVFoundation/AVFoundation.h>
 
+// Global variables
+#import "GlobalVariables.h"
+
 // Cells
 #import "MessageCell.h"
 
@@ -41,8 +44,9 @@
 
 // pagination variables
 @property (nonatomic, assign) NSInteger currentPageNumber;
-@property (nonatomic, assign) bool shouldKeepScrolling;
-@property (nonatomic, assign) int MESSAGES_PER_PAGE;
+@property (nonatomic, assign) bool canKeepScrolling;
+
+@property (nonatomic, assign) int MessagesPerPage;
 
 @end
 
@@ -55,8 +59,9 @@
     [super viewDidLoad];
     
     self.chat.messages = [NSMutableArray new];
+    
     _currentPageNumber = 0;
-    _MESSAGES_PER_PAGE = 10;
+    _MessagesPerPage = 10;
     
     [self loadMessages];
     
@@ -67,8 +72,8 @@
     [self getChatRecipient];
     
     // live queries
-    [self liveQueryMessage];
-    [self liveQueryChat];
+   // [self liveQueryMessage];
+   // [self liveQueryChat];
   
     [self.tableView registerClass:MessageCell.class forCellReuseIdentifier:@"MessageCell"];
 }
@@ -86,7 +91,7 @@
     // using live query to immediately show the change
     self.liveQueryClient = [[PFLiveQueryClient alloc] initWithServer:@"wss://chat2markdown.b4a.io" applicationId:app_id clientKey:client_id];
     
-    PFQuery *chatQuery = [PFQuery queryWithClassName:@"Chat"];
+    PFQuery *chatQuery = [PFQuery queryWithClassName:CHAT_CLASS];
     self.subscription = [self.liveQueryClient subscribeToQuery:chatQuery];
    
    __unsafe_unretained typeof(self) weakSelf = self;
@@ -119,7 +124,7 @@
     
     // Using live query to immediately show the change
     self.liveQueryClient = [[PFLiveQueryClient alloc] initWithServer:@"wss://chat2markdown.b4a.io" applicationId:app_id clientKey:client_id];
-    PFQuery *messageQuery = [PFQuery queryWithClassName:@"Message"];
+    PFQuery *messageQuery = [PFQuery queryWithClassName:MESSAGE_CLASS];
     self.subscription = [self.liveQueryClient subscribeToQuery:messageQuery];
    
    __unsafe_unretained typeof(self) weakSelf = self;
@@ -149,15 +154,15 @@
 }
 
 - (void) loadMessages {
-    PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
+    PFRelation *chatMessagesRelation = [_chat relationForKey:MESSAGES];
     PFQuery *query = [chatMessagesRelation query];
-    [query orderByDescending:@"createdAt"];
+    [query orderByDescending:CREATED_AT];
     
     NSArray *queryKeys = [NSArray arrayWithObjects:@"text", @"sender", nil];
     [query includeKeys:queryKeys];
     
-    query.limit = _MESSAGES_PER_PAGE;
-    query.skip = _MESSAGES_PER_PAGE * _currentPageNumber;
+    query.limit = _MessagesPerPage;
+    query.skip = _MessagesPerPage * _currentPageNumber;
         
     // Fetch data asynchronously
     __weak __typeof(self) weakSelf = self;
@@ -167,7 +172,7 @@
         if (reversedMessages == nil) {
             NSLog(@"%@", error.localizedDescription);
         } else if ([reversedMessages count] > 0) {
-            strongSelf->_shouldKeepScrolling = YES;
+            strongSelf->_canKeepScrolling = YES;
             
             NSArray<Message *> *messages = [[reversedMessages reverseObjectEnumerator] allObjects];
             
@@ -175,23 +180,21 @@
             [newMessages addObjectsFromArray:strongSelf->_chat.messages];
             strongSelf->_chat.messages = newMessages;
             [strongSelf->_tableView reloadData];
+            
             // GD The method below should only be called when the chat is first opened but...
             // the problem is that in viewDidLoad the messages haven't been loaded yet
             // because this thread hasn't finished loading the messages.
             
             //[strongSelf scrollToBottom];
         } else {
-            strongSelf->_shouldKeepScrolling = NO;
+            strongSelf->_canKeepScrolling = NO;
         }
     }];
 }
 
 
--(void)viewDidAppear:(BOOL)animated
-{
+-(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    
     __weak __typeof(self) weakSelf = self;
     self.view.keyboardTriggerOffset = _inputbar.frame.size.height;
     
@@ -363,9 +366,11 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    // GD see if it's really worth it to put something here
     return @"test";
 }
 
+// GD see if it's really worth it to put something here
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     CGRect frame = CGRectMake(0, 0, tableView.frame.size.width, 40);
     
@@ -400,11 +405,11 @@
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (_shouldKeepScrolling) {
-        if (scrollView.contentOffset.y + _tableView.safeAreaInsets.top == 0) {
+    if (_canKeepScrolling) {
+        NSInteger ScrollPosition = scrollView.contentOffset.y + _tableView.safeAreaInsets.top;
+        if (ScrollPosition <= TRIGGER_PAGINATION_POSITION) {
             _currentPageNumber++;
             [self loadMessages];
-            NSLog(@"Reloaded more messages!");
         }
     }
 }
@@ -439,7 +444,7 @@
     //Send message to server
     PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
     
-    [message pinInBackground];
+    // CC - Testing local storage [message pinInBackground];
     [chatMessagesRelation addObject:message];
     
     [_chat saveInBackground];

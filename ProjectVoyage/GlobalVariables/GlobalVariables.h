@@ -28,3 +28,7 @@ NSString *const RECIPIENTS;
 NSString *const CHAT_DESCRIPTION;
 NSString *const MESSAGES;
 NSString *const IMAGE;
+
+// Messages
+NSInteger const TRIGGER_PAGINATION_POSITION;
+

@@ -45,7 +45,8 @@
 
 - (void) addContent {
     [self addTextView];
-    [self addButton:self.sendButton withLabel:@"Send" withMethod:@selector(didPressSendButton:) withOrder:1 isSelected:YES];
+    [self addSendButton];
+    //[self addButton:self.sendButton withLabel:@"Send" withMethod:@selector(didPressSendButton:) withOrder:1 isSelected:YES];
     [self addButton:self.changeSenderButton withLabel:@"Change" withMethod:@selector(didPressChangeSenderButton:) withOrder:2 isSelected:NO];
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
@@ -109,6 +110,26 @@
     
     [button setSelected:selection];
 }
+
+-(void)addSendButton
+{
+    CGSize size = self.frame.size;
+    self.sendButton = [[UIButton alloc] init];
+    self.sendButton.frame = CGRectMake(size.width - BUTTON_SIZE, 0, BUTTON_SIZE, size.height);
+    self.sendButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
+    [self.sendButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [self.sendButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateSelected];
+    [self.sendButton setTitle:@"Done" forState:UIControlStateNormal];
+    self.sendButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
+    //[self addButton:self.sendButton withLabel:@"Send" withMethod:@selector(didPressSendButton:) withOrder:1 isSelected:YES];
+
+    [self.sendButton addTarget:self action:@selector(didPressSendButton:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addSubview:self.sendButton];
+    
+    [self.sendButton setSelected:YES];
+}
+
 
 -(void)resignFirstResponder {
     [_textView resignFirstResponder];

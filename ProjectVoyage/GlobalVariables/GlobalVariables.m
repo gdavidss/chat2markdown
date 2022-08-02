@@ -23,9 +23,11 @@ NSString *const NAME = @"name";
 NSString *const USERNAME = @"username";
 NSString *const PROFILE_PICTURE = @"profile_picture";
 
-
 // Chat
 NSString *const RECIPIENTS = @"recipients";
 NSString *const CHAT_DESCRIPTION = @"chatDescription";
 NSString *const MESSAGES = @"messages_3";
 NSString *const IMAGE = @"image";
+
+// Messages
+NSInteger const TRIGGER_PAGINATION_POSITION = 5;
