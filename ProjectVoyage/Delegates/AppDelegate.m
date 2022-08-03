@@ -6,6 +6,7 @@
 //
 
 #import "AppDelegate.h"
+#import "NetworkManager.h"
 @import Parse;
 
 @interface AppDelegate ()
@@ -21,6 +22,8 @@
 
     NSString *app_id = [dict objectForKey: @"app_id"];
     NSString *consumer_id = [dict objectForKey: @"client_id"];
+    
+    [[NetworkManager shared] checkConnection];
     
     ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
 

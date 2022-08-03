@@ -22,6 +22,8 @@
 		6A9CDC732878E93C0003EFA1 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC722878E93C0003EFA1 /* HPTextViewInternal.m */; };
 		6A9CDC7B287DDC420003EFA1 /* EditMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC7A287DDC420003EFA1 /* EditMessageViewController.m */; };
 		6A9CDC7F2881E5970003EFA1 /* MarkdownExportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC7E2881E5970003EFA1 /* MarkdownExportVC.m */; };
+		6AADA83B289B1EF400BC42C6 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AADA83A289B1EF400BC42C6 /* NetworkManager.m */; };
+		6AADA83E289B1F5A00BC42C6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AADA83D289B1F5A00BC42C6 /* Reachability.m */; };
 		6AC2C8AB2876269D00436B8D /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AA2876269D00436B8D /* SignUpViewController.m */; };
 		6AC2C8AE2876347500436B8D /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AD2876347500436B8D /* Keys.plist */; };
 		6AC2C8B12876411B00436B8D /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B02876411B00436B8D /* ChatListViewController.m */; };
@@ -89,6 +91,10 @@
 		6A9CDC7A287DDC420003EFA1 /* EditMessageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditMessageViewController.m; sourceTree = "<group>"; };
 		6A9CDC7D2881E5970003EFA1 /* MarkdownExportVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MarkdownExportVC.h; sourceTree = "<group>"; };
 		6A9CDC7E2881E5970003EFA1 /* MarkdownExportVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarkdownExportVC.m; sourceTree = "<group>"; };
+		6AADA839289B1EF400BC42C6 /* NetworkManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		6AADA83A289B1EF400BC42C6 /* NetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
+		6AADA83C289B1F5A00BC42C6 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		6AADA83D289B1F5A00BC42C6 /* Reachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		6AC2C8A92876269D00436B8D /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		6AC2C8AA2876269D00436B8D /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		6AC2C8AD2876347500436B8D /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -261,6 +267,17 @@
 			path = "Chat message";
 			sourceTree = "<group>";
 		};
+		6AADA838289B1EA300BC42C6 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				6AADA839289B1EF400BC42C6 /* NetworkManager.h */,
+				6AADA83A289B1EF400BC42C6 /* NetworkManager.m */,
+				6AADA83C289B1F5A00BC42C6 /* Reachability.h */,
+				6AADA83D289B1F5A00BC42C6 /* Reachability.m */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		6AC2C8AC287633B600436B8D /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,6 +347,7 @@
 		6AD5983528760C140058386E /* ProjectVoyage */ = {
 			isa = PBXGroup;
 			children = (
+				6AADA838289B1EA300BC42C6 /* API */,
 				6A860330289880E200564C1A /* GlobalVariables */,
 				6AC2C8C02878A22000436B8D /* Cell */,
 				6AC2C8BC2877B2E900436B8D /* Util */,
@@ -634,6 +652,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AADA83E289B1F5A00BC42C6 /* Reachability.m in Sources */,
 				6A8603332898810700564C1A /* GlobalVariables.m in Sources */,
 				6AD5983828760C140058386E /* AppDelegate.m in Sources */,
 				6A9CDC6D2878E46E0003EFA1 /* DAKeyboardControl.m in Sources */,
@@ -657,6 +676,7 @@
 				6AC2C8B5287648F000436B8D /* Chat.m in Sources */,
 				6A9CDC4B2878DA610003EFA1 /* Message.m in Sources */,
 				6AF337A028875B5E004FD644 /* ChatCreateViewController.m in Sources */,
+				6AADA83B289B1EF400BC42C6 /* NetworkManager.m in Sources */,
 				6AC2C8BB2877B2DD00436B8D /* Util.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -5,6 +5,8 @@
 //  Created by Gui David on 7/6/22.
 //
 
+// Libraries
+#import "NetworkManager.h"
 
 // View controllers
 #import "ChatListViewController.h"
@@ -40,7 +42,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    if ([[NetworkManager shared] isAppOnline]) {
+        NSLog(@"App's online");
+        // Query chats from the internet
+    } else {
+        NSLog(@"App's offline");
+        // Only query chats locally
+    }
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self initRefreshControl];
@@ -112,12 +122,11 @@
 }
 
 - (void) deleteAllMessagesForChat:(Chat *)chat {
-    /* SS - find a method to delete via relations
-    NSArray<Message *> *messages = chat.messages;
-    for (Message *message in messages) {
+    /* GD - Delete all messages from the relations
+    for (Message *message in chat.messages_3) {
         [message deleteInBackground];
     }
-     */
+    */
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

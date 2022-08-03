@@ -10,6 +10,7 @@
 
 // Libraries
 #import <AVFoundation/AVFoundation.h>
+#import "NetworkManager.h"
 
 // Global variables
 #import "GlobalVariables.h"
@@ -56,9 +57,18 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
-        
+    
+    if ([[NetworkManager shared] isAppOnline]) {
+        NSLog(@"App's online");
+        // Query messages from the internet
+    } else {
+        NSLog(@"App's offline");
+        // Query all messages chats locally
+        // Maybe do [query fromDataLocalStore]?
+    }
+    
     if (!_messagesInChat) {
-        _messagesInChat = [NSMutableArray new];
+        _messagesInChat = [NSMutableOrderedSet new];
     }
     
     _currentPageNumber = 0;
@@ -316,12 +326,14 @@
         Message *message = _messagesInChat[indexPath.row];
         
         // Update backend
-        // SS - Delete message using relation below
         // Get order of the message you just deleted and decrease one from the order of each message until the end
         
+        [_messagesInChat removeObject:message];
+        [self addToOrdersFromIndex:indexPath.row-1 withEndIndex:_messagesInChat.count withAmount:-1];
+        
         // GD Check to see if deleteInBackground also unpins it
-        [message deleteInBackground];
-        [self.chat saveInBackground];
+        [message delete];
+        //[self.chat saveInBackground];
         
         NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
         [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
@@ -344,6 +356,7 @@
     [self changeSender:_messagesInChat[indexPath.row]];
 }
 
+// Hold message to move position
 - (NSArray<UIDragItem *> *)tableView:(UITableView *)tableView itemsForBeginningDragSession:(id<UIDragSession>)session atIndexPath:(NSIndexPath *)indexPath {
     Message *messageToMove = _messagesInChat[indexPath.row];
     UIDragItem *dragItem = [[UIDragItem alloc] initWithItemProvider:[[NSItemProvider alloc] init]];
@@ -351,12 +364,36 @@
     return @[dragItem];
 }
 
+- (void) addToOrdersFromIndex:(NSInteger)startIndex withEndIndex:(NSInteger)endIndex withAmount:(NSInteger)amount{
+    NSInteger currentIndex = startIndex + 1;
+    while (currentIndex < endIndex) {
+        Message *message = _messagesInChat[currentIndex];
+        currentIndex++;
+        message.order += amount;
+        [message save];
+        if (currentIndex == _messagesInChat.count - 1 && amount == -1) {
+            _chat.lastOrder = message.order + 1;
+        }
+    }
+}
+
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     Message *messageToMove = _messagesInChat[sourceIndexPath.row];
-    // SS Update order of the messages here
+    messageToMove.order = destinationIndexPath.row;
+    
     [_messagesInChat removeObjectAtIndex:sourceIndexPath.row];
     [_messagesInChat insertObject:messageToMove atIndex:destinationIndexPath.row];
     
+    __weak __typeof(self) weakSelf = self;
+    [messageToMove saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        if (sourceIndexPath.row > destinationIndexPath.row) {
+            [self addToOrdersFromIndex:destinationIndexPath.row withEndIndex:strongSelf->_messagesInChat.count withAmount:1];
+        } else {
+            // GD Currently having a bug with order here, just need to do more math and models
+            [self addToOrdersFromIndex:sourceIndexPath.row withEndIndex:destinationIndexPath.row withAmount:-1];
+        }
+    }];
     [self.chat saveInBackground];
 }
 
