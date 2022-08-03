@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, MessageSender) {
 @property (nonatomic, strong) NSString *text;
 @property (nonatomic, assign) PFUser *sender;
 
+@property (nonatomic, assign) NSInteger order;
 @property (assign, nonatomic) CGFloat height;
 
 + (void) postMessage: (NSString * _Nullable)text withSender:(PFUser *)sender withHeight:(CGFloat)height withCompletion: (PFBooleanResultBlock  _Nullable)completion;

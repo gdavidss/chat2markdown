@@ -26,6 +26,7 @@ NSString *const PROFILE_PICTURE;
 // Chat
 NSString *const RECIPIENTS;
 NSString *const CHAT_DESCRIPTION;
+NSString *const ORDERED_MESSAGES;
 NSString *const MESSAGES;
 NSString *const IMAGE;
 

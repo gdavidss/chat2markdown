@@ -84,14 +84,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/* CC - I used this method to generate a bunch of chats
-- (void) generateChats {
-    for (PFUser *user in _users) {
-        [self postChatWithUser:user];
-    }
-}
- */
-
 - (void) alertFailedChat {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Chat post failed" message:@"Something went wrong when trying to create the chat." preferredStyle:UIAlertControllerStyleAlert];
     

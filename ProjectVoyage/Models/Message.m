@@ -26,11 +26,12 @@
     return @"Message";
 }
 
-+ (void) postMessage: (NSString * _Nullable)text withSender:(PFUser *)sender withHeight:(CGFloat)height withCompletion: (PFBooleanResultBlock  _Nullable)completion{
++ (void) postMessage: (NSString * _Nullable)text withSender:(PFUser *)sender withHeight:(CGFloat)height withOrder:(NSInteger)order withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     Message *newMessage = [Message new];
     newMessage.sender = sender;
     newMessage.text = text;
     newMessage.height = height;
+    newMessage.order = order;
     [newMessage saveInBackgroundWithBlock: completion];
 }
 
