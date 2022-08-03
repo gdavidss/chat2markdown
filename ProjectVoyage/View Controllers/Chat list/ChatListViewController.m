@@ -112,10 +112,12 @@
 }
 
 - (void) deleteAllMessagesForChat:(Chat *)chat {
+    /* SS - find a method to delete via relations
     NSArray<Message *> *messages = chat.messages;
     for (Message *message in messages) {
         [message deleteInBackground];
     }
+     */
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

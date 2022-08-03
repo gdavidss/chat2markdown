@@ -26,7 +26,7 @@
     [super viewDidLoad];
     _convertedMarkdown = [NSMutableString new];
     [_convertedMarkdown appendString:@"\n"];
-    _messages = _chat.messages;
+    _messages = [Chat getMessagesArrayForChat:_chat];
 
     [self appendMetadata];
     if ([_messages count] != 0) {

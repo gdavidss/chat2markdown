@@ -26,10 +26,12 @@ NSString *const PROFILE_PICTURE;
 // Chat
 NSString *const RECIPIENTS;
 NSString *const CHAT_DESCRIPTION;
-NSString *const ORDERED_MESSAGES;
 NSString *const MESSAGES;
 NSString *const IMAGE;
 
 // Messages
 NSInteger const TRIGGER_PAGINATION_POSITION;
+NSString *const TEXT;
+NSString *const SENDER;
+NSString *const ORDER;
 
