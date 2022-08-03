@@ -11,8 +11,8 @@
 
 @implementation Chat
 
+@dynamic chatTitle;
 @dynamic chatDescription;
-@dynamic author;
 @dynamic recipients;
 @dynamic messages;
 @dynamic current_sender;
@@ -22,12 +22,16 @@
     return @"Chat";
 }
 
-+ (void) postChat: (NSString * _Nullable)chatDescription withImage:(UIImage * _Nullable )image withRecipients:(NSArray<PFUser *> *)recipients withCompletion: (PFBooleanResultBlock  _Nullable)completion{
++ (void) postChat: (NSString * _Nullable)chatTitle withDescription:(NSString * _Nullable)chatDescription withImage:(UIImage * _Nullable )image withRecipients:(NSArray<PFUser *> *)recipients withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     Chat *newChat = [Chat new];
+    newChat.chatTitle = chatTitle;
     newChat.recipients = recipients;
+    newChat.chatDescription = chatDescription;
     newChat.messages = [NSMutableArray new];
-    newChat.current_sender = ChatSenderMyself;
+    newChat.current_sender = 0;
     newChat.image = [Util getPFFileFromImage:image];
+    
+    //[newChat pinInBackground];
     [newChat saveInBackgroundWithBlock: completion];
 }
 

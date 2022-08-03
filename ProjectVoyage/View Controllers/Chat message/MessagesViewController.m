@@ -39,8 +39,10 @@
 // This assumes that there's only one other recipient in each chat, should be changed if groups are allowed
 @property (nonatomic, strong) PFUser *otherRecipient;
 
+// pagination variables
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) bool shouldKeepScrolling;
+@property (nonatomic, assign) int MESSAGES_PER_PAGE;
 
 @end
 
@@ -51,7 +53,11 @@
 
 -(void)viewDidLoad {
     [super viewDidLoad];
+    
     self.chat.messages = [NSMutableArray new];
+    _currentPageNumber = 0;
+    _MESSAGES_PER_PAGE = 10;
+    
     [self loadMessages];
     
     // set methods
@@ -79,8 +85,6 @@
 
     // using live query to immediately show the change
     self.liveQueryClient = [[PFLiveQueryClient alloc] initWithServer:@"wss://chat2markdown.b4a.io" applicationId:app_id clientKey:client_id];
-    //PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
-    //PFQuery *chatQuery = [chatMessagesRelation query];
     
     PFQuery *chatQuery = [PFQuery queryWithClassName:@"Chat"];
     self.subscription = [self.liveQueryClient subscribeToQuery:chatQuery];
@@ -113,7 +117,7 @@
     NSString *app_id = [dict objectForKey: @"app_id"];
     NSString *client_id = [dict objectForKey: @"client_id"];
     
-    // using live query to immediately show the change
+    // Using live query to immediately show the change
     self.liveQueryClient = [[PFLiveQueryClient alloc] initWithServer:@"wss://chat2markdown.b4a.io" applicationId:app_id clientKey:client_id];
     PFQuery *messageQuery = [PFQuery queryWithClassName:@"Message"];
     self.subscription = [self.liveQueryClient subscribeToQuery:messageQuery];
@@ -121,10 +125,11 @@
    __unsafe_unretained typeof(self) weakSelf = self;
    [self.subscription addUpdateHandler:^(PFQuery<PFObject *> * _Nonnull query, PFObject * _Nonnull object) {
        __strong typeof (self) strongSelf = weakSelf;
-       if (object) {
+       if (object){
            Message *message = [strongSelf findMessageByObjectId:object.objectId];
            message.text = object[@"text"];
            message.sender = object[@"sender"];
+           
            dispatch_async(dispatch_get_main_queue(), ^{
                // GD Maybe only reload data at the specific IndexPath?
                [message fetch];
@@ -143,46 +148,62 @@
     return nil;
 }
 
-// GD Is there a way to only load this once and cache it so I don't fetch it everytime I open this?
 - (void) loadMessages {
     PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
     PFQuery *query = [chatMessagesRelation query];
-    [query orderByAscending:@"createdAt"];
-    
+    [query orderByDescending:@"createdAt"];
     
     NSArray *queryKeys = [NSArray arrayWithObjects:@"text", @"sender", nil];
     [query includeKeys:queryKeys];
+    
+    query.limit = _MESSAGES_PER_PAGE;
+    query.skip = _MESSAGES_PER_PAGE * _currentPageNumber;
         
-    // fetch data asynchronously
+    // Fetch data asynchronously
     __weak __typeof(self) weakSelf = self;
-    [query findObjectsInBackgroundWithBlock:^(NSArray *messages, NSError *error) {
+    [query findObjectsInBackgroundWithBlock:^(NSArray *reversedMessages, NSError *error) {
         __strong __typeof(weakSelf) strongSelf = weakSelf;
         if (!strongSelf) return;
-        if (messages != nil) {
-            strongSelf->_chat.messages = [messages mutableCopy];
-            [strongSelf->_tableView reloadData];
-        } else {
-            // GD throw alert
+        if (reversedMessages == nil) {
             NSLog(@"%@", error.localizedDescription);
+        } else if ([reversedMessages count] > 0) {
+            strongSelf->_shouldKeepScrolling = YES;
+            
+            NSArray<Message *> *messages = [[reversedMessages reverseObjectEnumerator] allObjects];
+            
+            NSMutableArray *newMessages = [messages mutableCopy];
+            [newMessages addObjectsFromArray:strongSelf->_chat.messages];
+            strongSelf->_chat.messages = newMessages;
+            [strongSelf->_tableView reloadData];
+            // GD The method below should only be called when the chat is first opened but...
+            // the problem is that in viewDidLoad the messages haven't been loaded yet
+            // because this thread hasn't finished loading the messages.
+            
+            //[strongSelf scrollToBottom];
+        } else {
+            strongSelf->_shouldKeepScrolling = NO;
         }
     }];
 }
 
 
--(void)viewDidAppear:(BOOL)animated {
+-(void)viewDidAppear:(BOOL)animated
+{
     [super viewDidAppear:animated];
-        
-    self.view.keyboardTriggerOffset = _inputbar.frame.size.height;
+    
     
     __weak __typeof(self) weakSelf = self;
+    self.view.keyboardTriggerOffset = _inputbar.frame.size.height;
+    
     [self.view addKeyboardPanningWithActionHandler:^(CGRect keyboardFrameInView, BOOL opening, BOOL closing) {
-         /*
+        /*
          Try not to call "self" inside this block (retain cycle).
          But if you do, make sure to remove DAKeyboardControl
          when you are done with the view controller by calling:
          [self.view removeKeyboardControl];
          */
         __strong __typeof(weakSelf) strongSelf = weakSelf;
+        
         if (!strongSelf) { return; }
         CGRect toolBarFrame = strongSelf->_inputbar.frame;
         toolBarFrame.origin.y = keyboardFrameInView.origin.y - toolBarFrame.size.height;
@@ -191,12 +212,11 @@
         tableViewFrame.size.height = strongSelf->_inputbar.frame.origin.y - 64;
         strongSelf->_tableView.frame = tableViewFrame;
         
-        [strongSelf tableViewScrollToBottomAnimated:NO];
+        [strongSelf scrollToBottomAnimated:NO];
     }];
 }
 
--(void)viewDidDisappear:(BOOL)animated
-{
+-(void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     [self.view endEditing:YES];
     [self.view removeKeyboardControl];
@@ -230,18 +250,19 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f,self.view.frame.size.width, 10.0f)];
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.backgroundColor = [UIColor clearColor]; // UIColorFromRGB(0xDFDBC4);
-    
+
     // Drag and drop methods to move messages around
     self.tableView.dragInteractionEnabled = true;
     self.tableView.dragDelegate = self;
     self.tableView.dropDelegate = self;
-     
+    
+    [self.tableView setScrollsToTop:YES];
     [self.tableView registerClass:[MessageCell class] forCellReuseIdentifier: @"MessageCell"];
 }
 
 - (void) setChat:(Chat *)chat {
     _chat = chat;
-    self.title = [NSString stringWithFormat:@"%@ & %@", chat.recipients[0].username, chat.recipients[1].username];;
+    self.title = [NSString stringWithFormat:@"%@ & %@", chat.recipients[0].username, chat.recipients[1].username];
 }
 
 #pragma mark - Actions
@@ -294,6 +315,9 @@
         
         // Update backend
         [self.chat removeObject:message forKey:@"messages"];
+        
+        // GD Check to see if deleteInBackground also unpins it
+        // [message unpinInBackground];
         [message deleteInBackground];
         [self.chat saveInBackground];
         
@@ -324,7 +348,6 @@
     dragItem.localObject = messageToMove;
     return @[dragItem];
 }
-
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     Message *messageToMove = self.chat.messages[sourceIndexPath.row];
@@ -366,20 +389,25 @@
     return view;
 }
 
-
-- (void)tableViewScrollToBottomAnimated:(BOOL)animated {
-    NSInteger numberOfRows = self.chat.messages.count;
-    
-    // Open chat in the very last message
-    if (numberOfRows) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(self.chat.messages.count - 1) inSection:0];
-        
-        [_tableView scrollToRowAtIndexPath:indexPath
-                    atScrollPosition:UITableViewScrollPositionBottom
-                    animated:animated];
+- (void) scrollToBottomAnimated:(BOOL)animated {
+    // CC-  This if statement was in place to check the case where you opened a chat
+    // and there were more loaded messages than it could be possibly be visible on screen
+    // if (_chat.messages.count > [[_tableView visibleCells] count]) {
+    if (_chat.messages.count > 0) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_chat.messages.count - 1) inSection:0];
+        [_tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionBottom animated:animated];
     }
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (_shouldKeepScrolling) {
+        if (scrollView.contentOffset.y + _tableView.safeAreaInsets.top == 0) {
+            _currentPageNumber++;
+            [self loadMessages];
+            NSLog(@"Reloaded more messages!");
+        }
+    }
+}
 
 #pragma mark - InputbarDelegate
 
@@ -399,18 +427,19 @@
     //Insert Message in UI
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.chat.messages.count - 1 inSection:0];
     
-    [self.tableView beginUpdates];
+    [_tableView beginUpdates];
+    [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+    [_tableView endUpdates];
+    [_tableView scrollToRowAtIndexPath: [NSIndexPath indexPathForRow:self.chat.messages.count - 1 inSection:0]
+                                        atScrollPosition:UITableViewScrollPositionBottom
+                                        animated:YES];
     
-    [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
-    
-    [self.tableView endUpdates];
-    
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.chat.messages.count - 1 inSection:0]
-                    atScrollPosition:UITableViewScrollPositionBottom
-                    animated:YES];
+    [self scrollToBottomAnimated:YES];
     
     //Send message to server
     PFRelation *chatMessagesRelation = [_chat relationForKey:@"messages_3"];
+    
+    [message pinInBackground];
     [chatMessagesRelation addObject:message];
     
     [_chat saveInBackground];
@@ -426,21 +455,22 @@
     self.view.keyboardTriggerOffset = new_height;
 }
 
+
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-   if ([segue.identifier isEqualToString:@"EditMessageSegue"]) {
+    if ([segue.identifier isEqualToString:@"EditMessageSegue"]) {
         EditMessageViewController *editMessageVC = [segue destinationViewController];
         Message *messageToPass = sender;
         editMessageVC.message = messageToPass;
         editMessageVC.delegate = self;
     }
-   else if ([segue.identifier isEqualToString:@"MarkdownSegue"]) {
-       MarkdownExportVC *markdownExportVC = [segue destinationViewController];
-       Chat *chat = sender;
-       markdownExportVC.chat = chat;
-       markdownExportVC.otherRecipientUsername = _otherRecipient.username;
-   }
+    else if ([segue.identifier isEqualToString:@"MarkdownSegue"]) {
+        MarkdownExportVC *markdownExportVC = [segue destinationViewController];
+        Chat *chat = sender;
+        markdownExportVC.chat = chat;
+        markdownExportVC.otherRecipientUsername = _otherRecipient.username;
+    }
 }
 
 #pragma mark - Container methods

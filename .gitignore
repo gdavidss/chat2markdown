@@ -3,6 +3,8 @@ Pods/
 
 # Various settings:
 *xcworkspace/xcuserdata/*
+ProjectVoyage.xcworkspace/xcuserdata/
+ProjectVoyage/.DS_Store
 
 # Files
 .DS_Store
