@@ -21,19 +21,18 @@
 
 + (NSMutableOrderedSet *) retrieveCachedMessages:(Chat *)chat {
     PFQuery *query = [PFQuery queryWithClassName:MESSAGE_CLASS];
-    
-    NSArray *queryKeys = [NSArray arrayWithObjects:TEXT, SENDER, ORDER, nil];
-    
     [query fromPinWithName:chat.objectId];
-    [query includeKeys:queryKeys];
+    
     [query fromLocalDatastore];
-    [query orderByAscending:ORDER];
+    [query orderByAscending:@"order"];
     
-    //query.limit = STORAGE_SIZE;
-    NSArray<Message *> *cachedMessages = [query findObjects];
-    NSMutableOrderedSet *cachedMessagesSet = [NSMutableOrderedSet orderedSetWithArray:cachedMessages];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        NSArray<Message *> *cachedMessages = objects;
+    }];
     
-    return cachedMessagesSet;
+    //NSMutableOrderedSet *cachedMessagesSet = [NSMutableOrderedSet orderedSetWithArray:cachedMessages];
+    
+    return nil;
 }
 
 + (NSArray *) retrieveCachedChats {

@@ -14,8 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NetworkManager *)shared;
 @property(nonatomic, strong) Reachability *reachable;
-@property(nonatomic, assign) BOOL isAppOnline;
+
 - (void)checkConnection;
+- (bool)isAppOnline;
 
 @end
 

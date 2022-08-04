@@ -32,6 +32,10 @@
 
 @interface MessagesViewController() <InputbarDelegate, UITableViewDataSource, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
+
+@property (nonatomic, strong) NSMutableOrderedSet *messagesInChat;
+@property (nonatomic, strong) NSTimer *connectionTimer;
+
 @property (nonatomic, strong) IBOutlet Inputbar *inputbar;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *markdownButton;
 
@@ -41,13 +45,10 @@
 // This assumes that there's only one other recipient in each chat, should be changed if groups are allowed
 @property (nonatomic, strong) PFUser *otherRecipient;
 
-@property (nonatomic, strong) NSMutableOrderedSet *messagesInChat;
-@property (nonatomic, strong) NSMutableOrderedSet *messagesCached;
 
 // Pagination variables
 @property (nonatomic, assign) NSInteger currentPageNumber;
 @property (nonatomic, assign) bool canKeepScrolling;
-
 @property (nonatomic, assign) int MessagesPerPage;
 
 @end
@@ -60,35 +61,49 @@
         _messagesInChat = [NSMutableOrderedSet new];
     }
     
+    // set methods
+    [self setInputbar];
+    [self setTableView];
+    [self.tableView registerClass:MessageCell.class forCellReuseIdentifier:@"MessageCell"];
+
     _currentPageNumber = 0;
     _MessagesPerPage = 10;
     
+    // GD -- unify the logic and make isAppOnline a method that returns a bool
     [[NetworkManager shared] checkConnection];
     
     if ([[NetworkManager shared] isAppOnline]) {
         NSLog(@"App's online");
         [self loadMessages:_currentPageNumber];
     } else {
-        // Add timer to check connection
-        
         NSLog(@"App's offline");
-        _messagesInChat = [Cache retrieveCachedMessages:_chat];
-        [self.tableView reloadData];
+        [self retrieveCachedMessages];
+        
+        // Checks the connection every 5 seconds to later sync messages
+        _connectionTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(checkConnection) userInfo:nil repeats:true];
     }
         
-    // set methods
-    [self setInputbar];
-    [self setTableView];
-    
     [self getChatRecipient];
     
     // live queries
-   //[self liveQueryMessage];
     if ([[NetworkManager shared] isAppOnline]) {
-        [self liveQueryChat];
+       [self liveQueryChat];
+        // CC - liveQuery message not yet available due to conflicts
+        [self liveQueryMessage];
+
     }
-  
-   [self.tableView registerClass:MessageCell.class forCellReuseIdentifier:@"MessageCell"];
+}
+
+-(void) checkConnection {
+    NSLog(@"Checking connection");
+    // Sync messages if app is online
+    if ([[NetworkManager shared] isAppOnline]) {
+        NSLog(@"App's back online! Loading messages...");
+        [_connectionTimer invalidate];
+        [self loadMessages:_currentPageNumber];
+    } else {
+        NSLog(@"App's still offline...");
+    }
 }
 
 - (Message *) findMessageByObjectId:(NSString *)objectId {
@@ -100,11 +115,27 @@
     return nil;
 }
 
+- (void) retrieveCachedMessages {
+    PFQuery *query = [PFQuery queryWithClassName:MESSAGE_CLASS];
+    [query fromPinWithName:_chat.objectId];
+    
+    [query fromLocalDatastore];
+    [query orderByAscending:@"order"];
+    
+    __weak __typeof(self) weakSelf = self;
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        __strong __typeof(weakSelf) strongSelf = weakSelf;
+        NSArray<Message *> *cachedMessages = objects;
+        strongSelf->_messagesInChat = [NSMutableOrderedSet orderedSetWithArray:cachedMessages];
+        [strongSelf->_tableView reloadData];
+    }];
+}
+
 - (void) loadMessages:(NSInteger)pageNumber {
     PFRelation *chatMessagesRelation = [_chat relationForKey:MESSAGES];
     PFQuery *query = [chatMessagesRelation query];
     
-    NSArray *queryKeys = [NSArray arrayWithObjects:TEXT, SENDER, ORDER, LAST_ORDER, nil];
+    NSArray *queryKeys = [NSArray arrayWithObjects:TEXT, SENDER, ORDER, nil];
     
     [query includeKeys:queryKeys];
     [query orderByDescending:ORDER];
@@ -133,17 +164,18 @@
             NSArray *descriptor = @[[[NSSortDescriptor alloc] initWithKey:ORDER ascending:YES]];
             [newMessages sortUsingDescriptors:descriptor];
             strongSelf->_messagesInChat = newMessages;
-            
+                        
             [strongSelf->_tableView reloadData];
             
-            // Unpin old objects and cache results
+            // Uncache old messages and cache results
             [PFObject unpinAll:messages withName:strongSelf->_chat.objectId];
-            // [PFObject pinAll:messages];
             [PFObject pinAll:messages withName:strongSelf->_chat.objectId];
         } else {
             strongSelf->_canKeepScrolling = NO;
         }
     }];
+    // Pin chat locally
+    [PFObject pinAll:@[_chat]];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -248,7 +280,6 @@
            message.sender = object[@"sender"];
            
            dispatch_async(dispatch_get_main_queue(), ^{
-               // GD Maybe only reload data at the specific IndexPath?
                [message fetch];
                [strongSelf reloadRowContainingMessage:message];
            });
@@ -284,16 +315,16 @@
                                         atScrollPosition:UITableViewScrollPositionBottom
                                         animated:YES];
      
-    //[self scrollToBottomAnimated:YES];
-        
-    // Cache message
-    [message pinWithName:_chat.objectId];
+    [self scrollToBottomAnimated:YES];
     
     // Store message in Parse
     PFRelation *chatMessagesRelation = [_chat relationForKey:MESSAGES];
     [chatMessagesRelation addObject:message];
     
+    // Cache message and chat
+    [message pinWithName:_chat.objectId];
     [_chat pin];
+    
     if ([[NetworkManager shared] isAppOnline]) {
         [message save];
         [_chat saveInBackground];

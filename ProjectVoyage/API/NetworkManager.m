@@ -24,16 +24,10 @@
     return _sharedManager;
 }
 
-- (void)checkConnection {
+- (BOOL)isAppOnline {
     self.reachable = [Reachability reachabilityWithHostname:@"www.google.com"];
     [self.reachable startNotifier];
-    self.isAppOnline = [self.reachable isReachable];
-}
-
-- (void)reachabilityChanged {
-    self.isAppOnline = [self.reachable isReachable];
-    // This is where I should sync objects created offline
-    
+    return [self.reachable isReachable];
 }
 
 @end

@@ -12,7 +12,7 @@
 // Class names
 NSString *const USER_CLASS = @"_User";
 NSString *const CHAT_CLASS = @"Chat";
-NSString *const MESSAGE_CLASS = @"Comment";
+NSString *const MESSAGE_CLASS = @"Message";
 
 // Default keys
 NSString *const CREATED_AT = @"createdAt";
