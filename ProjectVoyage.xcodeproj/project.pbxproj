@@ -24,6 +24,7 @@
 		6A9CDC7F2881E5970003EFA1 /* MarkdownExportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A9CDC7E2881E5970003EFA1 /* MarkdownExportVC.m */; };
 		6AADA83B289B1EF400BC42C6 /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AADA83A289B1EF400BC42C6 /* NetworkManager.m */; };
 		6AADA83E289B1F5A00BC42C6 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AADA83D289B1F5A00BC42C6 /* Reachability.m */; };
+		6AADA84A289B725D00BC42C6 /* Cache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AADA849289B725D00BC42C6 /* Cache.m */; };
 		6AC2C8AB2876269D00436B8D /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AA2876269D00436B8D /* SignUpViewController.m */; };
 		6AC2C8AE2876347500436B8D /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6AC2C8AD2876347500436B8D /* Keys.plist */; };
 		6AC2C8B12876411B00436B8D /* ChatListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AC2C8B02876411B00436B8D /* ChatListViewController.m */; };
@@ -95,6 +96,8 @@
 		6AADA83A289B1EF400BC42C6 /* NetworkManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		6AADA83C289B1F5A00BC42C6 /* Reachability.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		6AADA83D289B1F5A00BC42C6 /* Reachability.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		6AADA848289B725D00BC42C6 /* Cache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Cache.h; sourceTree = "<group>"; };
+		6AADA849289B725D00BC42C6 /* Cache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Cache.m; sourceTree = "<group>"; };
 		6AC2C8A92876269D00436B8D /* SignUpViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SignUpViewController.h; sourceTree = "<group>"; };
 		6AC2C8AA2876269D00436B8D /* SignUpViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SignUpViewController.m; sourceTree = "<group>"; };
 		6AC2C8AD2876347500436B8D /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
@@ -325,6 +328,8 @@
 		6AD5982A28760C140058386E = {
 			isa = PBXGroup;
 			children = (
+				6AADA848289B725D00BC42C6 /* Cache.h */,
+				6AADA849289B725D00BC42C6 /* Cache.m */,
 				6AD5983528760C140058386E /* ProjectVoyage */,
 				6AD5985128760C170058386E /* ProjectVoyageTests */,
 				6AD5985B28760C170058386E /* ProjectVoyageUITests */,
@@ -670,6 +675,7 @@
 				6A9CDC702878E6ED0003EFA1 /* MessagesViewController.m in Sources */,
 				6A9CDC7F2881E5970003EFA1 /* MarkdownExportVC.m in Sources */,
 				6AC2C8B12876411B00436B8D /* ChatListViewController.m in Sources */,
+				6AADA84A289B725D00BC42C6 /* Cache.m in Sources */,
 				6AD5983B28760C140058386E /* SceneDelegate.m in Sources */,
 				6A9CDC732878E93C0003EFA1 /* HPTextViewInternal.m in Sources */,
 				6A9CDC482878D9E30003EFA1 /* MessageCell.m in Sources */,

@@ -18,6 +18,9 @@ NSString *const MESSAGE_CLASS = @"Comment";
 NSString *const CREATED_AT = @"createdAt";
 NSString *const UPDATED_AT = @"updatedAt";
 
+// Local storage
+NSInteger const STORAGE_SIZE = 20;
+
 // User
 NSString *const NAME = @"name";
 NSString *const USERNAME = @"username";
@@ -28,6 +31,7 @@ NSString *const RECIPIENTS = @"recipients";
 NSString *const CHAT_DESCRIPTION = @"chatDescription";
 NSString *const MESSAGES = @"messages_3";
 NSString *const IMAGE = @"image";
+NSString *const LAST_ORDER = @"lastOrder";
 
 // Messages
 NSInteger const TRIGGER_PAGINATION_POSITION = 0;

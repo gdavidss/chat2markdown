@@ -43,6 +43,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    /* Retrieved cached chats
     if ([[NetworkManager shared] isAppOnline]) {
         NSLog(@"App's online");
         // Query chats from the internet
@@ -50,6 +51,7 @@
         NSLog(@"App's offline");
         // Only query chats locally
     }
+    */
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

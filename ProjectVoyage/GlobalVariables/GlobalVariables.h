@@ -18,6 +18,9 @@ NSString *const MESSAGE_CLASS;
 NSString *const CREATED_AT;
 NSString *const UPDATED_AT;
 
+// Local storage
+NSInteger const STORAGE_SIZE;
+
 // User
 NSString *const NAME;
 NSString *const USERNAME;
@@ -28,6 +31,7 @@ NSString *const RECIPIENTS;
 NSString *const CHAT_DESCRIPTION;
 NSString *const MESSAGES;
 NSString *const IMAGE;
+NSString *const LAST_ORDER;
 
 // Messages
 NSInteger const TRIGGER_PAGINATION_POSITION;
