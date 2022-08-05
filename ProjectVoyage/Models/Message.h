@@ -30,9 +30,11 @@ typedef NS_ENUM(NSInteger, MessageSender) {
 @property (nonatomic, assign) PFUser *sender;
 
 @property (nonatomic, assign) NSInteger order;
-@property (assign, nonatomic) CGFloat height;
+@property (nonatomic, assign) CGFloat height;
 
-+ (void) postMessage: (NSString * _Nullable)text withSender:(PFUser *)sender withHeight:(CGFloat)height withCompletion: (PFBooleanResultBlock  _Nullable)completion;
+@property (nonatomic, strong) NSString *chatId;
+
++ (void) postMessage: (NSString * _Nullable)text withSender:(PFUser *)sender withHeight:(CGFloat)height withCompletion: (PFBooleanResultBlock  _Nullable)completion withChatId:(NSString *)chatId;
 
 @end
 

@@ -12,6 +12,8 @@
 @dynamic sender;
 @dynamic text;
 @dynamic height;
+@dynamic order;
+@dynamic chatId;
 
 - (id)init {
     self = [super init];
@@ -26,12 +28,14 @@
     return @"Message";
 }
 
-+ (void) postMessage: (NSString * _Nullable)text withSender:(PFUser *)sender withHeight:(CGFloat)height withOrder:(NSInteger)order withCompletion: (PFBooleanResultBlock  _Nullable)completion{
++ (void) postMessage: (NSString * _Nullable)text withSender:(PFUser *)sender withHeight:(CGFloat)height
+           withOrder:(NSInteger)order withCompletion: (PFBooleanResultBlock  _Nullable)completion withChatId:(NSString *)chatId{
     Message *newMessage = [Message new];
     newMessage.sender = sender;
     newMessage.text = text;
     newMessage.height = height;
     newMessage.order = order;
+    newMessage.chatId = chatId;
     [newMessage saveInBackgroundWithBlock: completion];
 }
 

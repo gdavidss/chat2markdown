@@ -23,8 +23,6 @@
     NSString *app_id = [dict objectForKey: @"app_id"];
     NSString *consumer_id = [dict objectForKey: @"client_id"];
     
-    [[NetworkManager shared] checkConnection];
-    
     ParseClientConfiguration *config = [ParseClientConfiguration  configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
 
         configuration.applicationId = app_id;

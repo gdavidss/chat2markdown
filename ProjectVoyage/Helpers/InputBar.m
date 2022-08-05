@@ -84,7 +84,7 @@
     
     _textView.layer.cornerRadius = 5.0;
     _textView.layer.borderWidth = 0.5;
-    _textView.layer.borderColor =  [UIColor colorWithRed:200.0/255.0 green:200.0/255.0 blue:205.0/255.0 alpha:1.0].CGColor;
+    _textView.layer.borderColor = [UIColor colorWithRed:200.0/255.0 green:200.0/255.0 blue:205.0/255.0 alpha:1.0].CGColor;
     
     _textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     
@@ -119,9 +119,8 @@
     self.sendButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
     [self.sendButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [self.sendButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateSelected];
-    [self.sendButton setTitle:@"Done" forState:UIControlStateNormal];
+    [self.sendButton setTitle:@"Send" forState:UIControlStateNormal];
     self.sendButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
-    //[self addButton:self.sendButton withLabel:@"Send" withMethod:@selector(didPressSendButton:) withOrder:1 isSelected:YES];
 
     [self.sendButton addTarget:self action:@selector(didPressSendButton:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -146,6 +145,8 @@
     if (self.sendButton.isSelected) return;
     
     [self.delegate inputbarDidPressSendButton:self];
+    
+    // Clears input bar so that a new message can be typed
     self.textView.text = @"";
 }
 
