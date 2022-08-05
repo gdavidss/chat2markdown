@@ -35,6 +35,7 @@
 
 @property (nonatomic, strong) NSMutableOrderedSet *messagesInChat;
 @property (nonatomic, strong) NSMutableOrderedSet *cachedMessages;
+@property (nonatomic, strong) NSMutableOrderedSet *queueSync;
 
 @property (nonatomic, strong) NSTimer *connectionTimer;
 
@@ -74,7 +75,9 @@
         
     if ([[NetworkManager shared] isAppOnline]) {
         NSLog(@"App's online");
-        [self loadMessages:_currentPageNumber];
+        //[self loadMessages:_currentPageNumber];
+        [self alertOffline];
+        [self loadCachedMessages];
     } else {
         NSLog(@"App's offline");
         [self alertOffline];
@@ -111,23 +114,25 @@
 
 -(void) syncMessages {
     _queueOrder = 0;
-    NSMutableOrderedSet *messagesToSync = [Cache retrieveMessagesToSync:_chat];
     
+    PFRelation *chatMessagesRelation = [_chat relationForKey:MESSAGES];
     NSInteger messageOrder = _chat.lastOrder;
-    for (Message *message in messagesToSync) {
+    for (Message *message in _queueSync) {
         message.order = messageOrder++;
+        [_messagesInChat addObject:message];
+        
+        [chatMessagesRelation addObject:message];
         [message save];
     }
     
+    [_chat save];
+    
     // Clear sync queue
-    NSString *syncQueueIdentifier = [Cache getSyncQueueIdentifierForChat:_chat];
-    [PFObject unpinAllObjectsWithName:syncQueueIdentifier];
+    _queueSync = [NSMutableOrderedSet new];
     
     // Load messages again
-    
     // GD - This is just to ensure every message is shown up well
-    _messagesInChat = nil;
-    [self loadMessages:0];
+    //[self loadMessages:0];
 }
 
 -(void) checkConnection {
@@ -137,9 +142,7 @@
         NSLog(@"App's back online! Loading messages...");
         [_connectionTimer invalidate];
         [self loadMessages:_currentPageNumber];
-        
-        // CC - Still testing synchronization
-        // [self syncMessages]
+        [self syncMessages];
     } else {
         NSLog(@"App's still offline...");
     }
@@ -180,8 +183,8 @@
             //[self syncMessages];
             
             // Uncache old messages and cache results
-            [PFObject unpinAll:messages withName:strongSelf->_chat.objectId];
-            [PFObject pinAll:messages withName:strongSelf->_chat.objectId];
+            [PFObject unpinAll:messages];
+            [PFObject pinAll:messages];
             
             // Reloading data
             [strongSelf->_tableView reloadData];
@@ -338,14 +341,19 @@
     
     // Cache message and chat
     if ([[NetworkManager shared] isAppOnline]) {
+        message.order = _queueOrder++;
+        [_queueSync addObject:message];
+        
+        /*
         message.chatId = _chat.objectId;
         [message pinWithName:_chat.objectId];
         [message save];
         [_chat saveInBackground];
+         */
     } else {
         // Store messages in queue to be synchronized later on
         message.order = _queueOrder++;
-        [Cache cacheMessagesInSyncQueue:message forChat:_chat];
+        [_queueSync addObject:message];
     }
 }
 
