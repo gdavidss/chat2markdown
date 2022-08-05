@@ -155,7 +155,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Guilherme David" borderStyle="roundedRect" placeholder="New name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LOQ-yI-Onr">
-                                <rect key="frame" x="325" y="56" width="207" height="34"/>
+                                <rect key="frame" x="142" y="91" width="207" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -795,7 +795,6 @@
         <!--Navigation Controller-->
         <scene sceneID="U8W-8j-6Rk">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EU4-Zr-lSO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="318-vV-XNj" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="iJY-4Q-RJU"/>
@@ -808,6 +807,7 @@
                         <segue destination="rua-zO-KYb" kind="relationship" relationship="rootViewController" id="rgU-TN-tlF"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EU4-Zr-lSO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4364" y="-715"/>
         </scene>

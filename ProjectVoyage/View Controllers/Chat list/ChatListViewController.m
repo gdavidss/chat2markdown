@@ -5,6 +5,8 @@
 //  Created by Gui David on 7/6/22.
 //
 
+// Libraries
+#import "NetworkManager.h"
 
 // View controllers
 #import "ChatListViewController.h"
@@ -40,7 +42,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    /* Retrieved cached chats
+    if ([[NetworkManager shared] isAppOnline]) {
+        NSLog(@"App's online");
+        // Query chats from the internet
+    } else {
+        NSLog(@"App's offline");
+        // Only query chats locally
+    }
+    */
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self initRefreshControl];
@@ -63,7 +75,7 @@
     [query orderByDescending:UPDATED_AT];
     
     // GD You need to find a way to query both from local datastore and online too
-    //[query fromLocalDatastore];
+    // [query fromLocalDatastore];
     
     NSArray *queryKeys = [NSArray arrayWithObjects:RECIPIENTS, CHAT_DESCRIPTION, MESSAGES, IMAGE, nil];
     [query includeKeys:queryKeys];
@@ -112,10 +124,11 @@
 }
 
 - (void) deleteAllMessagesForChat:(Chat *)chat {
-    NSArray<Message *> *messages = chat.messages;
-    for (Message *message in messages) {
+    /* GD - Delete all messages from the relations
+    for (Message *message in chat.messages_3) {
         [message deleteInBackground];
     }
+    */
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

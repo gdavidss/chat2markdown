@@ -40,6 +40,7 @@
           // call sign up function on the object
           [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
               if (error != nil) {
+                  NSLog(@"%@", error.localizedDescription);
                   [self alertFailedSignUp];
               } else {
                   // segue to home feed

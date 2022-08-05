@@ -30,7 +30,7 @@
             [self.message saveInBackground];
             
             // Update array
-            NSMutableArray<Message *> *chatMessages = self.delegate.chat.messages;
+            NSMutableArray<Message *> *chatMessages = [Chat getMessagesArrayForChat:self.delegate.chat];
             NSInteger messageIndex = [chatMessages indexOfObject:self.message];
             chatMessages[messageIndex].text = self.editView.text;
             
