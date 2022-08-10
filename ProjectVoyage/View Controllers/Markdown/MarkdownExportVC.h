@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface MarkdownExportVC : UIViewController
 
 @property (strong, nonatomic) Chat *chat;
+@property (nonatomic, weak) NSMutableArray<Message *> *messages;
 @property (nonatomic, strong) NSString *otherRecipientUsername;
 
 @end

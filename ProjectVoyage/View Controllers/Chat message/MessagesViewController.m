@@ -645,6 +645,13 @@
         Chat *chat = sender;
         markdownExportVC.chat = chat;
         markdownExportVC.otherRecipientUsername = _otherRecipient.username;
+        if (![[NetworkManager shared] isAppOnline]) {
+            NSMutableArray<Message *> *cachedMessages = [NSMutableArray new];
+            for (Message *message in _messagesInChat) {
+                [cachedMessages addObject:message];
+            }
+            markdownExportVC.messages = cachedMessages;
+        }
     }
 }
 

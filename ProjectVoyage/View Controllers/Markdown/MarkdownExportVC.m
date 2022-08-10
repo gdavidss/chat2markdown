@@ -6,6 +6,9 @@
 //
 
 #import "MarkdownExportVC.h"
+#import "GlobalVariables.h"
+#import "NetworkManager.h"
+#import "Util.h"
 #import "Message.h"
 @import Parse;
 @import MarkdownView;
@@ -14,7 +17,6 @@
 #define Someone  ((BOOL)0)
 
 @interface MarkdownExportVC ()
-@property (nonatomic, weak) NSMutableArray<Message *> *messages;
 @property (nonatomic, strong) NSMutableString *convertedMarkdown;
 @property (nonatomic, strong) IBOutlet UIView *markdownView;
 
@@ -29,6 +31,10 @@
     _messages = [Chat getMessagesArrayForChat:_chat];
 
     [self appendMetadata];
+    
+    if ([[NetworkManager shared] isAppOnline]) {
+        [self retrieveAllMessages];
+    }
     if ([_messages count] != 0) {
         [self appendChat];
     }
@@ -40,18 +46,34 @@
 }
 
 - (void) appendMetadata {
-    NSString *chat_title = [NSString stringWithFormat:@"%@, %@", _chat.recipients[0].username, _chat.recipients[1].username];
+    NSString *chat_title = [NSString stringWithFormat:@"%@, %@", _chat.recipients[0][NAME], _chat.recipients[1][NAME]];
     
     NSString *recipientName = [NSString stringWithFormat:@"%@: %@", @"**Recipients**", chat_title];
     NSString *chatDescription = [NSString stringWithFormat:@"%@: %@", @"**Chat Description**", _chat.chatDescription];
-    NSString *chatDate = [NSString stringWithFormat:@"%@: %@", @"**Date**", _chat.createdAt];
+    NSString *chatDate = [NSString stringWithFormat:@"%@: %@", @"**Date**", [Util formatDateString:_chat.createdAt]];
     NSString *chatId = [NSString stringWithFormat:@"%@: %@", @"**Chat ID**", _chat.objectId];
 
     [self generateBlock:@"Metadata" withIdentation:0 isItBold:YES];
     [self generateBlock:recipientName withIdentation:1 isItBold:NO];
-    [self generateBlock:chatDescription withIdentation:1 isItBold:NO];
+    if (![_chat.chatDescription isEqual:@""]) {
+        [self generateBlock:chatDescription withIdentation:1 isItBold:NO];
+    }
     [self generateBlock:chatDate withIdentation:1 isItBold:NO];
     [self generateBlock:chatId withIdentation:1 isItBold:NO];
+}
+
+- (void) retrieveAllMessages {
+    PFRelation *chatMessagesRelation = [_chat relationForKey:MESSAGES];
+    PFQuery *query = [chatMessagesRelation query];
+    
+    NSArray *queryKeys = [NSArray arrayWithObjects:TEXT, SENDER, ORDER, nil];
+    
+    [query includeKeys:queryKeys];
+    [query orderByAscending:ORDER];
+    
+    // Fetch data asynchronously
+    NSArray *messagesArray = [query findObjects];
+    _messages = (NSMutableArray<Message *> *)messagesArray;
 }
 
 - (void) appendChat {
