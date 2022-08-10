@@ -77,6 +77,11 @@
     return [NSString stringWithFormat:@"%@%@", chat.objectId, @":syncQueue", nil];
 }
 
++ (void) resetCacheWithMessages:messages {
+    [PFObject unpinAll:messages];
+    [PFObject pinAll:messages];
+}
+
 /* CC - Old strategy of manually caching
 + (BOOL) isCacheFull:(NSMutableOrderedSet *)cachedMessages {
     return (cachedMessages.count == STORAGE_SIZE);

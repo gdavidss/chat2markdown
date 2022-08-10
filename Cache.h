@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSMutableOrderedSet *) retrieveMessagesToSync:(Chat *)chat;
 + (void) cacheMessagesInSyncQueue:(Message *)message forChat:(Chat *)chat;
 + (NSString *) getSyncQueueIdentifierForChat:(Chat *)chat;
-
++ (void) resetCacheWithMessages:messages;
 @end
 
 NS_ASSUME_NONNULL_END
