@@ -20,6 +20,7 @@ NSString *const UPDATED_AT;
 
 // Local storage
 NSInteger const STORAGE_SIZE;
+NSInteger const NETWORK_CHECK_INTERVAL;
 
 // User
 NSString *const NAME;

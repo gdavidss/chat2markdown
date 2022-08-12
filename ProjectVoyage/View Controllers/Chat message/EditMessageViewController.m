@@ -30,11 +30,13 @@
             [self.message saveInBackground];
             
             // Update array
+            /*
             NSMutableArray<Message *> *chatMessages = [Chat getMessagesArrayForChat:self.delegate.chat];
             NSInteger messageIndex = [chatMessages indexOfObject:self.message];
             chatMessages[messageIndex].text = self.editView.text;
-            
+            */
             // Reload that specific row as opposed to all rows in table
+            NSInteger messageIndex = [self.delegate.messagesInChat indexOfObject:self.message];
             NSArray *indexPaths = [[NSArray alloc]
                                    initWithObjects:[NSIndexPath indexPathForRow:messageIndex inSection:0], nil];
             

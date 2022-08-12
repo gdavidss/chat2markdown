@@ -17,4 +17,7 @@
 @property (nonatomic, strong) Chat *chat;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 
+@property (nonatomic, strong) NSMutableOrderedSet *messagesInChat;
+@property (nonatomic, strong) NSMutableOrderedSet *cachedMessages;
+
 @end

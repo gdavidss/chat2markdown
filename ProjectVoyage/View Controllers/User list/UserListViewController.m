@@ -36,7 +36,7 @@
 - (void) queryUsers {
     PFQuery *query = [PFQuery queryWithClassName:USER_CLASS];
     
-    NSArray *queryKeys = [NSArray arrayWithObjects:NAME, USERNAME, nil];
+    NSArray *queryKeys = [NSArray arrayWithObjects:NAME, USERNAME, IMAGE, nil];
     [query includeKeys:queryKeys];
     
     [query whereKey:@"objectId" notEqualTo:[PFUser currentUser].objectId];

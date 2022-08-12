@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Message.h"
 #import "Chat.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -15,7 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property PFObject *cache;
 
 + (NSMutableOrderedSet *) retrieveCachedMessages:(Chat *)chat;
-
++ (NSMutableOrderedSet *) retrieveMessagesToSync:(Chat *)chat;
++ (void) cacheMessagesInSyncQueue:(Message *)message forChat:(Chat *)chat;
++ (NSString *) getSyncQueueIdentifierForChat:(Chat *)chat;
++ (void) resetCacheWithMessages:messages;
 @end
 
 NS_ASSUME_NONNULL_END

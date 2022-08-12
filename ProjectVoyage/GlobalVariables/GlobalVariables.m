@@ -20,6 +20,7 @@ NSString *const UPDATED_AT = @"updatedAt";
 
 // Local storage
 NSInteger const STORAGE_SIZE = 20;
+NSInteger const NETWORK_CHECK_INTERVAL = 30;
 
 // User
 NSString *const NAME = @"name";

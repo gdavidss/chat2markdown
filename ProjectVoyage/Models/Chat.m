@@ -16,7 +16,7 @@
 @dynamic chatDescription;
 @dynamic recipients;
 @dynamic messages_3;
-@dynamic current_sender;
+@dynamic currentSender;
 @dynamic lastOrder;
 @dynamic image;
 
@@ -30,7 +30,7 @@
     newChat.lastOrder = -1;
     newChat.recipients = recipients;
     newChat.chatDescription = chatDescription;
-    newChat.current_sender = 0;
+    newChat.currentSender = 0;
     newChat.image = [Util getPFFileFromImage:image];
     
     //[newChat pinInBackground];

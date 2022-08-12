@@ -43,7 +43,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    /* Retrieved cached chats
+/*
+ 
+// Retrieved cached chats //
+
     if ([[NetworkManager shared] isAppOnline]) {
         NSLog(@"App's online");
         // Query chats from the internet
@@ -55,6 +58,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.layer.shadowColor = [UIColor darkGrayColor].CGColor;
     [self initRefreshControl];
 }
 
@@ -76,12 +80,11 @@
     
     // GD You need to find a way to query both from local datastore and online too
     // [query fromLocalDatastore];
-    
     NSArray *queryKeys = [NSArray arrayWithObjects:RECIPIENTS, CHAT_DESCRIPTION, MESSAGES, IMAGE, nil];
     [query includeKeys:queryKeys];
         
     [query whereKey:RECIPIENTS containsAllObjectsInArray:@[[PFUser currentUser]]];
-        // fetch data asynchronously
+        // fetch data asynchronously;
         __weak __typeof(self) weakSelf = self;
         [query findObjectsInBackgroundWithBlock:^(NSArray *chats, NSError *error) {
             __strong __typeof(weakSelf) strongSelf = weakSelf;
@@ -124,11 +127,11 @@
 }
 
 - (void) deleteAllMessagesForChat:(Chat *)chat {
-    /* GD - Delete all messages from the relations
+    /*
     for (Message *message in chat.messages_3) {
         [message deleteInBackground];
     }
-    */
+     */
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

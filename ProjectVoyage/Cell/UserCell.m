@@ -24,9 +24,10 @@
 }
 
 - (void) setUser:(PFUser *)user {
+    UIImage *profilePicture = [UIImage imageWithData:[user[IMAGE] getData]];
     _nameLabel.text = user[NAME];
-    if (user[PROFILE_PICTURE]) {
-        [_userPicture setImage:user[PROFILE_PICTURE]];
+    if (profilePicture) {
+        [_userPicture setImage:profilePicture];
     } else {
         [_userPicture setImage:[UIImage imageNamed:@"user.png"]];
     }
