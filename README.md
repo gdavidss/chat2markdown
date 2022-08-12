@@ -58,24 +58,16 @@ philosophical assumptions:
    * User can delete any chat
    * User can export any chat to Markdown
 * Chat
-   * User can record a voice message
-   * User can import a voice message from the files
    * User can see message bubbles
    * User can edit any message bubbles
    * User can export chat to Markdown
-   * (Stretch) User can play the voice message
 * Edit message bubble
     * User can edit message bubble
 * Settings
     * User can delete account
     * User can change password
 
-
-
 ### 3. Navigation
-
-**Tab Navigation** (Tab to Screen)
-
 
 **Flow Navigation** (Screen to Screen)
 
