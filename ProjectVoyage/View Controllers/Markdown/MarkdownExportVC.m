@@ -35,6 +35,7 @@
     if ([[NetworkManager shared] isAppOnline]) {
         [self retrieveAllMessages];
     }
+    
     if ([_messages count] != 0) {
         [self appendChat];
     }
@@ -83,7 +84,7 @@
     NSString *lastSender = ordered_messages[0].sender.objectId;
     
     if ([lastSender isEqual:[PFUser currentUser].objectId]) {
-        [self generateBlock:[PFUser currentUser].username withIdentation:1 isItBold:YES];
+        [self generateBlock:[PFUser currentUser][NAME] withIdentation:1 isItBold:YES];
     } else {
         [self generateBlock:_otherRecipientUsername withIdentation:1 isItBold:YES];
     }
@@ -93,14 +94,13 @@
         
         if (![lastSender isEqual:currentSender]) {
             if ([currentSender isEqual:[PFUser currentUser].objectId]) {
-                [self generateBlock:[PFUser currentUser].username withIdentation:1 isItBold:YES];
+                [self generateBlock:[PFUser currentUser][NAME] withIdentation:1 isItBold:YES];
             } else {
                 [self generateBlock:_otherRecipientUsername withIdentation:1 isItBold:YES];
             }
         }
         
         [self generateBlock:message.text withIdentation:3 isItBold:NO];
-        
         lastSender = currentSender;
     }
 }

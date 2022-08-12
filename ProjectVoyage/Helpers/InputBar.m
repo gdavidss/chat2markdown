@@ -15,7 +15,7 @@
 
 @end
 
-#define BUTTON_SIZE 60
+#define BUTTON_SIZE 35
 
 @implementation Inputbar
 
@@ -46,8 +46,7 @@
 - (void) addContent {
     [self addTextView];
     [self addSendButton];
-    //[self addButton:self.sendButton withLabel:@"Send" withMethod:@selector(didPressSendButton:) withOrder:1 isSelected:YES];
-    [self addButton:self.changeSenderButton withLabel:@"Change" withMethod:@selector(didPressChangeSenderButton:) withOrder:2 isSelected:NO];
+    [self addChangeSenderButton];
     
     self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 }
@@ -56,7 +55,7 @@
     CGSize size = self.frame.size;
     _textView = [[HPGrowingTextView alloc] initWithFrame:CGRectMake(10,
                                                                     5,
-                                                                    size.width - 10 - 3 * BUTTON_SIZE,
+                                                                    size.width - 10 - 2 * BUTTON_SIZE,
                                                                     size.height)];
     _textView.isScrollable = NO;
     _textView.contentInset = UIEdgeInsetsMake(0, 5, 0, 5);
@@ -94,33 +93,28 @@
 
 #pragma mark - Buttons
 
-- (void)addButton:(UIButton *)button withLabel:(NSString *)label withMethod:(nonnull SEL)method withOrder:(int)order isSelected:(BOOL)selection{
+- (void)addChangeSenderButton {
     CGSize size = self.frame.size;
-    button = [[UIButton alloc] init];
-    button.frame = CGRectMake(size.width - order * BUTTON_SIZE, 0, BUTTON_SIZE, size.height);
-    button.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
-    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateSelected];
-    [button setTitle:label forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
+    _changeSenderButton = [[UIButton alloc] init];
+    _changeSenderButton.frame = CGRectMake(size.width - 2 * BUTTON_SIZE, 0, BUTTON_SIZE, size.height);
+    _changeSenderButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
+
+    [_changeSenderButton setImage:[UIImage systemImageNamed:@"person.crop.circle"] forState:UIControlStateNormal];
+    [_changeSenderButton setImage:[UIImage systemImageNamed:@"person.crop.circle.fill"] forState:UIControlStateSelected];
+    [_changeSenderButton addTarget:self action:@selector(didPressChangeSenderButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    [button addTarget:self action:method forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_changeSenderButton];
     
-    [self addSubview:button];
-    
-    [button setSelected:selection];
+    [_changeSenderButton setSelected:NO];
 }
 
--(void)addSendButton
-{
+-(void)addSendButton {
     CGSize size = self.frame.size;
     self.sendButton = [[UIButton alloc] init];
     self.sendButton.frame = CGRectMake(size.width - BUTTON_SIZE, 0, BUTTON_SIZE, size.height);
     self.sendButton.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin;
-    [self.sendButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-    [self.sendButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateSelected];
-    [self.sendButton setTitle:@"Send" forState:UIControlStateNormal];
-    self.sendButton.titleLabel.font = [UIFont fontWithName:@"Helvetica" size:15.0];
+    UIImage *imageSelected = [[UIImage systemImageNamed:@"paperplane.circle"] imageWithTintColor:[UIColor lightGrayColor]];
+    [self.sendButton setImage:imageSelected forState:UIControlStateNormal];
 
     [self.sendButton addTarget:self action:@selector(didPressSendButton:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -128,7 +122,6 @@
     
     [self.sendButton setSelected:YES];
 }
-
 
 -(void)resignFirstResponder {
     [_textView resignFirstResponder];
@@ -151,13 +144,16 @@
 }
 
 - (void)didPressChangeSenderButton:(UIButton *)sender {
-    if (self.changeSenderButton.isSelected) return;
+    if (self.changeSenderButton.isSelected) {
+        [self.changeSenderButton setSelected:NO];
+    } else {
+        [self.changeSenderButton setSelected:YES];
+    }
     
     [self.delegate inputbarDidPressChangeSenderButton:self];
 }
 
-- (void)didPressLeftButton:(UIButton *)sender
-{
+- (void)didPressLeftButton:(UIButton *)sender {
     [self.delegate inputbarDidPressLeftButton:self];
 }
 
@@ -169,7 +165,9 @@
 }
 
 -(void)setSendButtonTextColor:(UIColor *)sendButtonTextColor {
-    [self.sendButton setTitleColor:sendButtonTextColor forState:UIControlStateNormal];
+    // arrow.up.message
+    [self.sendButton setImage:[UIImage systemImageNamed:@"arrow.up.message"] forState:UIControlStateNormal];
+    // [self.sendButton setTitleColor:sendButtonTextColor forState:UIControlStateNormal];
 }
 
 -(void)setSendButtonText:(NSString *)sendButtonText {
@@ -186,8 +184,7 @@
     r.origin.y += diff;
     self.frame = r;
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(inputbarDidChangeHeight:)])
-    {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(inputbarDidChangeHeight:)]) {
         [self.delegate inputbarDidChangeHeight:self.frame.size.height];
     }
 }

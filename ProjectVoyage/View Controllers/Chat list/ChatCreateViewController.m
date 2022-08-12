@@ -26,13 +26,14 @@
     
     _didChangeImage = NO;
     
-    if (_user[PROFILE_PICTURE]) {
-        [_chatImage setImage:_user[PROFILE_PICTURE]];
+    if (_user[IMAGE]) {
+        UIImage *profilePicture = [UIImage imageWithData:[_user[IMAGE] getData]];
+        [_chatImage setImage:profilePicture];
+        _didChangeImage = YES;
     } else {
         [_chatImage setImage:[UIImage imageNamed:@"user.png"]];
     }
-    
-    _chatTitleTextField.text = [NSString stringWithFormat:@"%@ & %@", [PFUser currentUser].username, _user.username];
+    _chatTitleTextField.text = [NSString stringWithFormat:@"%@ & %@", [PFUser currentUser][NAME], _user[NAME]];
 }
 
 - (IBAction)trimEndSpaces:(id)sender {

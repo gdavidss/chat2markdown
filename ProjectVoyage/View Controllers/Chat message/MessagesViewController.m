@@ -33,8 +33,6 @@
 @interface MessagesViewController() <InputbarDelegate, UITableViewDataSource, UITableViewDelegate, ContainerProtocol, UITableViewDragDelegate, UITableViewDropDelegate, AVAudioRecorderDelegate, AVAudioPlayerDelegate>
 
 
-@property (nonatomic, strong) NSMutableOrderedSet *messagesInChat;
-@property (nonatomic, strong) NSMutableOrderedSet *cachedMessages;
 @property (nonatomic, strong) NSMutableOrderedSet *syncQueue;
 
 @property (nonatomic, strong) NSTimer *connectionTimer;
@@ -75,7 +73,7 @@
     _currentPageNumber = 0;
     _MessagesPerPage = 10;
         
-    if ([[NetworkManager shared] isAppOnline]) {
+    if (![[NetworkManager shared] isAppOnline]) {
         NSLog(@"App's online");
         [self loadMessages:_currentPageNumber];
     } else {
@@ -87,7 +85,7 @@
     [self getChatRecipient];
     
     // live queries
-    if ([[NetworkManager shared] isAppOnline]) {
+    if (![[NetworkManager shared] isAppOnline]) {
        [self liveQueryChat];
         // CC - liveQuery message not yet available due to conflicts
         // [self liveQueryMessage];
@@ -112,9 +110,7 @@
     }];
 }
 
-// Save messages in sync queue to network
 -(void) syncMessages {
-    // SS - logica do queue order aqui ta diferente do send messages, ou vc inicializa no viewdidload ou faz outra parada
     PFRelation *chatMessagesRelation = [_chat relationForKey:MESSAGES];
     for (Message *message in _syncQueue) {
         _chat.lastOrder++;
@@ -359,13 +355,12 @@
     [chatMessagesRelation addObject:message];
     
     // Cache message and chat
-    if ([[NetworkManager shared] isAppOnline]) {
+    if (![[NetworkManager shared] isAppOnline]) {
         [message pinWithName:_chat.objectId];
         [message save];
         [_chat saveInBackground];
     } else {
         // Store messages in queue to be synchronized later on
-        //message.order = _queueOrder++;
         [_syncQueue addObject:message];
     }
 }
@@ -374,15 +369,12 @@
     Message *message = [Message new];
     message.text = [Util removeEndSpaceFrom:text];
     
-    if ([[NetworkManager shared] isAppOnline]) {
-        _chat.lastOrder++;
-        message.order = _chat.lastOrder;
-    } else {
-        message.order = nil;
-    }
+    message.order = _chat.lastOrder;
+    _chat.lastOrder++;;
+    
     message.chatId = _chat.objectId;
 
-    if (_chat.current_sender == MessageSenderMyself) {
+    if (_chat.currentSender == MessageSenderMyself) {
         message.sender = [PFUser currentUser];
     } else {
         message.sender = _otherRecipient;
@@ -406,8 +398,8 @@
 }
 
 - (void)inputbarDidPressChangeSenderButton:(Inputbar *)inputbar {
-    NSInteger current_sender = self.chat.current_sender;
-    self.chat.current_sender = (current_sender == MessageSenderMyself)? MessageSenderSomeone: MessageSenderMyself;
+    NSInteger currentSender = self.chat.currentSender;
+    self.chat.currentSender = (currentSender == MessageSenderMyself)? MessageSenderSomeone: MessageSenderMyself;
 }
 
 - (void)inputbarDidChangeHeight:(CGFloat)new_height {
@@ -435,8 +427,7 @@
         [self addToOrdersFromIndex:indexPath.row-1 withEndIndex:_messagesInChat.count withAmount:-1];
         
         // GD Check to see if deleteInBackground also unpins it
-        [message delete];
-        //[self.chat saveInBackground];
+        [message deleteInBackground];
         
         NSArray *indexPaths = [[NSArray alloc] initWithObjects:indexPath, nil];
         [self.tableView deleteRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationFade];
@@ -561,8 +552,6 @@
 -(void)setInputbar {
     self.inputbar.placeholder = @"";
     self.inputbar.delegate = self;
-    self.inputbar.sendButtonText = @"Send";
-    self.inputbar.sendButtonTextColor = [UIColor colorWithRed:0 green:124/255.0 blue:1 alpha:1];
 }
 
 -(void) setTableView {
@@ -644,7 +633,7 @@
         MarkdownExportVC *markdownExportVC = [segue destinationViewController];
         Chat *chat = sender;
         markdownExportVC.chat = chat;
-        markdownExportVC.otherRecipientUsername = _otherRecipient.username;
+        markdownExportVC.otherRecipientUsername = _otherRecipient[NAME];
         if (![[NetworkManager shared] isAppOnline]) {
             NSMutableArray<Message *> *cachedMessages = [NSMutableArray new];
             for (Message *message in _messagesInChat) {

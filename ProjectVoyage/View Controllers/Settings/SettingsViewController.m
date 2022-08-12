@@ -7,6 +7,7 @@
 
 #import "SettingsViewController.h"
 #import "LoginViewController.h"
+#import "GlobalVariables.h"
 #import "SceneDelegate.h"
 @import Parse;
 
@@ -23,11 +24,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    //_passwordField.secureTextEntry = NO;
+    //_repeatPasswordField.secureTextEntry = NO;
+
     PFUser *currentUser = [PFUser currentUser];
-    _nameField.text = currentUser[@"name"];
-    _usernameField.text = currentUser[@"username"];
+    _nameField.text = currentUser[NAME];
+    _usernameField.text = currentUser[USERNAME];
     _emailField.text = currentUser[@"email"];
+}
+
+- (void) disableAutocorrection {
+    _passwordField.autocorrectionType = UITextAutocorrectionTypeNo;
+    _repeatPasswordField.autocorrectionType = UITextAutocorrectionTypeNo;
+    _usernameField.autocorrectionType = UITextAutocorrectionTypeNo;
+    _emailField.autocorrectionType = UITextAutocorrectionTypeNo;
+    _nameField.autocorrectionType = UITextAutocorrectionTypeNo;
 }
 
 - (IBAction)logout:(id)sender {
@@ -122,7 +133,7 @@
 }
 
 - (BOOL) arePasswordsDifferent {
-    if (_passwordField.text != _repeatPasswordField.text) {
+    if (![_passwordField.text isEqual:_repeatPasswordField.text]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Passwords do not match" message:@"" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* acknowledge = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
