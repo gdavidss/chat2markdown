@@ -12,7 +12,7 @@
 + (NSString *) formatDateString:(NSDate *)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    [dateFormatter setDateFormat:@"MM/dd/yyyy"];
+    [dateFormatter setDateFormat:@"MM/dd/yy"];
 
     NSString *convertedString = [dateFormatter stringFromDate:date];
     

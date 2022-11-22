@@ -27,7 +27,7 @@
 + (void) postChat: (NSString * _Nullable)chatTitle withDescription:(NSString * _Nullable)chatDescription withImage:(UIImage * _Nullable )image withRecipients:(NSArray<PFUser *> *)recipients withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     Chat *newChat = [Chat new];
     newChat.chatTitle = chatTitle;
-    newChat.lastOrder = -1;
+    newChat.lastOrder = 0;
     newChat.recipients = recipients;
     newChat.chatDescription = chatDescription;
     newChat.currentSender = 0;

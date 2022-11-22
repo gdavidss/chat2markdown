@@ -73,12 +73,13 @@
     _currentPageNumber = 0;
     _MessagesPerPage = 10;
         
-    if (![[NetworkManager shared] isAppOnline]) {
+    if ([[NetworkManager shared] isAppOnline]) {
         NSLog(@"App's online");
         [self loadMessages:_currentPageNumber];
     } else {
         NSLog(@"App's offline");
-        [self alertOffline];
+        //[self alertOffline];
+        //[self loadMessages:_currentPageNumber];
         [self loadCachedMessages];
     }
     
@@ -355,7 +356,7 @@
     [chatMessagesRelation addObject:message];
     
     // Cache message and chat
-    if (![[NetworkManager shared] isAppOnline]) {
+    if ([[NetworkManager shared] isAppOnline]) {
         [message pinWithName:_chat.objectId];
         [message save];
         [_chat saveInBackground];
