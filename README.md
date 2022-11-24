@@ -1,6 +1,8 @@
 
 # chat2markdown
 
+![logo_svg](https://user-images.githubusercontent.com/62527620/203829669-b40cd12f-bf3e-45e0-a657-c941a85246f0.svg)
+
 ## Table of Contents
 1. [Overview](#Overview)
 1. [Product Spec](#Product-Spec)
