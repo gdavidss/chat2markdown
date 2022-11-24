@@ -32,20 +32,10 @@ philosophical assumptions:
 
 **Required Must-have Stories**
 
-* User should be able to upload a voice message directly from WhatsApp.
-* Transcribed message should be displayed in screen as a message bubble.
 * The user can delete a message bubble, or edit it any way they want (as for correcting syntaxical errors, for example).
-*  Users can import **written** messages from WhatsApp.
-*   Users edit any of the text of all parties in the dialogue as they wish.
+* Users can move around messages in any order, in real-time
+* Users edit any of the text of all parties in the dialogue as they wish.
 *    In cybernetic terms, users should have requisite variety over all existing symbols in the dialogue.
-
-**Optional Nice-to-have Stories**
-
-* Support for more than one language
-    * Automatic language recognition
-* Include audio in generated log, uploading it automatically to database and linking it using Markdown famous syntax "[[]()]()" to direct playing it.
-* The user can play the voice message directly from its transcribed message bubble.
-* Copy the WhatsApp interface perfectly and pitch it as a possible feature for WhatsApp (:DDDD)
 
 ### 2. Screen Archetypes
 
@@ -53,12 +43,12 @@ philosophical assumptions:
    * User can log in
    * User can sign up
 * Chat list
-   * User can see a list of previous created chat
+   * User can see a list of previous created chats
    * User can create a new chat
    * User can delete any chat
-   * User can export any chat to Markdown
 * Chat
    * User can see message bubbles
+   * User can move messages around
    * User can edit any message bubbles
    * User can export chat to Markdown
 * Edit message bubble
@@ -77,10 +67,10 @@ philosophical assumptions:
     * Settings
     * Chat
 * Edit message
-   * Chat (after done editing the message)
-
-
-
+   * Chat
+* Markdown export
+   * Chat
+ 
 ## Wireframes
 [Figma template](https://www.figma.com/file/mvjrm3VC09pIPwdkurNP2c/Untitled?node-id=4%3A152)
 
@@ -133,8 +123,8 @@ philosophical assumptions:
     - (Delete) Delete a new chat
 - Chat screen
     - (Create/POST) Create a new message
+    - (Update/Put) Change message order
     - (Delete) Delete a message
     - (Read/GET) Get messages in the chat
 - Message
-    - (Create/Post) Create a new transcription
     - (Update/Put) Edit message
